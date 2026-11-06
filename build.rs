@@ -23,8 +23,8 @@ fn main() {
         format!(
             r#"1 ICON "{ico_rc}"
 1 VERSIONINFO
-FILEVERSION 0,2,1,0
-PRODUCTVERSION 0,2,1,0
+FILEVERSION 0,2,2,0
+PRODUCTVERSION 0,2,2,0
 FILEFLAGSMASK 0x3f
 FILEFLAGS 0
 FILEOS 0x40004
@@ -37,8 +37,8 @@ BEGIN
     BEGIN
       VALUE "FileDescription", "Visualizador de imagens"
       VALUE "ProductName", "Visor"
-      VALUE "FileVersion", "0.2.1"
-      VALUE "ProductVersion", "0.2.1"
+      VALUE "FileVersion", "0.2.2"
+      VALUE "ProductVersion", "0.2.2"
     END
   END
   BLOCK "VarFileInfo"

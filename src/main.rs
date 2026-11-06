@@ -168,6 +168,7 @@ struct Visor {
     title: String,
     shown_percent: Option<i32>,
     checker: TextureHandle,
+    mark: TextureHandle,
     want_open: bool,
     want_export: bool,
     want_batch_files: bool,
@@ -196,6 +197,20 @@ impl Visor {
                 mipmap_mode: None,
             },
         );
+        let icon = window_icon();
+        let mark = ctx.load_texture(
+            "moldura",
+            ColorImage::from_rgba_unmultiplied(
+                [icon.width as usize, icon.height as usize],
+                &icon.rgba,
+            ),
+            TextureOptions {
+                magnification: egui::TextureFilter::Linear,
+                minification: egui::TextureFilter::Linear,
+                wrap_mode: TextureWrapMode::ClampToEdge,
+                mipmap_mode: None,
+            },
+        );
         let (notice_tx, notice_rx) = mpsc::channel();
         maybe_register_on_first_launch(notice_tx.clone());
         let mut app = Self {
@@ -213,6 +228,7 @@ impl Visor {
             title: "Visor".to_owned(),
             shown_percent: None,
             checker,
+            mark,
             want_open: false,
             want_export: false,
             want_batch_files: false,
@@ -681,6 +697,14 @@ impl Visor {
 
     fn toolbar(&mut self, ui: &mut egui::Ui) {
         ui.horizontal_wrapped(|ui| {
+            ui.add(
+                egui::Image::from_texture(&self.mark)
+                    .fit_to_exact_size(Vec2::splat(28.0))
+                    .corner_radius(7.0),
+            )
+            .on_hover_text("Moldura");
+            ui.label(RichText::new("Visor").strong());
+            ui.separator();
             if ui.button("Abrir").on_hover_text("Ctrl+O").clicked() {
                 self.want_open = true;
             }
@@ -1168,6 +1192,16 @@ impl Visor {
             );
             return;
         }
+        let mark = Rect::from_center_size(
+            canvas.center() + Vec2::new(0.0, -118.0),
+            Vec2::splat(84.0),
+        );
+        painter.image(
+            self.mark.id(),
+            mark,
+            Rect::from_min_max(Pos2::ZERO, Pos2::new(1.0, 1.0)),
+            Color32::WHITE,
+        );
         painter.text(
             canvas.center() + Vec2::new(0.0, -36.0),
             Align2::CENTER_CENTER,

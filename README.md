@@ -4,7 +4,7 @@
 
 <h1 align="center">Visor</h1>
 
-<p align="center">Ícone Moldura</p>
+<p align="center">O ícone Moldura fica na barra, na janela e no arquivo.</p>
 
 <p align="center">
   Visualizador de imagens para Windows.<br>
@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Tsujiu/visor/releases/latest/download/Visor-Setup-0.2.1.exe"><strong>Baixar o instalador</strong></a>
+  <a href="https://github.com/Tsujiu/visor/releases/latest/download/Visor-Setup-0.2.2.exe"><strong>Baixar o instalador</strong></a>
   &nbsp;·&nbsp;
   <a href="https://github.com/Tsujiu/visor/releases/latest">Outras versões</a>
 </p>
