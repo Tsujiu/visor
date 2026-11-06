@@ -1,0 +1,53 @@
+[package]
+name = "visor"
+version = "0.2.0"
+edition = "2024"
+rust-version = "1.95"
+description = "Visualizador de imagens para Windows"
+publish = false
+
+[dependencies]
+eframe = { version = "0.37", default-features = false, features = [
+    "clipboard",
+    "default_fonts",
+    "glow",
+] }
+# Codecs em Rust puro (png, zune-jpeg, image-webp, tiff, exr). Sem C no executável.
+image = { version = "0.25", default-features = false, features = [
+    "bmp",
+    "dds",
+    "exr",
+    "gif",
+    "hdr",
+    "ico",
+    "jpeg",
+    "png",
+    "pnm",
+    "qoi",
+    "tga",
+    "tiff",
+    "webp",
+] }
+rfd = "0.17"
+resvg = "0.48"
+jxl-oxide = { version = "0.12", default-features = false, features = ["image"] }
+kamadak-exif = "0.6"
+ddsfile = "0.5"
+texture2ddecoder = "0.1"
+ktx2 = "0.4"
+rawloader = "0.37"
+winreg = "0.55"
+exr = "1"
+windows-sys = { version = "0.61", features = [
+    "Win32_Foundation",
+    "Win32_Graphics_GdiPlus",
+    "Win32_UI_Shell",
+] }
+
+[dev-dependencies]
+flate2 = "1"
+png = "0.17"
+
+[profile.release]
+lto = "thin"
+strip = "symbols"
