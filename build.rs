@@ -8,7 +8,7 @@ fn main() {
         return;
     }
     let manifest = PathBuf::from(env::var("CARGO_MANIFEST_DIR").expect("CARGO_MANIFEST_DIR"));
-    let ico = manifest.join("assets").join("visor.ico");
+    let ico = manifest.join("assets").join("moldura.ico");
     println!("cargo:rerun-if-changed={}", ico.display());
     if !ico.is_file() {
         panic!("ícone ausente: {}", ico.display());
@@ -23,8 +23,8 @@ fn main() {
         format!(
             r#"1 ICON "{ico_rc}"
 1 VERSIONINFO
-FILEVERSION 0,2,0,0
-PRODUCTVERSION 0,2,0,0
+FILEVERSION 0,2,1,0
+PRODUCTVERSION 0,2,1,0
 FILEFLAGSMASK 0x3f
 FILEFLAGS 0
 FILEOS 0x40004
@@ -37,8 +37,8 @@ BEGIN
     BEGIN
       VALUE "FileDescription", "Visualizador de imagens"
       VALUE "ProductName", "Visor"
-      VALUE "FileVersion", "0.2.0"
-      VALUE "ProductVersion", "0.2.0"
+      VALUE "FileVersion", "0.2.1"
+      VALUE "ProductVersion", "0.2.1"
     END
   END
   BLOCK "VarFileInfo"

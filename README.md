@@ -1,8 +1,10 @@
 <p align="center">
-  <img src="assets/visor.png" width="120" alt="Visor">
+  <img src="assets/moldura.png" width="120" alt="Ícone Moldura">
 </p>
 
 <h1 align="center">Visor</h1>
+
+<p align="center">Ícone Moldura</p>
 
 <p align="center">
   Visualizador de imagens para Windows.<br>
@@ -10,7 +12,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Tsujiu/visor/releases/latest/download/Visor-Setup-0.2.0.exe"><strong>Baixar o instalador</strong></a>
+  <a href="https://github.com/Tsujiu/visor/releases/latest/download/Visor-Setup-0.2.1.exe"><strong>Baixar o instalador</strong></a>
   &nbsp;·&nbsp;
   <a href="https://github.com/Tsujiu/visor/releases/latest">Outras versões</a>
 </p>

@@ -1,7 +1,7 @@
 ; Instalador por usuário. Não pede administrador e registra o Visor só neste usuário.
 
 #define MyAppName "Visor"
-#define MyAppVersion "0.2.0"
+#define MyAppVersion "0.2.1"
 #define MyAppPublisher "MuTsuJii"
 #define MyAppURL "https://github.com/Tsujiu/visor"
 #define MyAppExeName "visor.exe"
@@ -19,8 +19,8 @@ DefaultDirName={localappdata}\Programs\Visor
 DefaultGroupName=Visor
 DisableProgramGroupPage=yes
 OutputDir=..\dist
-OutputBaseFilename=Visor-Setup-0.2.0
-SetupIconFile=..\assets\visor.ico
+OutputBaseFilename=Visor-Setup-0.2.1
+SetupIconFile=..\assets\moldura.ico
 UninstallDisplayIcon={app}\{#MyAppExeName}
 UninstallDisplayName={#MyAppName}
 Compression=lzma2
@@ -34,7 +34,7 @@ RestartApplications=no
 ChangesAssociations=yes
 VersionInfoDescription=Instalador do Visor
 VersionInfoProductName=Visor
-VersionInfoVersion=0.2.0.0
+VersionInfoVersion=0.2.1.0
 
 [Languages]
 Name: "brazilianportuguese"; MessagesFile: "compiler:Languages\BrazilianPortuguese.isl"

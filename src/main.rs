@@ -27,8 +27,8 @@ const BG: Color32 = Color32::from_rgb(22, 22, 24);
 const PANEL: Color32 = Color32::from_rgb(30, 30, 34);
 
 fn window_icon() -> egui::IconData {
-    let image = image::load_from_memory(include_bytes!("../assets/visor.png"))
-        .expect("ícone do Visor");
+    let image = image::load_from_memory(include_bytes!("../assets/moldura.png"))
+        .expect("ícone Moldura");
     let rgba = image.to_rgba8();
     let width = rgba.width();
     let height = rgba.height();
