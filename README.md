@@ -1,13 +1,50 @@
+<div align="center">
+
 <p align="center">
   <img src="assets/moldura.png" width="128" height="128" alt="VISOR Logo">
 </p>
 
-<h1 align="center">VISOR</h1>
+# VISOR
 
-<p align="center">
-  <strong>O visualizador de imagens ultrarrápido, moderno e 100% privativo para Windows 10 e 11.</strong><br>
-  <em>The ultra-fast, modern, and privacy-first image viewer engineered for Windows 10 & 11.</em>
-</p>
+**O visualizador de imagens ultrarrápido, moderno e 100% privativo para Windows 10 e 11.**<br>
+*The ultra-fast, modern, and privacy-first image viewer engineered for Windows 10 & 11.*
+
+<br>
+
+### 🌐 Selecione o Idioma / Select Language / 选择语言 / Выберите язык:
+
+[![Português](https://img.shields.io/badge/Português_(BR)-009c3b?style=for-the-badge&logo=flag&logoColor=white)](README.md)
+[![English](https://img.shields.io/badge/English-00247d?style=for-the-badge&logo=flag&logoColor=white)](README.en.md)
+[![Español](https://img.shields.io/badge/Español-aa151b?style=for-the-badge&logo=flag&logoColor=white)](README.es.md)
+[![简体中文](https://img.shields.io/badge/简体中文-de2910?style=for-the-badge&logo=flag&logoColor=white)](README.zh-CN.md)
+[![Русский](https://img.shields.io/badge/Русский-1c3578?style=for-the-badge&logo=flag&logoColor=white)](README.ru.md)
+[![Deutsch](https://img.shields.io/badge/Deutsch-000000?style=for-the-badge&logo=flag&logoColor=white)](README.de.md)
+[![日本語](https://img.shields.io/badge/日本語-bc002d?style=for-the-badge&logo=flag&logoColor=white)](README.ja.md)
+[![Polski](https://img.shields.io/badge/Polski-dc143c?style=for-the-badge&logo=flag&logoColor=white)](README.pl.md)
+[![Français](https://img.shields.io/badge/Français-0055a5?style=for-the-badge&logo=flag&logoColor=white)](README.fr.md)
+[![Italiano](https://img.shields.io/badge/Italiano-009246?style=for-the-badge&logo=flag&logoColor=white)](README.it.md)
+
+<br>
+
+<details>
+<summary><b>🌍 Traduzir Todo o GitHub Automaticamente (Google Translate) / Auto-Translate GitHub</b></summary>
+
+| Idioma / Language | Botão de Tradução Direta no Navegador |
+| :--- | :--- |
+| 🇧🇷 **Português (BR)** | [⚡ Traduzir Repositório para Português](https://translate.google.com/translate?sl=auto&tl=pt&u=https://github.com/Tsujiu/visor) |
+| 🇺🇸 **English** | [⚡ Translate Repository to English](https://translate.google.com/translate?sl=auto&tl=en&u=https://github.com/Tsujiu/visor) |
+| 🇪🇸 **Español** | [⚡ Traducir Repositorio al Español](https://translate.google.com/translate?sl=auto&tl=es&u=https://github.com/Tsujiu/visor) |
+| 🇨🇳 **简体中文** | [⚡ 在浏览器中将仓库自动翻译为简体中文](https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://github.com/Tsujiu/visor) |
+| 🇷🇺 **Русский** | [⚡ Открыть репозиторий с переводом на русский](https://translate.google.com/translate?sl=auto&tl=ru&u=https://github.com/Tsujiu/visor) |
+| 🇩🇪 **Deutsch** | [⚡ Repository automatisch auf Deutsch übersetzen](https://translate.google.com/translate?sl=auto&tl=de&u=https://github.com/Tsujiu/visor) |
+| 🇯🇵 **日本語** | [⚡ リポジトリ全体を日本語に自動翻訳](https://translate.google.com/translate?sl=auto&tl=ja&u=https://github.com/Tsujiu/visor) |
+| 🇵🇱 **Polski** | [⚡ Przetłumacz całe repozytorium na język polski](https://translate.google.com/translate?sl=auto&tl=pl&u=https://github.com/Tsujiu/visor) |
+| 🇫🇷 **Français** | [⚡ Traduire automatiquement le dépôt en français](https://translate.google.com/translate?sl=auto&tl=fr&u=https://github.com/Tsujiu/visor) |
+| 🇮🇹 **Italiano** | [⚡ Traduci automaticamente il repository in italiano](https://translate.google.com/translate?sl=auto&tl=it&u=https://github.com/Tsujiu/visor) |
+
+</details>
+
+<br>
 
 <p align="center">
   <a href="https://github.com/Tsujiu/visor/releases/latest"><img src="https://img.shields.io/badge/Release-v1.0.0-0078D4?style=for-the-badge&logo=windows11&logoColor=white" alt="Release v1.0.0"></a>
@@ -28,6 +65,8 @@
   &nbsp;•&nbsp;
   <a href="#-apoie-o-desenvolvimento--buy-me-a-coffee"><strong>Apoiar o Projeto ☕</strong></a>
 </p>
+
+</div>
 
 ---
 
