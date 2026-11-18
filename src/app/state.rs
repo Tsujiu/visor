@@ -308,6 +308,7 @@ pub struct VisorApp {
     pub show_filmstrip: bool,
     pub filmstrip_scroll_target: Option<usize>,
     pub show_settings: bool,
+    pub show_support: bool,
     pub show_color_picker: bool,
     pub color_picker_hex_input: String,
     pub show_association_banner: bool,

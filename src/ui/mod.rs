@@ -11,6 +11,7 @@ pub mod filmstrip;
 pub mod info_panel;
 pub mod settings;
 pub mod status;
+pub mod support_dialog;
 pub mod theme;
 pub mod toolbar;
 pub mod update_dialog;
@@ -25,6 +26,7 @@ pub use filmstrip::render_filmstrip;
 pub use info_panel::render_info_panel;
 pub use settings::render_settings_window;
 pub use status::render_status;
+pub use support_dialog::render_support_dialog;
 pub use theme::{
     ThemeDimensions, ThemePalette, ThemeRounding, ThemeSpacing, configure_visor_theme,
 };

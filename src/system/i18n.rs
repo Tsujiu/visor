@@ -414,6 +414,21 @@ pub struct I18nStrings {
     pub batch_results: &'static str,
     pub batch_choose_files: &'static str,
     pub set_default_notice: &'static str,
+
+    // Apoio ao Projeto / Support Dialog
+    pub support_btn: &'static str,
+    pub support_title: &'static str,
+    pub support_subtitle: &'static str,
+    pub support_brasil_badge: &'static str,
+    pub support_brasil_title: &'static str,
+    pub support_brasil_desc: &'static str,
+    pub support_brasil_btn: &'static str,
+    pub support_global_badge: &'static str,
+    pub support_global_title: &'static str,
+    pub support_global_desc: &'static str,
+    pub support_global_btn: &'static str,
+    pub support_stripe_brl_btn: &'static str,
+    pub support_thank_you: &'static str,
 }
 
 // -----------------------------------------------------------------------------
@@ -699,6 +714,20 @@ pub static STRINGS_PT_BR: I18nStrings = I18nStrings {
     hub_history_date_unrecorded: "Data não informada",
     hub_history_version_prefix: "Versão",
     hub_history_count_desc: "correções e melhorias registradas.",
+
+    support_btn: "Apoiar",
+    support_title: "Apoiar o Desenvolvimento do VISOR",
+    support_subtitle: "O VISOR é 100% gratuito, independente e livre de telemetria. Seu apoio voluntário mantém o projeto ativo com novas atualizações, novos formatos e otimizações contínuas.",
+    support_brasil_badge: "BRASIL · PIX & CARTÃO",
+    support_brasil_title: "InfinitePay (PIX & Cartão)",
+    support_brasil_desc: "Doações no Brasil instantâneas via PIX com QR Code ou cartão nacional. Escolha o valor que desejar.",
+    support_brasil_btn: "Apoiar via PIX (InfinitePay)",
+    support_global_badge: "GLOBAL · STRIPE",
+    support_global_title: "Stripe Global (USD / Internacional)",
+    support_global_desc: "Doações internacionais seguras com qualquer cartão de crédito em Dólar (USD) ou sua moeda local.",
+    support_global_btn: "Apoiar via Stripe Global (USD)",
+    support_stripe_brl_btn: "Ou doar via Stripe Brasil (BRL)",
+    support_thank_you: "Muito obrigado por apoiar o desenvolvimento de software independente!",
 };
 
 // -----------------------------------------------------------------------------
@@ -984,6 +1013,20 @@ pub static STRINGS_EN_US: I18nStrings = I18nStrings {
     hub_history_date_unrecorded: "Date unrecorded",
     hub_history_version_prefix: "Version",
     hub_history_count_desc: "logged fixes and improvements.",
+
+    support_btn: "Support",
+    support_title: "Support VISOR Development",
+    support_subtitle: "VISOR is 100% free, independent, and telemetry-free. Your voluntary support keeps the project active with regular updates, new formats, and ongoing performance optimizations.",
+    support_brasil_badge: "BRAZIL · PIX & CARD",
+    support_brasil_title: "InfinitePay (PIX & Card)",
+    support_brasil_desc: "Instant donations in Brazil via PIX QR Code or national cards. Choose any amount you wish.",
+    support_brasil_btn: "Support via PIX (InfinitePay)",
+    support_global_badge: "GLOBAL · STRIPE",
+    support_global_title: "Stripe Global (USD / International)",
+    support_global_desc: "Secure international credit card donations in USD or your local currency. Choose any custom amount ($1, $5, $10, $20, $50...).",
+    support_global_btn: "Support via Stripe Global (USD)",
+    support_stripe_brl_btn: "Or donate via Stripe Brazil (BRL)",
+    support_thank_you: "Thank you so much for supporting independent software development!",
 };
 
 // -----------------------------------------------------------------------------
@@ -1269,6 +1312,20 @@ pub static STRINGS_ES_ES: I18nStrings = I18nStrings {
     hub_history_date_unrecorded: "Fecha no registrada",
     hub_history_version_prefix: "Versión",
     hub_history_count_desc: "correcciones y mejoras registradas.",
+
+    support_btn: "Apoyar",
+    support_title: "Apoyar el Desarrollo de VISOR",
+    support_subtitle: "VISOR es 100% gratuito, independiente y sin telemetría. Su apoyo voluntario mantiene el proyecto activo con nuevas actualizaciones, formatos y optimizaciones.",
+    support_brasil_badge: "BRASIL · PIX Y TARJETA",
+    support_brasil_title: "InfinitePay (PIX y Tarjeta)",
+    support_brasil_desc: "Donaciones en Brasil instantáneas a través de PIX con código QR o tarjeta nacional.",
+    support_brasil_btn: "Apoyar vía PIX (InfinitePay)",
+    support_global_badge: "GLOBAL · STRIPE",
+    support_global_title: "Stripe Global (USD / Internacional)",
+    support_global_desc: "Donaciones internacionales seguras con tarjeta de crédito en USD o moneda local.",
+    support_global_btn: "Apoyar vía Stripe Global (USD)",
+    support_stripe_brl_btn: "O donar vía Stripe Brasil (BRL)",
+    support_thank_you: "¡Muchas gracias por apoyar el desarrollo de software independiente!",
 };
 
 // -----------------------------------------------------------------------------
@@ -1554,6 +1611,20 @@ pub static STRINGS_ZH_CN: I18nStrings = I18nStrings {
     hub_history_date_unrecorded: "未记录日期",
     hub_history_version_prefix: "版本",
     hub_history_count_desc: "项修复与优化记录。",
+
+    support_btn: "支持项目",
+    support_title: "支持 VISOR 开发",
+    support_subtitle: "VISOR 是一款完全免费、独立且零遥测的开源图像查看器。您的自愿支持将持续推动新格式支持与性能优化。",
+    support_brasil_badge: "巴西 · PIX 与银行卡",
+    support_brasil_title: "InfinitePay (PIX 与银行卡)",
+    support_brasil_desc: "通过 PIX 二维码或巴西本地银行卡即时捐助，自由选择任意金额。",
+    support_brasil_btn: "通过 PIX (InfinitePay) 支持",
+    support_global_badge: "全球 · STRIPE",
+    support_global_title: "Stripe 全球 (美元 / 国际信用卡)",
+    support_global_desc: "支持国际主流信用卡，以美元或本地货币进行安全捐助，支持自定义任意金额。",
+    support_global_btn: "通过 Stripe 全球支持",
+    support_stripe_brl_btn: "或通过 Stripe 巴西支持",
+    support_thank_you: "非常感谢您对独立软件开发的支持！",
 };
 
 // -----------------------------------------------------------------------------
@@ -1839,6 +1910,20 @@ pub static STRINGS_JA_JP: I18nStrings = I18nStrings {
     hub_history_date_unrecorded: "日付未記録",
     hub_history_version_prefix: "バージョン",
     hub_history_count_desc: "件の修正と改善が記録されています。",
+
+    support_btn: "支援する",
+    support_title: "VISOR の開発を支援",
+    support_subtitle: "VISOR は完全無料・独立開発・テレメトリなしの画像ビューアーです。皆様の自発的なご支援が新形式の対応やパフォーマンス最適化の原動力となります。",
+    support_brasil_badge: "ブラジル · PIX & カード",
+    support_brasil_title: "InfinitePay (PIX & カード)",
+    support_brasil_desc: "ブラジル国内向け：PIX QRコードまたは国内カードでの即時支援。",
+    support_brasil_btn: "PIX (InfinitePay) で支援",
+    support_global_badge: "グローバル · STRIPE",
+    support_global_title: "Stripe グローバル (USD / 国際決済)",
+    support_global_desc: "米ドルまたは現地通貨での安全なクレジットカード決済。金額は自由に選択可能です。",
+    support_global_btn: "Stripe で支援 (グローバル)",
+    support_stripe_brl_btn: "または Stripe ブラジルで支援",
+    support_thank_you: "独立系ソフトウェアの開発を支援いただき、誠にありがとうございます！",
 };
 
 // -----------------------------------------------------------------------------
@@ -2124,6 +2209,20 @@ pub static STRINGS_DE_DE: I18nStrings = I18nStrings {
     hub_history_date_unrecorded: "Datum nicht erfasst",
     hub_history_version_prefix: "Version",
     hub_history_count_desc: "erfasste Korrekturen und Verbesserungen.",
+
+    support_btn: "Unterstützen",
+    support_title: "VISOR-Entwicklung unterstützen",
+    support_subtitle: "VISOR ist 100% kostenlos, unabhängig und frei von Telemetrie. Ihre freiwillige Unterstützung finanziert neue Bildformate und kontinuierliche GPU-Optimierungen.",
+    support_brasil_badge: "BRASILIEN · PIX & KARTE",
+    support_brasil_title: "InfinitePay (PIX & Karte)",
+    support_brasil_desc: "Spenden in Brasilien über PIX-QR-Code oder nationale Karten.",
+    support_brasil_btn: "Über PIX (InfinitePay) spenden",
+    support_global_badge: "GLOBAL · STRIPE",
+    support_global_title: "Stripe Global (USD / International)",
+    support_global_desc: "Sichere internationale Kreditkartenspenden in USD oder lokaler Währung mit frei wählbarem Betrag.",
+    support_global_btn: "Über Stripe Global spenden",
+    support_stripe_brl_btn: "Oder über Stripe Brasilien spenden",
+    support_thank_you: "Vielen Dank für Ihre Unterstützung unabhängiger Softwareentwicklung!",
 };
 
 // -----------------------------------------------------------------------------
@@ -2409,6 +2508,20 @@ pub static STRINGS_FR_FR: I18nStrings = I18nStrings {
     hub_history_date_unrecorded: "Date non renseignée",
     hub_history_version_prefix: "Version",
     hub_history_count_desc: "corrections et améliorations enregistrées.",
+
+    support_btn: "Soutenir",
+    support_title: "Soutenir le développement de VISOR",
+    support_subtitle: "VISOR est 100% gratuit, indépendant et sans télémétrie. Votre soutien volontaire permet d'ajouter de nouveaux formats et d'optimiser continuellement les performances.",
+    support_brasil_badge: "BRÉSIL · PIX & CARTE",
+    support_brasil_title: "InfinitePay (PIX & Carte)",
+    support_brasil_desc: "Dons au Brésil via QR Code PIX ou carte bancaire locale.",
+    support_brasil_btn: "Soutenir via PIX (InfinitePay)",
+    support_global_badge: "MONDIAL · STRIPE",
+    support_global_title: "Stripe Global (USD / International)",
+    support_global_desc: "Dons internationaux sécurisés par carte bancaire en USD ou devise locale avec montant libre.",
+    support_global_btn: "Soutenir via Stripe Global",
+    support_stripe_brl_btn: "Ou faire un don via Stripe Brésil",
+    support_thank_you: "Merci infiniment de soutenir le développement de logiciels indépendants !",
 };
 
 // -----------------------------------------------------------------------------
@@ -2694,6 +2807,20 @@ pub static STRINGS_IT_IT: I18nStrings = I18nStrings {
     hub_history_date_unrecorded: "Data non registrata",
     hub_history_version_prefix: "Versione",
     hub_history_count_desc: "correzioni e miglioramenti registrati.",
+
+    support_btn: "Supporta",
+    support_title: "Supporta lo sviluppo di VISOR",
+    support_subtitle: "VISOR è 100% gratuito, indipendente e privo di telemetria. Il tuo supporto volontario consente di aggiungere nuovi formati e ottimizzazioni continue della GPU.",
+    support_brasil_badge: "BRASILE · PIX & CARTA",
+    support_brasil_title: "InfinitePay (PIX & Carta)",
+    support_brasil_desc: "Donazioni in Brasile tramite codice QR PIX o carta nazionale.",
+    support_brasil_btn: "Supporta tramite PIX (InfinitePay)",
+    support_global_badge: "GLOBALE · STRIPE",
+    support_global_title: "Stripe Global (USD / Internazionale)",
+    support_global_desc: "Donazioni internazionali sicure con carta di credito in USD o valuta locale con importo a scelta.",
+    support_global_btn: "Supporta tramite Stripe Global",
+    support_stripe_brl_btn: "Oppure dona tramite Stripe Brasile",
+    support_thank_you: "Grazie mille per sostenere lo sviluppo di software indipendente!",
 };
 
 // -----------------------------------------------------------------------------
@@ -2979,6 +3106,20 @@ pub static STRINGS_RU_RU: I18nStrings = I18nStrings {
     hub_history_date_unrecorded: "Дата не указана",
     hub_history_version_prefix: "Версия",
     hub_history_count_desc: "зафиксированных исправлений и улучшений.",
+
+    support_btn: "Поддержать",
+    support_title: "Поддержать разработку VISOR",
+    support_subtitle: "VISOR — на 100% бесплатная, независимая программа без телеметрии. Ваша добровольная поддержка помогает развивать новые форматы и оптимизировать скорость работы.",
+    support_brasil_badge: "БРАЗИЛИЯ · PIX И КАРТЫ",
+    support_brasil_title: "InfinitePay (PIX и карты)",
+    support_brasil_desc: "Пожертвования в Бразилии через PIX по QR-коду или местным картам.",
+    support_brasil_btn: "Поддержать через PIX (InfinitePay)",
+    support_global_badge: "МЕЖДУНАРОДНЫЙ · STRIPE",
+    support_global_title: "Stripe Global (USD / Международный)",
+    support_global_desc: "Безопасные международные платежи по картам в долларах США или местной валюте с выбором любой суммы.",
+    support_global_btn: "Поддержать через Stripe Global",
+    support_stripe_brl_btn: "Или через Stripe Бразилия",
+    support_thank_you: "Большое спасибо за поддержку независимой разработки!",
 };
 
 /// Trait de extensão para fornecer rótulos localizados para `visor::Category`.

@@ -576,7 +576,11 @@ pub fn render_settings_window(app: &mut VisorApp, ctx: &Context) {
                                 app.updater.show_whats_new_window = true;
                             }
 
-                            if ui.button(RichText::new("GitHub").size(12.0)).clicked() {
+                            if ui
+                                .button(RichText::new("GitHub").size(12.0))
+                                .on_hover_text("https://github.com/Tsujiu/visor")
+                                .clicked()
+                            {
                                 ui.ctx().open_url(egui::OpenUrl::new_tab(
                                     "https://github.com/Tsujiu/visor",
                                 ));
@@ -584,15 +588,15 @@ pub fn render_settings_window(app: &mut VisorApp, ctx: &Context) {
 
                             if ui
                                 .button(
-                                    RichText::new("☕ Apoiar")
+                                    RichText::new(tr.support_btn)
                                         .size(12.0)
+                                        .strong()
                                         .color(palette.accent_default),
                                 )
+                                .on_hover_text(tr.support_title)
                                 .clicked()
                             {
-                                ui.ctx().open_url(egui::OpenUrl::new_tab(
-                                    "https://github.com/Tsujiu/visor#readme",
-                                ));
+                                app.show_support = true;
                             }
                         });
                     });

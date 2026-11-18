@@ -98,6 +98,7 @@ impl VisorApp {
             show_filmstrip: settings.show_filmstrip,
             filmstrip_scroll_target: Some(0),
             show_settings: false,
+            show_support: false,
             show_color_picker: false,
             color_picker_hex_input: String::new(),
             show_association_banner,

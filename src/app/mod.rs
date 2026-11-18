@@ -12,8 +12,8 @@ use crate::ui::theme::BG;
 use crate::ui::{
     render_association_banner, render_batch_window, render_canvas, render_color_picker_window,
     render_filmstrip, render_formats_window, render_info_panel, render_settings_window,
-    render_status, render_toolbar, render_update_banner, render_update_dialog,
-    render_whats_new_window,
+    render_status, render_support_dialog, render_toolbar, render_update_banner,
+    render_update_dialog, render_whats_new_window,
 };
 
 impl eframe::App for VisorApp {
@@ -111,6 +111,7 @@ impl eframe::App for VisorApp {
         render_formats_window(self, ui.ctx());
         render_batch_window(self, ui.ctx());
         render_settings_window(self, ui.ctx());
+        render_support_dialog(self, ui.ctx());
         render_update_dialog(self, ui.ctx());
         render_whats_new_window(self, ui.ctx());
         render_color_picker_window(self, ui.ctx());
