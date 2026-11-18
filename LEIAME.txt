@@ -1,5 +1,5 @@
 ==============================================================================
-                                VISOR 0.4.1
+                                VISOR 1.0.0
                 Visualizador de Imagens Moderno para Windows
 ==============================================================================
 
@@ -11,7 +11,8 @@ desempenho desenvolvido em Rust para o Windows 10 e Windows 11.
 Projetado para visualizacao instantanea de fotografias, ilustracoes e pixel art,
 o VISOR combina renderizacao acelerada por hardware (OpenGL via eframe/egui),
 arquitetura multithread com fila de tarefas assincrona, cache em memoria LRU
-inteligente e suporte nativo a 49 formatos de imagem raster, vetor e textura.
+inteligente e suporte nativo a mais de 75 formatos de imagem raster, vetor,
+animacoes, negativos digitais RAW e texturas de jogos.
 
 
 2. REQUISITOS DE SISTEMA
@@ -19,9 +20,6 @@ inteligente e suporte nativo a 49 formatos de imagem raster, vetor e textura.
 - Sistema Operacional:
   * Windows 11 (64 bits - x64) - Recomendado
   * Windows 10 (64 bits - x64, Versao 1809 ou superior)
-    [Nota de Seguranca: A Microsoft encerrou o suporte regular ao Windows 10
-     em 14 de outubro de 2025. O VISOR e compativel tecnicamente com o sistema,
-     mas recomendamos ambientes com suporte de seguranca ativo].
 - Arquitetura: x86_64 (64 bits nativo).
 - Processador: Qualquer CPU compativel com x86_64.
 - Memoria RAM: Minimo de 512 MB (recomendado 2 GB ou mais para imagens gigapixel).
@@ -34,7 +32,7 @@ inteligente e suporte nativo a 49 formatos de imagem raster, vetor e textura.
 ------------------------------------------------------------------------------
 O VISOR e disponibilizado em duas modalidades oficiais:
 
-A) INSTALADOR CONVENCIONAL (Visor-Setup-v0.4.1-x64.exe)
+A) INSTALADOR CONVENCIONAL (Visor-Setup-v1.0.0-x64.exe)
    - Instalacao por usuario em %LOCALAPPDATA%\Programs\Visor.
    - Nao exige privilegios administrativos (sem prompt UAC).
    - Cria atalhos no Menu Iniciar e opcionalmente na Area de Trabalho.
@@ -42,7 +40,7 @@ A) INSTALADOR CONVENCIONAL (Visor-Setup-v0.4.1-x64.exe)
    - Atualizacao in-place automatica sobre versoes anteriores.
    - Desinstalador limpo que preserva suas configuracoes pessoais por padrao.
 
-B) VERSAO PORTATIL (Visor-Portable-v0.4.1-x64.zip)
+B) VERSAO PORTATIL (Visor-Portable-v1.0.0-x64.zip)
    - Zero instalacao: basta extrair o arquivo compactado em qualquer pasta ou
      unidade removivel (pen drive, disco externo).
    - Suporte completo a caminhos com espacos e caracteres acentuados ou Unicode.

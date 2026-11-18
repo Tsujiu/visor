@@ -42,14 +42,87 @@ VersionInfoVersion={#MyAppVersion}
 
 [Languages]
 Name: "brazilianportuguese"; MessagesFile: "compiler:Languages\BrazilianPortuguese.isl"
+Name: "english"; MessagesFile: "compiler:Default.isl"
+Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
+Name: "french"; MessagesFile: "compiler:Languages\French.isl"
+Name: "german"; MessagesFile: "compiler:Languages\German.isl"
+Name: "italian"; MessagesFile: "compiler:Languages\Italian.isl"
+Name: "japanese"; MessagesFile: "compiler:Languages\Japanese.isl"
+Name: "polish"; MessagesFile: "compiler:Languages\Polish.isl"
+Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
+
+[CustomMessages]
+brazilianportuguese.TaskDesktopIcon=Criar um atalho na Área de Trabalho
+brazilianportuguese.TaskRegisterAssoc=Registrar o VISOR como aplicativo candidato para abrir imagens
+brazilianportuguese.TaskGroupShortcuts=Atalhos:
+brazilianportuguese.TaskGroupWindows=Integração com o Windows:
+brazilianportuguese.StatusRegister=Registrando o VISOR no Windows...
+brazilianportuguese.RunProgram=Abrir o VISOR
+
+english.TaskDesktopIcon=Create a desktop shortcut
+english.TaskRegisterAssoc=Register VISOR as a candidate image viewer in Windows
+english.TaskGroupShortcuts=Shortcuts:
+english.TaskGroupWindows=Windows Integration:
+english.StatusRegister=Registering VISOR with Windows...
+english.RunProgram=Launch VISOR
+
+spanish.TaskDesktopIcon=Crear un acceso directo en el Escritorio
+spanish.TaskRegisterAssoc=Registrar VISOR como visor de imágenes en Windows
+spanish.TaskGroupShortcuts=Accesos directos:
+spanish.TaskGroupWindows=Integración con Windows:
+spanish.StatusRegister=Registrando VISOR en Windows...
+spanish.RunProgram=Abrir VISOR
+
+french.TaskDesktopIcon=Créer un raccourci sur le Bureau
+french.TaskRegisterAssoc=Enregistrer VISOR comme visionneuse d'images dans Windows
+french.TaskGroupShortcuts=Raccourcis :
+french.TaskGroupWindows=Intégration Windows :
+french.StatusRegister=Enregistrement de VISOR dans Windows...
+french.RunProgram=Lancer VISOR
+
+german.TaskDesktopIcon=Desktop-Verknüpfung erstellen
+german.TaskRegisterAssoc=VISOR als Bildbetrachter in Windows registrieren
+german.TaskGroupShortcuts=Verknüpfungen:
+german.TaskGroupWindows=Windows-Integration:
+german.StatusRegister=VISOR wird in Windows registriert...
+german.RunProgram=VISOR starten
+
+italian.TaskDesktopIcon=Crea un collegamento sul Desktop
+italian.TaskRegisterAssoc=Registra VISOR come visualizzatore di immagini in Windows
+italian.TaskGroupShortcuts=Collegamenti:
+italian.TaskGroupWindows=Integrazione con Windows:
+italian.StatusRegister=Registrazione di VISOR in Windows...
+italian.RunProgram=Avvia VISOR
+
+japanese.TaskDesktopIcon=デスクトップにショートカットを作成する
+japanese.TaskRegisterAssoc=VISOR を Windows の画像ビューアーとして登録する
+japanese.TaskGroupShortcuts=ショートカット:
+japanese.TaskGroupWindows=Windows との連携:
+japanese.StatusRegister=VISOR を Windows に登録しています...
+japanese.RunProgram=VISOR を起動する
+
+polish.TaskDesktopIcon=Utwórz skrót na Pulpicie
+polish.TaskRegisterAssoc=Zarejestruj VISOR jako przeglądarkę obrazów w systemie Windows
+polish.TaskGroupShortcuts=Skróty:
+polish.TaskGroupWindows=Integracja z systemem Windows:
+polish.StatusRegister=Rejestrowanie VISOR w systemie Windows...
+polish.RunProgram=Uruchom VISOR
+
+russian.TaskDesktopIcon=Создать ярлык на Рабочем столе
+russian.TaskRegisterAssoc=Зарегистрировать VISOR в системе для просмотра изображений
+russian.TaskGroupShortcuts=Ярлыки:
+russian.TaskGroupWindows=Интеграция с Windows:
+russian.StatusRegister=Регистрация VISOR в Windows...
+russian.RunProgram=Запустить VISOR
 
 [Tasks]
-Name: "desktopicon"; Description: "Criar um atalho na Área de Trabalho"; GroupDescription: "Atalhos:"; Flags: unchecked
-Name: "registerassoc"; Description: "Registrar o VISOR como aplicativo candidato para abrir imagens"; GroupDescription: "Integração com o Windows:"; Flags: checkedonce
+Name: "desktopicon"; Description: "{cm:TaskDesktopIcon}"; GroupDescription: "{cm:TaskGroupShortcuts}"; Flags: unchecked
+Name: "registerassoc"; Description: "{cm:TaskRegisterAssoc}"; GroupDescription: "{cm:TaskGroupWindows}"; Flags: checkedonce
 
 [Files]
 Source: "..\target\release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\LEIAME.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\README-PORTABLE.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\CHANGELOG.md"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
@@ -58,9 +131,9 @@ Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: de
 
 [Run]
 ; Registro como candidato oficial via aplicativo centralizado (sem UAC, sem UserChoice)
-Filename: "{app}\{#MyAppExeName}"; Parameters: "--registrar-padrao"; StatusMsg: "Registrando o VISOR como aplicativo candidato..."; Tasks: registerassoc; Flags: runhidden waituntilterminated skipifsilent
+Filename: "{app}\{#MyAppExeName}"; Parameters: "--registrar-padrao"; StatusMsg: "{cm:StatusRegister}"; Tasks: registerassoc; Flags: runhidden waituntilterminated skipifsilent
 ; Executar o aplicativo apos conclusao se o usuario desejar
-Filename: "{app}\{#MyAppExeName}"; Description: "Abrir o VISOR"; Flags: postinstall nowait skipifsilent unchecked
+Filename: "{app}\{#MyAppExeName}"; Description: "{cm:RunProgram}"; Flags: postinstall nowait skipifsilent unchecked
 
 [Code]
 // Remocao seletiva de registros exclusivos do VISOR sem afetar outros aplicativos nem configuracoes pessoais
