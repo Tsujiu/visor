@@ -1,4 +1,4 @@
-<div align="center">
+﻿<div align="center">
 
 <p align="center">
   <img src="assets/moldura.png" width="128" height="128" alt="VISOR Logo">
@@ -22,26 +22,6 @@
 [![Polski](https://img.shields.io/badge/Polski-dc143c?style=for-the-badge&logo=flag&logoColor=white)](README.pl.md)
 [![Français](https://img.shields.io/badge/Français-0055a5?style=for-the-badge&logo=flag&logoColor=white)](README.fr.md)
 [![Italiano](https://img.shields.io/badge/Italiano-009246?style=for-the-badge&logo=flag&logoColor=white)](README.it.md)
-
-<br>
-
-<details>
-<summary><b>🌍 Traduction automatique de toute la page en 1 clic (Google Translate)</b></summary>
-
-| Langue | Bouton de traduction directe |
-| :--- | :--- |
-| 🇫🇷 **Français** | [⚡ Traduire automatiquement le dépôt en français](https://translate.google.com/translate?sl=auto&tl=fr&u=https://github.com/Tsujiu/visor) |
-| 🇺🇸 **English** | [⚡ Translate Repository to English](https://translate.google.com/translate?sl=auto&tl=en&u=https://github.com/Tsujiu/visor) |
-| 🇧🇷 **Português (BR)** | [⚡ Traduzir Repositório para Português](https://translate.google.com/translate?sl=auto&tl=pt&u=https://github.com/Tsujiu/visor) |
-| 🇪🇸 **Español** | [⚡ Traducir Repositorio al Español](https://translate.google.com/translate?sl=auto&tl=es&u=https://github.com/Tsujiu/visor) |
-| 🇨🇳 **简体中文** | [⚡ 在浏览器中将仓库自动翻译为简体中文](https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https://github.com/Tsujiu/visor) |
-| 🇷🇺 **Русский** | [⚡ Открыть репозиторий с переводом на русский](https://translate.google.com/translate?sl=auto&tl=ru&u=https://github.com/Tsujiu/visor) |
-| 🇩🇪 **Deutsch** | [⚡ Repository automatisch auf Deutsch übersetzen](https://translate.google.com/translate?sl=auto&tl=de&u=https://github.com/Tsujiu/visor) |
-| 🇯🇵 **日本語** | [⚡ リポジトリ全体を日本語に自動翻訳](https://translate.google.com/translate?sl=auto&tl=ja&u=https://github.com/Tsujiu/visor) |
-| 🇵🇱 **Polski** | [⚡ Przetłumacz całe repozytorium na język polski](https://translate.google.com/translate?sl=auto&tl=pl&u=https://github.com/Tsujiu/visor) |
-| 🇮🇹 **Italiano** | [⚡ Traduci automaticamente il repository in italiano](https://translate.google.com/translate?sl=auto&tl=it&u=https://github.com/Tsujiu/visor) |
-
-</details>
 
 <br>
 
