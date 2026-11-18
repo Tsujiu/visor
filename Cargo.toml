@@ -1,0 +1,75 @@
+[package]
+name = "visor"
+version = "1.0.0"
+edition = "2024"
+rust-version = "1.95"
+description = "Visualizador de imagens para Windows"
+publish = false
+
+[dependencies]
+eframe = { version = "0.37", default-features = false, features = [
+    "clipboard",
+    "default_fonts",
+    "glow",
+] }
+# Codecs em Rust puro (png, zune-jpeg, image-webp, tiff, exr). Sem C no executável.
+image = { version = "0.25", default-features = false, features = [
+    "bmp",
+    "dds",
+    "exr",
+    "ff",
+    "gif",
+    "hdr",
+    "ico",
+    "jpeg",
+    "png",
+    "pnm",
+    "qoi",
+    "tga",
+    "tiff",
+    "webp",
+] }
+rfd = "0.17"
+resvg = "0.48"
+jxl-oxide = { version = "0.12", default-features = false, features = ["image"] }
+kamadak-exif = "0.6"
+ddsfile = "0.5"
+texture2ddecoder = "0.1"
+ktx2 = "0.4"
+rawloader = "0.37"
+winreg = "0.55"
+exr = "1"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+windows-sys = { version = "0.61", features = [
+    "Win32_Foundation",
+    "Win32_Graphics_GdiPlus",
+    "Win32_UI_Shell",
+] }
+semver = "1.0"
+sha2 = "0.10"
+ureq = { version = "2.10", default-features = false, features = ["tls", "native-certs", "json"] }
+psd = "0.3.5"
+zip = { version = "9.5.1", default-features = false, features = ["deflate"] }
+xcf = "0.4.0"
+jpeg2k = "0.11.0"
+oxideav-avif = "0.0.18"
+rasterlottie = { version = "0.3.0", default-features = false, features = ["images", "dotlottie"] }
+source-vtf = "0.6.1"
+image-blp = "1.2.0"
+dxf_to_svg = "1.0.0"
+dxf = "0.6"
+libtxd = "0.1.0"
+basis-universal = "0.3.1"
+flate2 = "1"
+
+[dev-dependencies]
+flate2 = "1"
+png = "0.17"
+
+[features]
+default = []
+
+[profile.release]
+lto = "thin"
+strip = "symbols"

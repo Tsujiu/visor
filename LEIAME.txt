@@ -1,0 +1,135 @@
+==============================================================================
+                                VISOR 0.4.1
+                Visualizador de Imagens Moderno para Windows
+==============================================================================
+
+1. DESCRICAO DO APLICATIVO
+------------------------------------------------------------------------------
+O VISOR e um visualizador de imagens ultrarrapido, moderno e de alto
+desempenho desenvolvido em Rust para o Windows 10 e Windows 11.
+
+Projetado para visualizacao instantanea de fotografias, ilustracoes e pixel art,
+o VISOR combina renderizacao acelerada por hardware (OpenGL via eframe/egui),
+arquitetura multithread com fila de tarefas assincrona, cache em memoria LRU
+inteligente e suporte nativo a 49 formatos de imagem raster, vetor e textura.
+
+
+2. REQUISITOS DE SISTEMA
+------------------------------------------------------------------------------
+- Sistema Operacional:
+  * Windows 11 (64 bits - x64) - Recomendado
+  * Windows 10 (64 bits - x64, Versao 1809 ou superior)
+    [Nota de Seguranca: A Microsoft encerrou o suporte regular ao Windows 10
+     em 14 de outubro de 2025. O VISOR e compativel tecnicamente com o sistema,
+     mas recomendamos ambientes com suporte de seguranca ativo].
+- Arquitetura: x86_64 (64 bits nativo).
+- Processador: Qualquer CPU compativel com x86_64.
+- Memoria RAM: Minimo de 512 MB (recomendado 2 GB ou mais para imagens gigapixel).
+- Dependencias de Software: Nenhuma dependencia adicional ou runtime externo
+  e necessario. O aplicativo utiliza exclusivamente as bibliotecas nativas
+  ja presentes no sistema operacional Windows.
+
+
+3. MODALIDADES DE DISTRIBUICAO
+------------------------------------------------------------------------------
+O VISOR e disponibilizado em duas modalidades oficiais:
+
+A) INSTALADOR CONVENCIONAL (Visor-Setup-v0.4.1-x64.exe)
+   - Instalacao por usuario em %LOCALAPPDATA%\Programs\Visor.
+   - Nao exige privilegios administrativos (sem prompt UAC).
+   - Cria atalhos no Menu Iniciar e opcionalmente na Area de Trabalho.
+   - Registra o VISOR como candidato oficial no catalogo de aplicativos do Windows.
+   - Atualizacao in-place automatica sobre versoes anteriores.
+   - Desinstalador limpo que preserva suas configuracoes pessoais por padrao.
+
+B) VERSAO PORTATIL (Visor-Portable-v0.4.1-x64.zip)
+   - Zero instalacao: basta extrair o arquivo compactado em qualquer pasta ou
+     unidade removivel (pen drive, disco externo).
+   - Suporte completo a caminhos com espacos e caracteres acentuados ou Unicode.
+   - Nao modifica registros do sistema ao ser aberto.
+
+
+4. LOCAL DE ARMAZENAMENTO DAS CONFIGURACOES
+------------------------------------------------------------------------------
+Para garantir que suas preferencias e personalizacoes sejam mantidas mesmo
+durante atualizacoes do software ou desinstalacao, o VISOR armazena suas
+configuracoes de usuario no seguinte caminho padrao do Windows:
+
+   %LOCALAPPDATA%\Visor\settings.json
+   (Exemplo: C:\Users\<SeuUsuario>\AppData\Local\Visor\settings.json)
+
+As configuracoes pessoais sao salvas de forma atomica e segura contra falhas de
+energia, preservando versoes de schema e backups caso ocorra corrupcao.
+Tanto a versao instalada quanto a versao portatil utilizam esse diretorio seguro
+de configuracoes do usuario.
+
+
+5. COMO DEFINIR COMO APLICATIVO PADRAO
+------------------------------------------------------------------------------
+Em total conformidade com as diretrizes de seguranca da Microsoft para o
+Windows 10 e Windows 11, o VISOR respeita a escolha do usuario e nao tenta
+forcar sua definicao como aplicativo padrao.
+
+Para associar seus formatos de imagem ao VISOR:
+
+Metodo 1 (Banner de Primeiro Uso):
+- Ao abrir o VISOR, um banner azul discreto surgira no topo.
+- Clique em "Definir como padrao". O Windows abrira a tela oficial de
+  Configuracoes de Aplicativos Padrao onde voce podera escolher o VISOR.
+
+Metodo 2 (Menu de Configuracoes do Windows):
+- Abra o menu Iniciar -> "Configuracoes" -> "Aplicativos" -> "Aplicativos Padrao".
+- Localize "Visor" na lista e selecione os formatos desejados.
+
+Metodo 3 (Menu "Abrir com" do Explorer):
+- Clique com o botao direito em qualquer arquivo de imagem no Windows Explorer.
+- Selecione "Abrir com" -> "Escolher outro aplicativo".
+- Selecione o "Visor" e marque "Sempre usar este aplicativo".
+
+Metodo 4 (Linha de Comando):
+- Para registrar o VISOR no catalogo do Windows como candidato:
+  visor.exe --registrar-padrao
+- Para remover o registro do catalogo:
+  visor.exe --remover-padrao
+
+
+6. COMO DESINSTALAR
+------------------------------------------------------------------------------
+Se voce instalou o VISOR pelo instalador convencional:
+1. Abra o menu Iniciar -> "Configuracoes" -> "Aplicativos" -> "Aplicativos Instalados".
+2. Localize "Visor" na lista, clique nos tres pontos e selecione "Desinstalar".
+3. O assistente de desinstalacao removera o executavel, documentacao e atalhos.
+4. O desinstalador perguntara se voce deseja remover tambem as configuracoes
+   pessoais. Se desejar mante-las para reinstalacao futura, selecione "Nao"
+   (opcao padrao de seguranca).
+
+
+7. LIMITACOES CONHECIDAS E AVISO DO SMARTSCREEN
+------------------------------------------------------------------------------
+- Assinatura Digital e SmartScreen:
+  Este software e distribuido diretamente sem certificado comercial de assinatura
+  de codigo estendida (EV). Na primeira execucao apos o download, o Microsoft
+  Defender SmartScreen pode exibir o aviso "O Windows protegeu o computador".
+  Para abrir o aplicativo:
+  1. Clique no link "Mais informacoes".
+  2. Clique no botao "Executar assim mesmo".
+  Para verificar a integridade autentica do arquivo baixado, confira os hashes
+  SHA-256 fornecidos no arquivo SHA256SUMS.txt.
+
+
+8. INTEGRIDADE DOS PACOTES E HASHES (SHA-256)
+------------------------------------------------------------------------------
+Antes de executar qualquer executavel baixado da internet, recomendamos
+conferir o hash criptografico SHA-256 utilizando o PowerShell:
+
+   Get-FileHash -Algorithm SHA256 <NomeDoArquivo>
+
+Consulte a tabela oficial no arquivo SHA256SUMS.txt distribuido conjuntamente.
+
+
+9. TERMOS DE USO E LICENCA
+------------------------------------------------------------------------------
+O VISOR e fornecido no estado em que se encontra ("como esta"), para uso
+pessoal e profissional, sem garantias de qualquer natureza. Todos os direitos
+pertencem aos respectivos autores do projeto.
+==============================================================================
