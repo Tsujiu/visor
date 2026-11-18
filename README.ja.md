@@ -97,6 +97,15 @@ Windows 標準のフォトアプリは動作が重く、不要な機能やテレ
 
 ---
 
+## 📸 視覚的デモ
+
+| サムネイル・フィルムストリップ (Filmstrip) | 技術情報パネル (EXIF) & メニュー |
+| :---: | :---: |
+| <img src="assets/screenshots/filmstrip_view.png" width="460" alt="フィルムストリップナビゲーション"> | <img src="assets/screenshots/info_panel.png" width="460" alt="EXIF情報パネルと設定メニュー"> |
+| *非同期プリロードによる滑らかな画像切り替え* | *詳細な撮影・技術メタデータ解析と補間モード切り替え* |
+
+---
+
 ## 📦 対応フォーマット (75+)
 
 * **写真・高精度ラスター:** PNG, APNG, JPEG, JFIF, WebP, AVIF, JPEG XL (JXL), TIFF (16-bit), BMP, DIB, QOI, HDR Radiance, OpenEXR (EXR), ICO, CUR, Adobe Photoshop (PSD, PSB), GIMP (XCF), OpenRaster (ORA), Farbfeld, JPEG 2000 (JP2, J2K), Netpbm, SGI, Sun RAS, WBMP, XBM.

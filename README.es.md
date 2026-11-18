@@ -99,10 +99,10 @@ Los visores de imágenes predeterminados de Windows se han vuelto lentos, pesado
 
 ## 📸 Demostración Visual
 
-| Tira de Miniaturas (Filmstrip) | Inspección Pixel Perfect & Texturas |
+| Tira de Miniaturas (Filmstrip) | Panel Técnico EXIF & Menús |
 | :---: | :---: |
-| <img src="assets/screenshots/filmstrip_view.png" width="460" alt="Navegación por Filmstrip"> | <img src="assets/screenshots/pixel_perfect.png" width="460" alt="Pixel Perfect Mode"> |
-| *Navegación fluida desacoplada con precarga asíncrona* | *Nitidez máxima 1:1 sin desenfoque de interpolación* |
+| <img src="assets/screenshots/filmstrip_view.png" width="460" alt="Navegación por Filmstrip"> | <img src="assets/screenshots/info_panel.png" width="460" alt="Panel Técnico EXIF y Menús de Ajuste"> |
+| *Navegación fluida desacoplada con precarga asíncrona* | *Inspección completa de metadatos EXIF, modos de interpolación y controles* |
 
 ---
 

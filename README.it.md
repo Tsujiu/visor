@@ -97,6 +97,15 @@ I visualizzatori di foto predefiniti di Windows sono diventati lenti, pesanti e 
 
 ---
 
+## 📸 Dimostrazione Visiva
+
+| Pellicola di Anteprime (Filmstrip) | Pannello Tecnico EXIF e Menu |
+| :---: | :---: |
+| <img src="assets/screenshots/filmstrip_view.png" width="460" alt="Navigazione Filmstrip"> | <img src="assets/screenshots/info_panel.png" width="460" alt="Pannello Tecnico EXIF e Menu di Configurazione"> |
+| *Navigazione fluida con precaricamento asincrono* | *Ispezione approfondita dei metadati EXIF, interpolazione e controlli* |
+
+---
+
 ## 📦 Formati Supportati (75+)
 
 * **Fotografia e Raster:** PNG, APNG, JPEG, JFIF, WebP, AVIF, JPEG XL (JXL), TIFF (16-bit), BMP, DIB, QOI, HDR Radiance, OpenEXR (EXR), ICO, CUR, Adobe Photoshop (PSD, PSB), GIMP (XCF), OpenRaster (ORA), Farbfeld, JPEG 2000 (JP2, J2K), Netpbm, SGI, Sun RAS, WBMP, XBM.

@@ -99,10 +99,10 @@ Default Windows image viewers have grown sluggish, bloated, and cluttered with t
 
 ## 📸 Visual Demonstration
 
-| Thumbnail Filmstrip | Pixel Perfect & Texture Inspection |
+| Thumbnail Filmstrip | Technical EXIF Panel & Menus |
 | :---: | :---: |
-| <img src="assets/screenshots/filmstrip_view.png" width="460" alt="Filmstrip Navigation"> | <img src="assets/screenshots/pixel_perfect.png" width="460" alt="Pixel Perfect Mode"> |
-| *Smooth decoupled navigation with background preloading* | *Maximum 1:1 sharpness without interpolation blur* |
+| <img src="assets/screenshots/filmstrip_view.png" width="460" alt="Filmstrip Navigation"> | <img src="assets/screenshots/info_panel.png" width="460" alt="Technical EXIF Panel and Context Menus"> |
+| *Smooth decoupled navigation with background preloading* | *Complete photographic metadata inspection, interpolation modes & controls* |
 
 ---
 

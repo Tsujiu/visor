@@ -99,10 +99,10 @@ Windows 自带的照片查看器逐渐变得臃肿迟缓，充斥着不必要的
 
 ## 📸 视觉演示
 
-| 底部胶卷缩略图 (Filmstrip) | 动态点对点模式 (Pixel Perfect) |
+| 底部胶卷缩略图 (Filmstrip) | 技术信息面板 (EXIF) 与菜单 |
 | :---: | :---: |
-| <img src="assets/screenshots/filmstrip_view.png" width="460" alt="胶卷缩略图浏览"> | <img src="assets/screenshots/pixel_perfect.png" width="460" alt="点对点清晰采样"> |
-| *解耦异步加载，平滑顺畅* | *1:1 极致清晰，无插值模糊* |
+| <img src="assets/screenshots/filmstrip_view.png" width="460" alt="胶卷缩略图浏览"> | <img src="assets/screenshots/info_panel.png" width="460" alt="EXIF 技术面板与控制菜单"> |
+| *解耦异步加载，平滑顺畅* | *全面查看摄影与技术元数据，插值模式与右键菜单快速切换* |
 
 ---
 

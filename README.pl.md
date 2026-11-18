@@ -97,6 +97,15 @@ Domyślne przeglądarki zdjęć w systemie Windows stały się powolne i przeła
 
 ---
 
+## 📸 Prezentacja Wizualna
+
+| Pasek Miniatur (Filmstrip) | Panel Techniczny EXIF i Menu |
+| :---: | :---: |
+| <img src="assets/screenshots/filmstrip_view.png" width="460" alt="Nawigacja po pasku miniatur"> | <img src="assets/screenshots/info_panel.png" width="460" alt="Panel techniczny EXIF i menu opcji"> |
+| *Płynna nawigacja z asynchronicznym ładowaniem w tle* | *Pełny odczyt parametrów EXIF, tryby interpolacji i konfiguracja* |
+
+---
+
 ## 📦 Obsługiwane Formaty (75+)
 
 * **Fotografia i Grafika Rastrowa:** PNG, APNG, JPEG, JFIF, WebP, AVIF, JPEG XL (JXL), TIFF (16-bit), BMP, DIB, QOI, HDR Radiance, OpenEXR (EXR), ICO, CUR, Adobe Photoshop (PSD, PSB), GIMP (XCF), OpenRaster (ORA), Farbfeld, JPEG 2000 (JP2, J2K), Netpbm, SGI, Sun RAS, WBMP, XBM.

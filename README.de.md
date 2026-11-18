@@ -99,10 +99,10 @@ Standard-Bildbetrachter in Windows sind oft träge, überladen und voller ständ
 
 ## 📸 Visuelle Demonstration
 
-| Miniatur-Filmleiste (Filmstrip) | Pixel Perfect & Textur-Inspektion |
+| Miniatur-Filmleiste (Filmstrip) | Technisches EXIF-Panel & Menüs |
 | :---: | :---: |
-| <img src="assets/screenshots/filmstrip_view.png" width="460" alt="Filmstrip Navigation"> | <img src="assets/screenshots/pixel_perfect.png" width="460" alt="Pixel Perfect Mode"> |
-| *Flüssige Navigation mit asynchronem Vorladen* | *Maximale 1:1 Schärfe ohne Interpolationsunschärfe* |
+| <img src="assets/screenshots/filmstrip_view.png" width="460" alt="Filmstrip Navigation"> | <img src="assets/screenshots/info_panel.png" width="460" alt="Technisches EXIF-Panel und Kontextmenüs"> |
+| *Flüssige Navigation mit asynchronem Vorladen* | *Vollständige EXIF-Metadatenanalyse, Interpolationsmodi & Steuerung* |
 
 ---
 

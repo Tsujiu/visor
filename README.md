@@ -100,10 +100,10 @@ Os visualizadores de imagem padrão do Windows tornaram-se lentos, pesados e che
 
 ## 📸 Demonstração Visual
 
-| Tira de Miniaturas (Filmstrip) | Inspeção Pixel Perfect & Texturas |
+| Tira de Miniaturas (Filmstrip) | Painel Técnico EXIF & Menus |
 | :---: | :---: |
-| <img src="assets/screenshots/filmstrip_view.png" width="460" alt="Navegação por Filmstrip"> | <img src="assets/screenshots/pixel_perfect.png" width="460" alt="Pixel Perfect Mode"> |
-| *Navegação suave desacoplada com carregamento assíncrono* | *Nitidez máxima 1:1 sem interpolação borrada* |
+| <img src="assets/screenshots/filmstrip_view.png" width="460" alt="Navegação por Filmstrip"> | <img src="assets/screenshots/info_panel.png" width="460" alt="Painel Técnico EXIF e Menus de Ajuste"> |
+| *Navegação fluida desacoplada com carregamento assíncrono* | *Inspeção completa de metadados EXIF, modos de interpolação e controles* |
 
 ---
 

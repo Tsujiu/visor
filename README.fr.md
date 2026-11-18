@@ -97,6 +97,15 @@ Les visionneuses intégrées de Windows sont devenues lentes, lourdes et truffé
 
 ---
 
+## 📸 Démonstration Visuelle
+
+| Bandeau de Miniatures (Filmstrip) | Panneau Technique EXIF & Menus |
+| :---: | :---: |
+| <img src="assets/screenshots/filmstrip_view.png" width="460" alt="Navigation par bandeau de miniatures"> | <img src="assets/screenshots/info_panel.png" width="460" alt="Panneau technique EXIF et menus d'options"> |
+| *Navigation fluide et asynchrone en arrière-plan* | *Inspection complète des métadonnées EXIF, modes d'interpolation et réglages* |
+
+---
+
 ## 📦 Formats pris en charge (75+)
 
 * **Photographie et Raster :** PNG, APNG, JPEG, JFIF, WebP, AVIF, JPEG XL (JXL), TIFF (16-bit), BMP, DIB, QOI, HDR Radiance, OpenEXR (EXR), ICO, CUR, Adobe Photoshop (PSD, PSB), GIMP (XCF), OpenRaster (ORA), Farbfeld, JPEG 2000 (JP2, J2K), Netpbm, SGI, Sun RAS, WBMP, XBM.
