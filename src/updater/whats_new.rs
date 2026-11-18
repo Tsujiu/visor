@@ -203,12 +203,23 @@ pub fn parse_release_notes_from_markdown(
                 in_ignored_section = false;
             }
 
-            // Identifica categoria semântica
+            // Identifica categoria semântica multilíngue
             if header_text.contains("novo")
                 || header_text.contains("novas")
+                || header_text.contains("novidad")
                 || header_text.contains("added")
+                || header_text.contains("new")
+                || header_text.contains("features")
+                || header_text.contains("destaque")
+                || header_text.contains("highlight")
                 || header_text.contains("funcionalidade")
                 || header_text.contains("recurso")
+                || header_text.contains("neu")
+                || header_text.contains("nouveaut")
+                || header_text.contains("novedad")
+                || header_text.contains("новое")
+                || header_text.contains("新機能")
+                || header_text.contains("新增")
             {
                 current_category = Category::Added;
             } else if header_text.contains("melhoria")
@@ -216,29 +227,55 @@ pub fn parse_release_notes_from_markdown(
                 || header_text.contains("moderniz")
                 || header_text.contains("alterad")
                 || header_text.contains("changed")
+                || header_text.contains("improvement")
                 || header_text.contains("aprimor")
                 || header_text.contains("design")
                 || header_text.contains("layout")
                 || header_text.contains("tipografia")
+                || header_text.contains("verbesserung")
+                || header_text.contains("amélioration")
+                || header_text.contains("miglioramento")
+                || header_text.contains("улучшения")
+                || header_text.contains("改善")
+                || header_text.contains("优化")
             {
                 current_category = Category::Changed;
             } else if header_text.contains("corrig")
                 || header_text.contains("correç")
                 || header_text.contains("fixed")
+                || header_text.contains("fix")
                 || header_text.contains("bug")
                 || header_text.contains("resolv")
+                || header_text.contains("behebung")
+                || header_text.contains("correction")
+                || header_text.contains("correzione")
+                || header_text.contains("исправления")
+                || header_text.contains("修正")
+                || header_text.contains("修复")
             {
                 current_category = Category::Fixed;
             } else if header_text.contains("seguran")
                 || header_text.contains("security")
                 || header_text.contains("privacidade")
+                || header_text.contains("privacy")
                 || header_text.contains("integridade")
+                || header_text.contains("sicherheit")
+                || header_text.contains("sécurité")
+                || header_text.contains("sicurezza")
+                || header_text.contains("безопасность")
+                || header_text.contains("セキュリティ")
+                || header_text.contains("安全")
             {
                 current_category = Category::Security;
             } else if header_text.contains("important")
                 || header_text.contains("breaking")
                 || header_text.contains("atenção")
                 || header_text.contains("aviso")
+                || header_text.contains("wichtig")
+                || header_text.contains("attention")
+                || header_text.contains("attenzione")
+                || header_text.contains("важно")
+                || header_text.contains("重要")
             {
                 current_category = Category::Important;
             }

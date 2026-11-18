@@ -771,6 +771,134 @@ fn get_overview_cards(lang: ResolvedLanguage) -> [ContentCard; 6] {
                 desc: "• Convierta carpetas o selecciones a 11 formatos raster (PNG, JPEG, WebP, BMP, TIFF, GIF, QOI, TGA, ICO, PNM, HDR) conservando la profundidad de 16 bits en la salida.",
             },
         ],
+        ResolvedLanguage::DeDe => [
+            ContentCard {
+                tag: "KONZEPT",
+                title: "Was ist VISOR?",
+                desc: "VISOR wurde entwickelt, um die Trägheit und übermäßige Telemetrie herkömmlicher Bildbetrachter zu beseitigen. Geschrieben in purem Rust mit GPU-Hardwarebeschleunigung und modernem Windows 11 Fluent Design startet VISOR blitzschnell, verbraucht im Leerlauf 0% CPU und schützt Ihre Privatsphäre zu 100% offline.",
+            },
+            ContentCard {
+                tag: "LEISTUNG",
+                title: "Ultraschnelle Render-Engine & stufenloser Zoom",
+                desc: "• Cursor-verankerter stufenloser Zoom von 1% bis 6400% ohne Schärfeverlust.\n• Intelligenter Doppelklick: wechselt sofort zwischen Fensteranpassung und 100% (Originalgröße).\n• Dynamischer Pixel-Perfect-Modus: sanfte bilineare Filterung für Fotos, scharfes Nearest Neighbor für Pixel-Art und Texturen.\n• Intuitives Verschieben per Mauszug und Schachbrett-/Einfarbenhintergründe.",
+            },
+            ContentCard {
+                tag: "NAVIGATION",
+                title: "Miniatur-Filmleiste & asynchrones Vorladen",
+                desc: "• Einziehbare Filmleiste am unteren Bildschirmrand mit originalgetreuen Seitenverhältnissen.\n• Asynchroner Hintergrund-Thread-Pool lädt Miniaturansichten ohne UI-Verzögerung.\n• Entkoppeltes Scrollen: bequemes Durchsuchen des Ordners ohne erzwungenes Zurückspringen.",
+            },
+            ContentCard {
+                tag: "FOTOGRAFIE",
+                title: "Technisches EXIF-Metadaten-Seitenpanel",
+                desc: "• Tiefgehende Extraktion: Kamera, Objektiv, Blende (f-stop), ISO, Belichtungszeit und Brennweite.\n• Erkennung eingebetteter ICC-Farbprofile und GPS-Koordinaten.\n• 'Kopieren'-Schaltfläche: formatiert und exportiert alle Daten direkt in die Zwischenablage.",
+            },
+            ContentCard {
+                tag: "INTEGRATION",
+                title: "Verlustfreie Zwischenablage",
+                desc: "• Drücken von Strg+C kopiert das Bild in maximaler Qualität inklusive Alphakanal-Transparenz zum direkten Einfügen in Editoren und Browser.",
+            },
+            ContentCard {
+                tag: "WERKZEUGE",
+                title: "Integrierter Stapelkonverter (Batch Export)",
+                desc: "• Konvertieren Sie ganze Verzeichnisse in 11 Rasterformate (PNG, JPEG, WebP, BMP, TIFF, GIF, QOI, TGA, ICO, PNM, HDR) mit bis zu 16-Bit Farbtiefe.",
+            },
+        ],
+        ResolvedLanguage::FrFr => [
+            ContentCard {
+                tag: "CONCEPT",
+                title: "Qu'est-ce que VISOR ?",
+                desc: "VISOR a été conçu pour éliminer la lenteur et la télémétrie excessive des visionneuses d'images traditionnelles. Développé en Rust natif avec accélération matérielle GPU et esthétique Fluent Windows 11, VISOR démarre instantanément, ne consomme aucune mémoire au repos et conserve vos fichiers strictement privés.",
+            },
+            ContentCard {
+                tag: "PERFORMANCE",
+                title: "Moteur de rendu ultrarapide & zoom continu",
+                desc: "• Zoom fluide ancré au curseur de 1% à 6400% sans perte de mise au point.\n• Double-clic intelligent : bascule instantanément entre ajustement à l'écran et 100% (taille réelle).\n• Algorithme Pixel Perfect : interpolation douce pour les photos, échantillonnage net au plus proche pour le pixel art.\n• Déplacement panoramique par glisser-déposer et arrière-plans personnalisables.",
+            },
+            ContentCard {
+                tag: "NAVIGATION",
+                title: "Bandeau de miniatures & préchargement",
+                desc: "• Bandeau inférieur rétractable préservant fidèlement les proportions de chaque image.\n• Chargement multitâche en arrière-plan sans aucun blocage de l'interface.\n• Défilement découplé : parcourez le dossier à la molette sans recentrage forcé.",
+            },
+            ContentCard {
+                tag: "PHOTOGRAPHIE",
+                title: "Panneau latéral de métadonnées techniques (EXIF)",
+                desc: "• Analyse approfondie : appareil photo, objectif, ouverture, ISO, temps de pose et focale.\n• Détection des profils colorimétriques ICC intégrés et coordonnées géographiques GPS.\n• Bouton 'Copier' : exporte le résumé technique formaté directement dans le Presse-papiers.",
+            },
+            ContentCard {
+                tag: "INTÉGRATION",
+                title: "Presse-papiers haute fidélité",
+                desc: "• La combinaison Ctrl+C copie l'image avec préservation absolue de la transparence et des détails, prête à coller dans vos logiciels d'édition.",
+            },
+            ContentCard {
+                tag: "UTILITAIRE",
+                title: "Convertisseur par lots intégré (Batch Export)",
+                desc: "• Convertissez des dossiers entiers vers 11 formats raster pris en charge (PNG, JPEG, WebP, BMP, TIFF, GIF, QOI, TGA, ICO, PNM, HDR) jusqu'à 16 bits de profondeur.",
+            },
+        ],
+        ResolvedLanguage::ItIt => [
+            ContentCard {
+                tag: "CONCETTO",
+                title: "Cos'è VISOR?",
+                desc: "VISOR è stato creato per eliminare la lentezza e la telemetria invasiva dei visualizzatori tradizionali. Sviluppato in puro Rust con accelerazione GPU e design Fluent per Windows 11, VISOR si avvia all'istante, non consuma memoria inattivo e mantiene i tuoi file 100% al sicuro offline.",
+            },
+            ContentCard {
+                tag: "PRESTAZIONI",
+                title: "Motore di rendering ultrarapido & zoom continuo",
+                desc: "• Zoom continuo ancorato al cursore dall'1% al 6400% senza perdere nitidezza.\n• Doppio clic intelligente: alterna tra Adatta alla Finestra e 100% (Dimensioni Reali).\n• Algoritmo dinamico Pixel Perfect: campionamento bilineare per le foto e Nearest Neighbor nitido per pixel art.\n• Panoramica fluida trascinando il mouse e sfondi personalizzabili.",
+            },
+            ContentCard {
+                tag: "NAVIGAZIONE",
+                title: "Pellicola di anteprime & precaricamento asincrono",
+                desc: "• Pellicola inferiore a scomparsa che rispetta le proporzioni originali delle immagini.\n• Pool di thread in background che carica le miniature senza bloccare l'interfaccia utente.\n• Scorrimento disaccoppiato: naviga liberamente nella cartella senza salti forzati.",
+            },
+            ContentCard {
+                tag: "FOTOGRAFIA",
+                title: "Pannello laterale metadati tecnici (EXIF)",
+                desc: "• Estrazione profonda dei parametri fotografici: fotocamera, obiettivo, apertura, ISO, otturatore.\n• Rilevamento dei profili colore ICC incorporati e coordinate GPS.\n• Pulsante 'Copia': esporta il riassunto tecnico direttamente negli Appunti di sistema.",
+            },
+            ContentCard {
+                tag: "INTEGRAZIONE",
+                title: "Appunti di sistema ad alta fedeltà",
+                desc: "• Premendo Ctrl+C l'immagine viene copiata con piena fedeltà e trasparenza, pronta per essere incollata in qualsiasi app o browser.",
+            },
+            ContentCard {
+                tag: "STRUMENTI",
+                title: "Convertitore in batch integrato (Batch Export)",
+                desc: "• Converti intere cartelle o file selezionati in 11 formati raster supportati preservando la profondità fino a 16 bit in output.",
+            },
+        ],
+        ResolvedLanguage::RuRu => [
+            ContentCard {
+                tag: "КОНЦЕПЦИЯ",
+                title: "Что такое VISOR?",
+                desc: "VISOR создан для решения проблем медлительности и навязчивой телеметрии стандартных программ просмотра. Разработан на Rust с аппаратным ускорением GPU и эстетикой Fluent Design Windows 11. Открывается мгновенно, не тратит память в простое и гарантирует 100% офлайн-приватность.",
+            },
+            ContentCard {
+                tag: "СКОРОСТЬ",
+                title: "Сверхбыстрый рендеринг и плавный зум",
+                desc: "• Плавное масштабирование от 1% до 6400% с привязкой к позиции курсора.\n• Умный двойной клик: мгновенное переключение между «По размеру окна» и 100% (1:1).\n• Режим Pixel Perfect: гладкая фильтрация для фото и сверхчеткий Nearest Neighbor для пиксель-арта.\n• Перетаскивание зажатой мышью и выбор фона (шахматный, черный, белый или произвольный).",
+            },
+            ContentCard {
+                tag: "НАВИГАЦИЯ",
+                title: "Лента миниатюр и фоновый кэш",
+                desc: "• Выдвижная нижняя панель с точным сохранением пропорций каждого кадра.\n• Фоновый пул потоков плавно готовит миниатюры без зависания интерфейса.\n• Независимая прокрутка: свободный просмотр каталога без принудительного возврата фокуса.",
+            },
+            ContentCard {
+                tag: "ФОТОГРАФИЯ",
+                title: "Техническая панель метаданных (EXIF)",
+                desc: "• Детальный анализ: камера, объектив, диафрагма (f-число), ISO, выдержка и фокусное расстояние.\n• Чтение цветовых профилей ICC и географических координат GPS.\n• Кнопка «Копировать»: быстрый экспорт технического отчета в буфер обмена.",
+            },
+            ContentCard {
+                tag: "ИНТЕГРАЦИЯ",
+                title: "Высокоточный буфер обмена",
+                desc: "• По нажатию Ctrl+C изображение копируется с сохранением прозрачности и максимального качества для вставки в любые редакторы и мессенджеры.",
+            },
+            ContentCard {
+                tag: "ИНСТРУМЕНТЫ",
+                title: "Встроенный пакетный конвертер",
+                desc: "• Преобразование целых папок в 11 растровых форматов (PNG, JPEG, WebP, BMP, TIFF, GIF, QOI, TGA, ICO, PNM, HDR) с сохранением до 16 бит глубины цвета.",
+            },
+        ],
         _ => [
             ContentCard {
                 tag: "CONCEPT",
@@ -894,6 +1022,94 @@ fn get_format_categories(lang: ResolvedLanguage) -> [FormatCatCard; 5] {
             FormatCatCard {
                 title: "Texturas de Videojuegos y Motores Gráficos (11 formatos)",
                 list: "• Microsoft DirectDraw Surface (DDS): RGBA8, BC1, BC2, BC3, BC4, BC5, BC6H, BC7 y conteo de mipmaps.\n• Khronos KTX 1 y KTX 2.\n• Valve Texture Format (VTF) de juegos Source Engine.\n• Blizzard BLP1/BLP2 de Warcraft III y World of Warcraft.\n• Sprites GoldSrc / Half-Life IDSP (.spr).\n• RenderWare TXD (GTA III, Vice City, San Andreas).\n• ASTC (.astc), Basis Universal (.basis), PowerVR PVR (.pvr), Adobe ATF (.atf) y Klei KTEX (.tex).",
+            },
+        ],
+        ResolvedLanguage::DeDe => [
+            FormatCatCard {
+                title: "Foto- & Hochpräzisions-Rasterformate (24 Formate)",
+                list: "PNG, APNG, JPEG, JFIF, WebP, AVIF, JPEG XL (JXL), TIFF (16-Bit), BMP, DIB, QOI, HDR Radiance, OpenEXR (exr), ICO, CUR, Adobe Photoshop (PSD, PSB), GIMP (XCF), OpenRaster (ORA), Farbfeld (16-Bit), JPEG 2000 (JP2, J2K, J2C, JPX), Netpbm PNM (PPM, PGM, PBM, PAM), SGI, Sun RAS, WBMP und X11 Bitmap (XBM).",
+            },
+            FormatCatCard {
+                title: "Vektor, CAD & Grafikdesign (7 Formate)",
+                list: "• CorelDRAW (.cdr): Native Vorschaubild-Extraktion für ZIP-basierte (X4 bis 2024+) und RIFF-Dateien (v3 bis X3 mit DISP/DIB-Chunks).\n• SVG & SVGZ: Native sichere Vektorwiedergabe über resvg/usvg.\n• AutoCAD DXF: Native Vektorkonvertierung von CAD-Zeichnungen.\n• Windows EMF & WMF: Rendering über Windows GDI+.\n• PDF, EPS, PS und Adobe Illustrator (AI): Über ImageMagick im PATH.",
+            },
+            FormatCatCard {
+                title: "Native Animationen (6 Formate)",
+                list: "• GIF und APNG mit präziser Frame-Steuerung.\n• Windows animierte Cursor (ANI) im RIFF/ACON-Container.\n• Multiple-image Network Graphics (MNG).\n• Lottie-Vektoranimationen (.lottie, .json) und Telegram-Sticker (.tgs) über rasterlottie.",
+            },
+            FormatCatCard {
+                title: "Kamera-RAW-Fotografien (23+ Marken)",
+                list: "• Canon (CR2, CRW), Nikon (NEF, NRW), Sony (ARW, SRF, SR2), Fujifilm (RAF), Olympus (ORF), Panasonic (RW2), Pentax (PEF), Hasselblad (3FR), Phase One (IIQ), Epson (ERF), Kodak (KDC, DCR), Mamiya (MOS), Minolta (MRW), Sigma (X3F), Casio (BAY), Phase One (CAP) und Adobe DNG.\n• Canon CR3 ISOBMFF/CRX: Direkte Vorschau-Extraktion in voller Auflösung.",
+            },
+            FormatCatCard {
+                title: "Spiele-Texturen & Grafik-Engines (11 Formate)",
+                list: "• Microsoft DirectDraw Surface (DDS): RGBA8, BC1 bis BC7 und Mipmaps.\n• Khronos KTX 1 und KTX 2.\n• Source Engine Valve Texture Format (VTF).\n• Blizzard BLP1/BLP2 (Warcraft III, World of Warcraft).\n• GoldSrc / Half-Life Sprites (.spr).\n• RenderWare TXD (GTA III, VC, SA).\n• ASTC (.astc), Basis Universal (.basis), PowerVR PVR (.pvr), Adobe ATF (.atf) und Klei KTEX (.tex).",
+            },
+        ],
+        ResolvedLanguage::FrFr => [
+            FormatCatCard {
+                title: "Photographie & formats raster haute précision (24 formats)",
+                list: "PNG, APNG, JPEG, JFIF, WebP, AVIF, JPEG XL (JXL), TIFF (16 bits), BMP, DIB, QOI, HDR Radiance, OpenEXR (exr), ICO, CUR, Adobe Photoshop (PSD, PSB), GIMP (XCF), OpenRaster (ORA), Farbfeld (16 bits), JPEG 2000 (JP2, J2K, J2C, JPX), Netpbm PNM (PPM, PGM, PBM, PAM), SGI, Sun RAS, WBMP et X11 Bitmap (XBM).",
+            },
+            FormatCatCard {
+                title: "Vectoriel, CAO & Graphisme (7 formats)",
+                list: "• CorelDRAW (.cdr) : Extraction native de l'aperçu pour les fichiers ZIP (X4 à 2024+) et RIFF (v3 à X3).\n• SVG & SVGZ : Rendu vectoriel natif sécurisé via resvg/usvg.\n• AutoCAD DXF : Conversion vectorielle native de plans CAO.\n• Windows EMF & WMF : Métafichiers via le moteur officiel Windows GDI+.\n• PDF, EPS, PS et Adobe Illustrator (AI) : Via ImageMagick dans le PATH.",
+            },
+            FormatCatCard {
+                title: "Animations natives (6 formats)",
+                list: "• GIF et APNG avec contrôle précis du minutage des images.\n• Curseurs animés Windows (ANI) en conteneur RIFF/ACON.\n• Multiple-image Network Graphics (MNG).\n• Animations vectorielles Lottie (.lottie, .json) et stickers Telegram (.tgs) via rasterlottie.",
+            },
+            FormatCatCard {
+                title: "Photos RAW d'appareils professionnels (23+ marques)",
+                list: "• Canon (CR2, CRW), Nikon (NEF, NRW), Sony (ARW, SRF, SR2), Fujifilm (RAF), Olympus (ORF), Panasonic (RW2), Pentax (PEF), Hasselblad (3FR), Phase One (IIQ), Epson (ERF), Kodak (KDC, DCR), Mamiya (MOS), Minolta (MRW), Sigma (X3F), Casio (BAY), Phase One (CAP) et Adobe DNG.\n• Canon CR3 ISOBMFF/CRX : Extraction directe en pleine résolution.",
+            },
+            FormatCatCard {
+                title: "Textures de jeux & moteurs 3D (11 formats)",
+                list: "• Microsoft DirectDraw Surface (DDS) : RGBA8, BC1 à BC7 et mipmaps.\n• Khronos KTX 1 et KTX 2.\n• Valve Texture Format (VTF) des jeux Source Engine.\n• Blizzard BLP1/BLP2 (Warcraft III, World of Warcraft).\n• Sprites GoldSrc / Half-Life (.spr).\n• RenderWare TXD (GTA III, VC, SA).\n• ASTC (.astc), Basis Universal (.basis), PowerVR PVR (.pvr), Adobe ATF (.atf) et Klei KTEX (.tex).",
+            },
+        ],
+        ResolvedLanguage::ItIt => [
+            FormatCatCard {
+                title: "Fotografia e raster ad alta precisione (24 formati)",
+                list: "PNG, APNG, JPEG, JFIF, WebP, AVIF, JPEG XL (JXL), TIFF (16 bit), BMP, DIB, QOI, HDR Radiance, OpenEXR (exr), ICO, CUR, Adobe Photoshop (PSD, PSB), GIMP (XCF), OpenRaster (ORA), Farbfeld (16 bit), JPEG 2000 (JP2, J2K, J2C, JPX), Netpbm PNM (PPM, PGM, PBM, PAM), SGI, Sun RAS, WBMP e X11 Bitmap (XBM).",
+            },
+            FormatCatCard {
+                title: "Vettoriali, CAD & Illustrazione (7 formati)",
+                list: "• CorelDRAW (.cdr): Estrazione nativa dell'anteprima da file ZIP (X4 fino al 2024+) e RIFF (v3 a X3).\n• SVG & SVGZ: Rendering vettoriale nativo e sicuro tramite resvg/usvg.\n• AutoCAD DXF: Conversione vettoriale nativa per disegni CAD.\n• Windows EMF & WMF: Metafile tramite GDI+ nativo di Windows.\n• PDF, EPS, PS e Adobe Illustrator (AI): Supportati tramite ImageMagick nel PATH.",
+            },
+            FormatCatCard {
+                title: "Animazioni native (6 formati)",
+                list: "• GIF e APNG con controllo temporale accurato dei fotogrammi.\n• Cursore animato di Windows (ANI) in formato RIFF/ACON.\n• Multiple-image Network Graphics (MNG).\n• Animazioni vettoriali Lottie (.lottie, .json) e sticker Telegram (.tgs) con rasterlottie.",
+            },
+            FormatCatCard {
+                title: "Foto RAW da fotocamere professionali (23+ marchi)",
+                list: "• Canon (CR2, CRW), Nikon (NEF, NRW), Sony (ARW, SRF, SR2), Fujifilm (RAF), Olympus (ORF), Panasonic (RW2), Pentax (PEF), Hasselblad (3FR), Phase One (IIQ), Epson (ERF), Kodak (KDC, DCR), Mamiya (MOS), Minolta (MRW), Sigma (X3F), Casio (BAY), Phase One (CAP) e Adobe DNG.\n• Canon CR3 ISOBMFF/CRX: Estrazione diretta dell'anteprima a piena risoluzione.",
+            },
+            FormatCatCard {
+                title: "Texture di videogiochi & motori grafici (11 formati)",
+                list: "• Microsoft DirectDraw Surface (DDS): RGBA8, BC1 a BC7 e mipmaps.\n• Khronos KTX 1 e KTX 2.\n• Valve Texture Format (VTF) per giochi Source Engine.\n• Blizzard BLP1/BLP2 (Warcraft III, World of Warcraft).\n• Sprite GoldSrc / Half-Life (.spr).\n• RenderWare TXD (GTA III, VC, SA).\n• ASTC (.astc), Basis Universal (.basis), PowerVR PVR (.pvr), Adobe ATF (.atf) e Klei KTEX (.tex).",
+            },
+        ],
+        ResolvedLanguage::RuRu => [
+            FormatCatCard {
+                title: "Фотография и высокоточные растровые форматы (24 формата)",
+                list: "PNG, APNG, JPEG, JFIF, WebP, AVIF, JPEG XL (JXL), TIFF (16 бит), BMP, DIB, QOI, HDR Radiance, OpenEXR (exr), ICO, CUR, Adobe Photoshop (PSD, PSB), GIMP (XCF), OpenRaster (ORA), Farbfeld (16 бит), JPEG 2000 (JP2, J2K, J2C, JPX), Netpbm PNM (PPM, PGM, PBM, PAM), SGI, Sun RAS, WBMP и X11 Bitmap (XBM).",
+            },
+            FormatCatCard {
+                title: "Векторные форматы, CAD и графика (7 форматов)",
+                list: "• CorelDRAW (.cdr): Прямое извлечение превью из архивов ZIP (X4–2024+) и контейнеров RIFF (v3–X3).\n• SVG & SVGZ: Безопасный рендеринг векторной графики через resvg/usvg.\n• AutoCAD DXF: Нативная конвертация чертежей CAD.\n• Windows EMF & WMF: Рендеринг метафайлов через официальный Windows GDI+.\n• PDF, EPS, PS и Adobe Illustrator (AI): Через ImageMagick в системном PATH.",
+            },
+            FormatCatCard {
+                title: "Анимации (6 форматов)",
+                list: "• GIF и APNG с покадровым контролем времени.\n• Анимированные курсоры Windows (ANI) в формате RIFF/ACON.\n• Multiple-image Network Graphics (MNG).\n• Векторные анимации Lottie (.lottie, .json) и Telegram-стикеры (.tgs) через rasterlottie.",
+            },
+            FormatCatCard {
+                title: "Профессиональные RAW-фотографии (23+ бренда)",
+                list: "• Canon (CR2, CRW), Nikon (NEF, NRW), Sony (ARW, SRF, SR2), Fujifilm (RAF), Olympus (ORF), Panasonic (RW2), Pentax (PEF), Hasselblad (3FR), Phase One (IIQ), Epson (ERF), Kodak (KDC, DCR), Mamiya (MOS), Minolta (MRW), Sigma (X3F), Casio (BAY), Phase One (CAP) и Adobe DNG.\n• Canon CR3 ISOBMFF/CRX: Прямое извлечение полноразмерного превью.",
+            },
+            FormatCatCard {
+                title: "Текстуры видеоигр и игровых движков (11 форматов)",
+                list: "• Microsoft DirectDraw Surface (DDS): RGBA8, BC1–BC7 и мип-мапы.\n• Khronos KTX 1 и KTX 2.\n• Valve Texture Format (VTF) для Source Engine.\n• Blizzard BLP1/BLP2 (Warcraft III, World of Warcraft).\n• Спрайты GoldSrc / Half-Life (.spr).\n• RenderWare TXD (GTA III, VC, SA).\n• ASTC (.astc), Basis Universal (.basis), PowerVR PVR (.pvr), Adobe ATF (.atf) и Klei KTEX (.tex).",
             },
         ],
         _ => [
@@ -1051,6 +1267,134 @@ fn get_security_cards(lang: ResolvedLanguage) -> [ContentCard; 6] {
                 desc: "Desarrollado desde cero en Rust para ofrecer inicio instantáneo, mínimo consumo de memoria y máxima robustez para el uso continuo.",
             },
         ],
+        ResolvedLanguage::DeDe => [
+            ContentCard {
+                tag: "SICHERHEIT",
+                title: "Vollständige Privatsphäre & Null Telemetrie",
+                desc: "VISOR wurde nach dem Grundsatz 'Datenschutz durch Design' entwickelt. Die Software arbeitet zu 100% offline. Es werden niemals geöffnete Bilder, Verläufe oder Dateipfade gesammelt oder übertragen.",
+            },
+            ContentCard {
+                tag: "SICHERHEIT",
+                title: "Schutz vor beschädigten Dateien",
+                desc: "Isolierte und sichere Dekodierung. Bei defekten oder manipulierten Bilddateien wird der Fehler sicher abgefangen, ohne dass die Anwendung abstürzt oder Ihr System gefährdet wird.",
+            },
+            ContentCard {
+                tag: "SICHERHEIT",
+                title: "Sicherheit vor bösartigen Skripten",
+                desc: "Vektordateien (wie SVG und DXF) werden streng ohne Skriptausführung, Makros oder externe Internetverbindungen geöffnet.",
+            },
+            ContentCard {
+                tag: "SICHERHEIT",
+                title: "Konform mit Windows 10 & 11 Standards",
+                desc: "Saubere Installation ohne Administratorrechte, vollständig kompatibel mit den Microsoft-Sicherheitsrichtlinien für Standard-Apps.",
+            },
+            ContentCard {
+                tag: "SICHERHEIT",
+                title: "Echtheit & Vertrauenswürdigkeit garantiert",
+                desc: "Offizielle Pakete werden kryptografisch mit SHA-256 verifiziert, um sicherzustellen, dass Sie eine unveränderte Originalsoftware verwenden.",
+            },
+            ContentCard {
+                tag: "SICHERHEIT",
+                title: "Native Rust-Zuverlässigkeit",
+                desc: "Von Grund auf in Rust entwickelt für maximale Speichersicherheit, minimale Latenz und dauerhafte Stabilität im täglichen Einsatz.",
+            },
+        ],
+        ResolvedLanguage::FrFr => [
+            ContentCard {
+                tag: "SÉCURITÉ",
+                title: "Confidentialité absolue & Zéro télémétrie",
+                desc: "VISOR est conçu selon le principe de 'Confidentialité par défaut'. Fonctionnement 100% hors ligne : aucune image, métadonnée ou historique n'est collecté ou envoyé sur Internet.",
+            },
+            ContentCard {
+                tag: "SÉCURITÉ",
+                title: "Protection contre les fichiers corrompus",
+                desc: "Décodage en bac à sable sécurisé. Si un fichier est endommagé ou malformé, l'erreur est isolée proprement sans faire planter le logiciel ni menacer votre PC.",
+            },
+            ContentCard {
+                tag: "SÉCURITÉ",
+                title: "Protection contre les scripts malveillants",
+                desc: "Les formats vectoriels (SVG, DXF) sont analysés sans exécuter de scripts masqués, de macros ou de requêtes réseau indésirables.",
+            },
+            ContentCard {
+                tag: "SÉCURITÉ",
+                title: "Conformité officielle Windows 10 & 11",
+                desc: "Installation propre par utilisateur ne nécessitant aucun privilège administrateur, respectant scrupuleusement vos choix d'applications par défaut.",
+            },
+            ContentCard {
+                tag: "SÉCURITÉ",
+                title: "Authenticité & Intégrité garanties",
+                desc: "Chaque distribution officielle est validée par empreinte cryptographique SHA-256 pour garantir un binaire authentique et sain.",
+            },
+            ContentCard {
+                tag: "SÉCURITÉ",
+                title: "Fiabilité et robustesse native Rust",
+                desc: "Conçu en Rust pur pour une sécurité mémoire garantie, une réactivité fulgurante et une endurance totale au quotidien.",
+            },
+        ],
+        ResolvedLanguage::ItIt => [
+            ContentCard {
+                tag: "SICUREZZA",
+                title: "Privacy assoluta e Zero telemetria",
+                desc: "VISOR è progettato sul principio di Privacy by Design. Funziona al 100% offline. Nessuna immagine aperta, cronologia o percorso locale viene raccolto o trasmesso.",
+            },
+            ContentCard {
+                tag: "SICUREZZA",
+                title: "Protezione contro file danneggiati",
+                desc: "Decodifica sicura e isolata. Se un file immagine è corrotto, l'errore viene gestito in sicurezza senza causare crash o instabilità al sistema.",
+            },
+            ContentCard {
+                tag: "SICUREZZA",
+                title: "Sicurezza contro script dannosi",
+                desc: "I file vettoriali (SVG, DXF) vengono visualizzati senza consentire l'esecuzione di script, macro o chiamate di rete esterne.",
+            },
+            ContentCard {
+                tag: "SICUREZZA",
+                title: "Conformità standard Windows 10 e 11",
+                desc: "Installazione pulita senza permessi di amministratore obbligatori, nel pieno rispetto delle linee guida di sicurezza di Microsoft.",
+            },
+            ContentCard {
+                tag: "SICUREZZA",
+                title: "Autenticità e integrità verificate",
+                desc: "Tutte le release ufficiali sono protette da checksum SHA-256 per garantire l'autenticità e l'assenza di manomissioni.",
+            },
+            ContentCard {
+                tag: "SICUREZZA",
+                title: "Robustezza e velocità native Rust",
+                desc: "Costruito interamente in Rust per garantire sicurezza della memoria, consumi minimi e massima stabilità per l'uso quotidiano.",
+            },
+        ],
+        ResolvedLanguage::RuRu => [
+            ContentCard {
+                tag: "БЕЗОПАСНОСТЬ",
+                title: "Полная приватность и ноль телеметрии",
+                desc: "VISOR спроектирован по принципу «Конфиденциальность по умолчанию». Программа работает 100% офлайн. Никакие данные об открытых изображениях или истории не отправляются в сеть.",
+            },
+            ContentCard {
+                tag: "БЕЗОПАСНОСТЬ",
+                title: "Защита от поврежденных файлов",
+                desc: "Изолированное безопасное декодирование. При открытии поврежденного файла ошибка безопасно перехватывается, предотвращая сбой программы и системы.",
+            },
+            ContentCard {
+                tag: "БЕЗОПАСНОСТЬ",
+                title: "Защита от вредоносных скриптов",
+                desc: "Векторные форматы (SVG, DXF) обрабатываются со строгим запретом на выполнение скриптов, макросов или сетевых соединений.",
+            },
+            ContentCard {
+                tag: "БЕЗОПАСНОСТЬ",
+                title: "Соответствие стандартам Windows 10 и 11",
+                desc: "Чистая установка без прав администратора, полное уважение к настройкам приложений по умолчанию в операционной системе.",
+            },
+            ContentCard {
+                tag: "БЕЗОПАСНОСТЬ",
+                title: "Подлинность и проверка целостности",
+                desc: "Официальные релизы проверяются криптографическими контрольными суммами SHA-256 для гарантии защиты от подделки.",
+            },
+            ContentCard {
+                tag: "БЕЗОПАСНОСТЬ",
+                title: "Нативная надежность на языке Rust",
+                desc: "Разработано с нуля на Rust для абсолютной безопасности работы с памятью, мгновенного отклика и непревзойденной стабильности.",
+            },
+        ],
         _ => [
             ContentCard {
                 tag: "SECURITY",
@@ -1138,11 +1482,15 @@ mod tests {
     #[test]
     fn test_central_content_for_all_languages() {
         for lang in [
+            ResolvedLanguage::PtBr,
+            ResolvedLanguage::EnUs,
+            ResolvedLanguage::EsEs,
             ResolvedLanguage::ZhCn,
             ResolvedLanguage::JaJp,
-            ResolvedLanguage::PtBr,
-            ResolvedLanguage::EsEs,
-            ResolvedLanguage::EnUs,
+            ResolvedLanguage::DeDe,
+            ResolvedLanguage::FrFr,
+            ResolvedLanguage::ItIt,
+            ResolvedLanguage::RuRu,
         ] {
             let cards = get_overview_cards(lang);
             assert_eq!(cards.len(), 6);

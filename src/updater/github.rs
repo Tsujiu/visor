@@ -8,10 +8,10 @@ use crate::updater::version::is_newer_than_current;
 
 /// URL oficial da API do GitHub para a release estável mais recente.
 pub const OFFICIAL_API_LATEST_RELEASE: &str =
-    "https://api.github.com/repos/Tsujiu/visor-downloads/releases/latest";
+    "https://api.github.com/repos/Tsujiu/visor/releases/latest";
 
 /// Prefixo oficial do repositório no GitHub para validação estrita de segurança.
-pub const OFFICIAL_REPO_URL_PREFIX: &str = "https://github.com/Tsujiu/visor-downloads/releases/";
+pub const OFFICIAL_REPO_URL_PREFIX: &str = "https://github.com/Tsujiu/visor/releases/";
 
 /// Timeout padrão para requisições de consulta de versão (10 segundos).
 const REQUEST_TIMEOUT: Duration = Duration::from_secs(10);
@@ -36,7 +36,7 @@ impl GitHubAsset {
         if url.contains("..") || url.contains('@') {
             return false;
         }
-        url.starts_with("https://github.com/Tsujiu/visor-downloads/releases/download/")
+        url.starts_with("https://github.com/Tsujiu/visor/releases/download/")
             || url.starts_with("https://objects.githubusercontent.com/")
     }
 
@@ -190,7 +190,7 @@ pub fn query_github_latest(etag: Option<&str>) -> Result<GitHubCheckResult, Upda
     let agent = ureq::AgentBuilder::new()
         .timeout(REQUEST_TIMEOUT)
         .user_agent(&format!(
-            "Visor/{} (+https://github.com/Tsujiu/visor-downloads)",
+            "Visor/{} (+https://github.com/Tsujiu/visor)",
             env!("CARGO_PKG_VERSION")
         ))
         .build();
@@ -232,7 +232,7 @@ pub fn query_github_latest(etag: Option<&str>) -> Result<GitHubCheckResult, Upda
 
     if !release.is_valid_official_release() {
         return Err(UpdateCheckError::UntrustedRelease(format!(
-            "URL da release '{}' não pertence ao repositório oficial Tsujiu/visor-downloads",
+            "URL da release '{}' não pertence ao repositório oficial Tsujiu/visor",
             release.html_url
         )));
     }
@@ -253,7 +253,7 @@ mod tests {
             "tag_name": "v99.0.0",
             "name": "VISOR v99.0.0 — Update Center",
             "body": "Novidades incríveis nesta versão!",
-            "html_url": "https://github.com/Tsujiu/visor-downloads/releases/tag/v99.0.0",
+            "html_url": "https://github.com/Tsujiu/visor/releases/tag/v99.0.0",
             "published_at": "2026-11-09T00:00:00Z",
             "draft": false,
             "prerelease": false,
@@ -261,19 +261,19 @@ mod tests {
                 {
                     "name": "Visor-Setup-v99.0.0-x64.exe",
                     "size": 7000000,
-                    "browser_download_url": "https://github.com/Tsujiu/visor-downloads/releases/download/v99.0.0/Visor-Setup-v99.0.0-x64.exe",
+                    "browser_download_url": "https://github.com/Tsujiu/visor/releases/download/v99.0.0/Visor-Setup-v99.0.0-x64.exe",
                     "content_type": "application/x-msdownload"
                 },
                 {
                     "name": "Visor-Portable-v99.0.0-x64.zip",
                     "size": 7500000,
-                    "browser_download_url": "https://github.com/Tsujiu/visor-downloads/releases/download/v99.0.0/Visor-Portable-v99.0.0-x64.zip",
+                    "browser_download_url": "https://github.com/Tsujiu/visor/releases/download/v99.0.0/Visor-Portable-v99.0.0-x64.zip",
                     "content_type": "application/zip"
                 },
                 {
                     "name": "SHA256SUMS.txt",
                     "size": 194,
-                    "browser_download_url": "https://github.com/Tsujiu/visor-downloads/releases/download/v99.0.0/SHA256SUMS.txt",
+                    "browser_download_url": "https://github.com/Tsujiu/visor/releases/download/v99.0.0/SHA256SUMS.txt",
                     "content_type": "text/plain"
                 }
             ]
@@ -314,7 +314,7 @@ mod tests {
     fn test_draft_release_ignored() {
         let draft_json = r#"{
             "tag_name": "v1.0.0",
-            "html_url": "https://github.com/Tsujiu/visor-downloads/releases/tag/v1.0.0",
+            "html_url": "https://github.com/Tsujiu/visor/releases/tag/v1.0.0",
             "draft": true,
             "prerelease": false,
             "assets": []
@@ -330,7 +330,7 @@ mod tests {
             name: "../../../Windows/System32/evil.exe".to_string(),
             size: 1024,
             browser_download_url:
-                "https://github.com/Tsujiu/visor-downloads/releases/download/v1.0.0/evil.exe"
+                "https://github.com/Tsujiu/visor/releases/download/v1.0.0/evil.exe"
                     .to_string(),
             content_type: None,
         };
@@ -339,7 +339,7 @@ mod tests {
         let good_asset = GitHubAsset {
             name: "Visor-Setup-v0.4.1-x64.exe".to_string(),
             size: 1024,
-            browser_download_url: "https://github.com/Tsujiu/visor-downloads/releases/download/v0.4.1/Visor-Setup-v0.4.1-x64.exe".to_string(),
+            browser_download_url: "https://github.com/Tsujiu/visor/releases/download/v0.4.1/Visor-Setup-v0.4.1-x64.exe".to_string(),
             content_type: None,
         };
         assert!(good_asset.is_safe_filename());

@@ -226,6 +226,7 @@ pub fn render_update_banner(app: &mut VisorApp, ui: &mut Ui) {
 
     let palette = ThemePalette::dark();
     let current_v = crate::updater::version::CURRENT_VERSION;
+    let tr = *app.tr();
 
     egui::Frame::NONE
         .fill(palette.surface_card)
@@ -240,8 +241,8 @@ pub fn render_update_banner(app: &mut VisorApp, ui: &mut Ui) {
                     .inner_margin(egui::Margin::symmetric(6, 2))
                     .show(ui, |ui| {
                         ui.label(
-                            RichText::new("ATUALIZAÇÃO")
-                                .size(10.0)
+                            RichText::new(tr.update_dialog_official_badge)
+                                .size(9.5)
                                 .strong()
                                 .color(palette.accent_default),
                         );
@@ -249,8 +250,8 @@ pub fn render_update_banner(app: &mut VisorApp, ui: &mut Ui) {
 
                 ui.label(
                     RichText::new(format!(
-                        "Nova versão disponível: {} (sua versão: v{})",
-                        release.tag_name, current_v
+                        "{}: {} ({} v{})",
+                        tr.update_available, release.tag_name, tr.update_dialog_current_prefix, current_v
                     ))
                     .size(12.5)
                     .strong()
@@ -260,7 +261,7 @@ pub fn render_update_banner(app: &mut VisorApp, ui: &mut Ui) {
                 ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
                     if ui
                         .button(
-                            RichText::new("Lembrar mais tarde")
+                            RichText::new(tr.update_dialog_remind_later)
                                 .size(11.5)
                                 .color(palette.text_muted),
                         )
@@ -271,7 +272,7 @@ pub fn render_update_banner(app: &mut VisorApp, ui: &mut Ui) {
 
                     if ui
                         .button(
-                            RichText::new("Ver Novidades")
+                            RichText::new(tr.view_update)
                                 .size(11.5)
                                 .color(palette.text_secondary),
                         )
@@ -287,7 +288,7 @@ pub fn render_update_banner(app: &mut VisorApp, ui: &mut Ui) {
                     }
 
                     let update_btn = egui::Button::new(
-                        RichText::new("Atualizar Agora")
+                        RichText::new(tr.update_dialog_download_btn)
                             .size(12.0)
                             .strong()
                             .color(palette.text_on_accent),
@@ -371,7 +372,7 @@ pub mod tests {
             tag_name: "v99.0.0".to_string(),
             name: Some("VISOR v99.0.0".to_string()),
             body: Some("Notas da release".to_string()),
-            html_url: "https://github.com/Tsujiu/visor-downloads/releases/tag/v99.0.0".to_string(),
+            html_url: "https://github.com/Tsujiu/visor/releases/tag/v99.0.0".to_string(),
             published_at: Some("2026-11-09T12:00:00Z".to_string()),
             draft: false,
             prerelease: false,
