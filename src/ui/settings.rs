@@ -581,9 +581,7 @@ pub fn render_settings_window(app: &mut VisorApp, ctx: &Context) {
                                 .on_hover_text("https://github.com/Tsujiu/visor")
                                 .clicked()
                             {
-                                ui.ctx().open_url(egui::OpenUrl::new_tab(
-                                    "https://github.com/Tsujiu/visor",
-                                ));
+                                crate::system::open_in_browser("https://github.com/Tsujiu/visor");
                             }
 
                             if ui

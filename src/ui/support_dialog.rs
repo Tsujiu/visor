@@ -173,7 +173,7 @@ pub fn render_support_dialog(app: &mut VisorApp, ctx: &Context) {
                             .on_hover_text(SUPPORT_URL_INFINITEPAY)
                             .clicked()
                         {
-                            ui.ctx().open_url(egui::OpenUrl::new_tab(SUPPORT_URL_INFINITEPAY));
+                            crate::system::open_in_browser(SUPPORT_URL_INFINITEPAY);
                         }
 
                         let stripe_brl_btn = egui::Button::new(
@@ -187,7 +187,7 @@ pub fn render_support_dialog(app: &mut VisorApp, ctx: &Context) {
                             .on_hover_text(SUPPORT_URL_STRIPE_BRL)
                             .clicked()
                         {
-                            ui.ctx().open_url(egui::OpenUrl::new_tab(SUPPORT_URL_STRIPE_BRL));
+                            crate::system::open_in_browser(SUPPORT_URL_STRIPE_BRL);
                         }
                     });
                 });
@@ -259,7 +259,7 @@ pub fn render_support_dialog(app: &mut VisorApp, ctx: &Context) {
                         .on_hover_text(SUPPORT_URL_STRIPE_GLOBAL)
                         .clicked()
                     {
-                        ui.ctx().open_url(egui::OpenUrl::new_tab(SUPPORT_URL_STRIPE_GLOBAL));
+                        crate::system::open_in_browser(SUPPORT_URL_STRIPE_GLOBAL);
                     }
                 });
 

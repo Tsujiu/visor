@@ -39,6 +39,15 @@ unsafe extern "system" {
 
     pub fn ILCreateFromPathW(psz_path: *const u16) -> *mut c_void;
     pub fn ILFree(pidl: *mut c_void);
+
+    pub fn ShellExecuteW(
+        hwnd: *mut c_void,
+        lpoperation: *const u16,
+        lpfile: *const u16,
+        lpparameters: *const u16,
+        lpdirectory: *const u16,
+        nshowcmd: i32,
+    ) -> isize;
 }
 
 /// Guard RAII para inicialização e finalização COM STA garantida na thread executora.
@@ -162,6 +171,36 @@ pub fn open_with_dialog(path: &Path, hwnd: Option<*mut c_void>) -> Result<(), St
         .spawn()
         .map(|_| ())
         .map_err(|e| format!("Não foi possível abrir o diálogo 'Abrir com': {e}"))
+}
+
+/// Abre uma URL ou URI de protocolo no navegador padrão do sistema utilizando ShellExecuteW
+/// com fallback automático para rundll32 url.dll.
+pub fn open_in_browser(url: &str) -> bool {
+    let wide_url: Vec<u16> = url.encode_utf16().chain(std::iter::once(0)).collect();
+    let wide_op: Vec<u16> = "open".encode_utf16().chain(std::iter::once(0)).collect();
+
+    // SW_SHOWNORMAL = 1
+    let res = unsafe {
+        ShellExecuteW(
+            ptr::null_mut(),
+            wide_op.as_ptr(),
+            wide_url.as_ptr(),
+            ptr::null_mut(),
+            ptr::null_mut(),
+            1,
+        )
+    };
+
+    if res > 32 {
+        return true;
+    }
+
+    // Fallback: tentar via rundll32 caso ShellExecuteW retorne código <= 32
+    Command::new("rundll32.exe")
+        .args(["url.dll,FileProtocolHandler", url])
+        .spawn()
+        .map(|_| true)
+        .unwrap_or(false)
 }
 
 #[cfg(test)]
