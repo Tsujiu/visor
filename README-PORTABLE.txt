@@ -37,6 +37,7 @@ INSTRUCOES RAPIDAS
 CONTEUDO DESTE PACOTE
 ------------------------------------------------------------------------------
 - visor.exe           : Executavel oficial do VISOR (64 bits, nativo).
+- LICENSE             : Termos da licenca PolyForm Noncommercial License 1.0.0.
 - CHANGELOG.md        : Historico completo de mudancas e novidades da versao.
 - LEIAME.txt          : Documentacao completa de recursos, requisitos e suporte.
 - README-PORTABLE.txt : Este arquivo de instrucoes da versao portatil.

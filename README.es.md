@@ -175,7 +175,7 @@ target/release/visor.exe
 
 ## 📄 Licencia
 
-Distribuido bajo términos de software libre y de código abierto para uso personal y profesional. Consulte el archivo [LICENSE](LICENSE).
+Distribuido bajo la licencia **PolyForm Noncommercial License 1.0.0** (Uso Personal y No Comercial). Consulte el archivo [LICENSE](LICENSE) para más detalles.
 
 ---
 

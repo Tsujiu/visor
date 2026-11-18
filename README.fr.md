@@ -151,7 +151,7 @@ cargo build --release
 
 ## 📄 Licence
 
-Distribué sous licence open-source libre pour usage personnel et professionnel. Consultez le fichier [LICENSE](LICENSE).
+Distribué sous la licence **PolyForm Noncommercial License 1.0.0** (Usage personnel et non commercial). Consultez le fichier [LICENSE](LICENSE) pour plus de détails.
 
 ---
 

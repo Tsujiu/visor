@@ -179,7 +179,7 @@ Your support directly funds decoder expansions, continuous GPU pipeline optimiza
 
 ## 📄 License
 
-Distributed under free and personal open-source software terms. See the [LICENSE](LICENSE) file for full details.
+Distributed under the **PolyForm Noncommercial License 1.0.0** (Personal & Noncommercial Use). See the [LICENSE](LICENSE) file for full details.
 
 ---
 

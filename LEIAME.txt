@@ -127,7 +127,8 @@ Consulte a tabela oficial no arquivo SHA256SUMS.txt distribuido conjuntamente.
 
 9. TERMOS DE USO E LICENCA
 ------------------------------------------------------------------------------
-O VISOR e fornecido no estado em que se encontra ("como esta"), para uso
-pessoal e profissional, sem garantias de qualquer natureza. Todos os direitos
-pertencem aos respectivos autores do projeto.
+O VISOR e distribuido sob a licenca PolyForm Noncommercial License 1.0.0
+para uso pessoal e nao comercial ("como esta"), sem garantias de qualquer
+natureza. Consulte o arquivo LICENSE para os termos completos.
+Todos os direitos pertencem aos respectivos autores do projeto.
 ==============================================================================

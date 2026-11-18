@@ -4,6 +4,7 @@ version = "1.0.0"
 edition = "2024"
 rust-version = "1.95"
 description = "Visualizador de imagens para Windows"
+license = "PolyForm-Noncommercial-1.0.0"
 publish = false
 
 [dependencies]

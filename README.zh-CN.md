@@ -169,7 +169,7 @@ cargo build --release
 
 ## 📄 开源许可证
 
-遵循开源及个人免费许可。详见 [LICENSE](LICENSE) 文件。
+基于 **PolyForm Noncommercial License 1.0.0** 许可证分发（个人与非商业用途）。详见 [LICENSE](LICENSE) 文件。
 
 ---
 

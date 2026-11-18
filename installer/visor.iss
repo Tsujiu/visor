@@ -121,6 +121,7 @@ Name: "registerassoc"; Description: "{cm:TaskRegisterAssoc}"; GroupDescription: 
 
 [Files]
 Source: "..\target\release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\LICENSE"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\LEIAME.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\README-PORTABLE.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\CHANGELOG.md"; DestDir: "{app}"; Flags: ignoreversion

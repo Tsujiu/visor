@@ -180,7 +180,7 @@ Seu apoio ajuda a manter o projeto atualizado com novos formatos de câmeras, ot
 
 ## 📄 Licença
 
-Distribuído sob a licença de software livre e uso pessoal. Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
+Distribuído sob a licença **PolyForm Noncommercial License 1.0.0** (Uso Pessoal e Não Comercial). Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ---
 
