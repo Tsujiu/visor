@@ -2,6 +2,23 @@
 
 Todas as alterações notáveis neste projeto serão documentadas neste arquivo.
 
+## [1.0.1] - 2026-11-19
+
+### Corrigido
+- **Compatibilidade Nativa Definitiva no Windows (Eliminação de libstdc++-6.dll):**
+  - Padronização integral da compilação e empacotamento no target oficial `x86_64-pc-windows-msvc` com runtime C/C++ estático (`+crt-static`).
+  - O VISOR agora é 100% autocontido, iniciando perfeitamente em computadores Windows 10 e 11 limpos sem depender de MinGW, GCC, MSYS2 ou pacotes redistribuíveis externos.
+- **Abertura Segura de Navegador via Win32 ShellExecuteW:**
+  - Correção dos cliques em links externos (GitHub Oficial e Central do VISOR), acionando com confiabilidade o navegador padrão do usuário.
+- **Diálogo Elegante de Apoio e Doações:**
+  - Remoção de glifos ausentes nos botões e interface modal com links diretos para Brasil (PIX / InfinitePay) e Global (Stripe USD).
+
+### Modificado
+- **Ícone Oficial Refinado Fluent Design:**
+  - Ícone do aplicativo com cantos arredondados no padrão Windows 11 (squircle) e transparência limpa.
+- **Pipeline de Distribuição e Instalador Oficial Inno Setup:**
+  - O instalador oficial consome exclusivamente binários MSVC estáticos auditados por verificação PE de dependências.
+
 ## [1.0.0] - 2026-11-17 — Lançamento Oficial
 
 ### Adicionado

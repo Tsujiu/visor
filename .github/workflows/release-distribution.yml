@@ -186,9 +186,17 @@ jobs:
       - name: Validar Binário Compilado (PE Header e Integridade)
         shell: pwsh
         run: |
-          $binPath = "target/release/visor.exe"
+          $binPath = "target/x86_64-pc-windows-msvc/release/visor.exe"
           if (-not (Test-Path $binPath)) {
-            throw "FALHA DE BUILD: '$binPath' não foi gerado pelo cargo build!"
+            $binPath = "target/release/visor.exe"
+          }
+          if (-not (Test-Path $binPath)) {
+            throw "FALHA DE BUILD: executável não foi gerado pelo cargo build!"
+          }
+          # Manter cópia em target/release/visor.exe para compatibilidade com ferramentas legadas
+          if (-not (Test-Path "target/release/visor.exe")) {
+            New-Item -ItemType Directory -Force -Path "target/release" | Out-Null
+            Copy-Item $binPath "target/release/visor.exe" -Force
           }
           $binSize = (Get-Item $binPath).Length
           if ($binSize -lt 2000000) {
@@ -205,13 +213,19 @@ jobs:
           }
           Write-Host "Executável oficial validado: $binPath ($([math]::Round($binSize / 1MB, 2)) MB, cabeçalho PE confirmado)"
 
-          # Validação de runtime estático: garantir ausência de dependência externa de VCRUNTIME140.dll
+          # Validação de runtime estático: garantir ausência de dependência externa de VCRUNTIME140.dll e libstdc++-6.dll
           $bytes = [System.IO.File]::ReadAllBytes((Resolve-Path $binPath))
           $ascii = [System.Text.Encoding]::ASCII.GetString($bytes)
           if ($ascii.IndexOf("VCRUNTIME140.dll", [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
             throw "REGRESSÃO DE RUNTIME: 'VCRUNTIME140.dll' foi detectada nas dependências do binário! A flag '+crt-static' deve ser mantida."
           }
-          Write-Host "Verificado: Runtime C vinculado estaticamente (sem dependência de VCRUNTIME140.dll)."
+          if ($ascii.IndexOf("libstdc++-6.dll", [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
+            throw "REGRESSÃO DE RUNTIME: 'libstdc++-6.dll' foi detectada nas dependências do binário! O compilador MSVC deve ser utilizado."
+          }
+          if ($ascii.IndexOf("libgcc_s_seh-1.dll", [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
+            throw "REGRESSÃO DE RUNTIME: 'libgcc_s_seh-1.dll' foi detectada nas dependências do binário!"
+          }
+          Write-Host "Verificado: Runtime C/C++ vinculado estaticamente (sem dependência de VCRUNTIME140.dll, libstdc++-6.dll ou libgcc)."
 
       - name: Preparar e Configurar SSL.com eSigner CKA (Cloud Key Adapter)
         id: esigner_setup

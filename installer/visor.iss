@@ -3,7 +3,7 @@
 ; ==============================================================================
 
 #define MyAppName "VISOR"
-#define MyAppVersion "1.0.0"
+#define MyAppVersion "1.0.1"
 #define MyAppPublisher "Tsujiu"
 #define MyAppURL "https://github.com/Tsujiu/visor"
 #define MyAppExeName "visor.exe"
@@ -120,7 +120,7 @@ Name: "desktopicon"; Description: "{cm:TaskDesktopIcon}"; GroupDescription: "{cm
 Name: "registerassoc"; Description: "{cm:TaskRegisterAssoc}"; GroupDescription: "{cm:TaskGroupWindows}"; Flags: checkedonce
 
 [Files]
-Source: "..\target\release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\target\x86_64-pc-windows-msvc\release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\LICENSE"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\LEIAME.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\README-PORTABLE.txt"; DestDir: "{app}"; Flags: ignoreversion
