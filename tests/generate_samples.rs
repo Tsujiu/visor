@@ -36,6 +36,7 @@ fn calc_sha256(bytes: &[u8]) -> String {
 }
 
 #[test]
+#[ignore = "Geração manual de amostras de teste (requer rede externa e ambiente local)"]
 fn generate_and_validate_all_samples() {
     let base_dir = downloads_dir();
     fs::create_dir_all(&base_dir).expect("Falha ao criar diretório base de downloads");
@@ -898,12 +899,34 @@ fn generate_farbfeld(base: &Path, records: &mut Vec<SampleRecord>) {
     }
 }
 
+fn find_cargo_crate_dir(crate_prefix: &str) -> Option<PathBuf> {
+    let home = std::env::var("CARGO_HOME")
+        .map(PathBuf::from)
+        .or_else(|_| std::env::var("USERPROFILE").map(|h| PathBuf::from(h).join(".cargo")))
+        .ok()?;
+    let src_dir = home.join("registry").join("src");
+    if let Ok(entries) = fs::read_dir(src_dir) {
+        for entry in entries.flatten() {
+            if entry.file_type().map(|t| t.is_dir()).unwrap_or(false) {
+                if let Ok(crate_entries) = fs::read_dir(entry.path()) {
+                    for c_entry in crate_entries.flatten() {
+                        let name = c_entry.file_name();
+                        if name.to_string_lossy().starts_with(crate_prefix) {
+                            return Some(c_entry.path());
+                        }
+                    }
+                }
+            }
+        }
+    }
+    None
+}
+
 fn generate_psd(base: &Path, records: &mut Vec<SampleRecord>) {
     let dir = base.join("PSD");
     fs::create_dir_all(&dir).unwrap();
-    let fixtures_dir = PathBuf::from(
-        r"C:\Users\bruno\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\psd-0.3.5\tests\fixtures",
-    );
+    let fixtures_dir = find_cargo_crate_dir("psd-")
+        .map(|p| p.join("tests").join("fixtures"));
     let sources = [
         ("sample-01-16x16-rle.psd", "16x16-rle-partially-opaque.psd"),
         ("sample-02-3x3-opaque.psd", "3x3-opaque-center.psd"),
@@ -913,16 +936,18 @@ fn generate_psd(base: &Path, records: &mut Vec<SampleRecord>) {
     ];
     for (dest_name, src_name) in sources {
         let dest = dir.join(dest_name);
-        let src = fixtures_dir.join(src_name);
-        fs::copy(&src, &dest)
-            .unwrap_or_else(|err| panic!("Falha ao copiar PSD {}: {err}", src.display()));
-        register(
-            records,
-            "PSD",
-            dest_name,
-            dest,
-            &format!("Adobe Photoshop oficial ({src_name})"),
-        );
+        if let Some(ref fix_dir) = fixtures_dir {
+            let src = fix_dir.join(src_name);
+            if src.exists() && fs::copy(&src, &dest).is_ok() {
+                register(
+                    records,
+                    "PSD",
+                    dest_name,
+                    dest,
+                    &format!("Adobe Photoshop oficial ({src_name})"),
+                );
+            }
+        }
     }
 }
 
@@ -1029,19 +1054,20 @@ fn generate_ora(base: &Path, records: &mut Vec<SampleRecord>) {
 fn generate_jp2(base: &Path, records: &mut Vec<SampleRecord>) {
     let dir = base.join("JP2");
     fs::create_dir_all(&dir).unwrap();
-    // 1 arquivo local do openjp2
-    let local_jp2 = PathBuf::from(
-        r"C:\Users\bruno\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\openjp2-0.7.2\doc\example.jp2",
-    );
-    let dest_01 = dir.join("sample-01-example.jp2");
-    fs::copy(&local_jp2, &dest_01).unwrap();
-    register(
-        records,
-        "JP2",
-        "sample-01-example.jp2",
-        dest_01,
-        "OpenJPEG example.jp2 oficial",
-    );
+    // 1 arquivo local do openjp2 se disponível no cargo registry
+    if let Some(crate_dir) = find_cargo_crate_dir("openjp2-") {
+        let local_jp2 = crate_dir.join("doc").join("example.jp2");
+        let dest_01 = dir.join("sample-01-example.jp2");
+        if local_jp2.exists() && fs::copy(&local_jp2, &dest_01).is_ok() {
+            register(
+                records,
+                "JP2",
+                "sample-01-example.jp2",
+                dest_01,
+                "OpenJPEG example.jp2 oficial",
+            );
+        }
+    }
 
     // 4 arquivos oficiais de conformidade ISO/IEC 15444-4
     let conformance_urls = [

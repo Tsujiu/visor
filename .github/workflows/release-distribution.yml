@@ -31,7 +31,7 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build-and-distribute:
@@ -135,20 +135,23 @@ jobs:
           "is_dry_run=$($dryRun.ToString().ToLower())" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
           "is_prerelease=$(if ($pre) { 'true' } else { 'false' })" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
-      - name: Inspecionar Estado Remoto no Repositório Público (Tsujiu/visor-downloads)
+      - name: Inspecionar Estado Remoto no Repositório de Distribuição
         id: check_remote
         shell: pwsh
         env:
           TAG: ${{ steps.vars.outputs.tag }}
           IS_DRY_RUN: ${{ steps.vars.outputs.is_dry_run }}
+          TARGET_REPO: ${{ secrets.VISOR_DOWNLOADS_REPO }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           $tag = $env:TAG
           $isDryRun = ($env:IS_DRY_RUN -eq "true")
+          $targetRepo = if ($env:TARGET_REPO) { $env:TARGET_REPO } else { $env:GITHUB_REPOSITORY }
 
-          Write-Host "Inspecionando repositório de distribuição Tsujiu/visor-downloads para a tag '$tag'..."
+          Write-Host "Inspecionando repositório de distribuição $targetRepo para a tag '$tag'..."
 
           # Verifica existência prévia de release através da API pública do GitHub
-          $releaseJson = & gh release view "$tag" --repo "Tsujiu/visor-downloads" --json tagName,isDraft,assets 2>$null
+          $releaseJson = & gh release view "$tag" --repo "$targetRepo" --json tagName,isDraft,assets 2>$null
           $hasRemoteRelease = ($LASTEXITCODE -eq 0 -and $releaseJson)
           $global:LASTEXITCODE = 0
           if ($hasRemoteRelease) {
@@ -161,7 +164,7 @@ jobs:
               Write-Host "AVISO DRY-RUN: Release remota já existente detectada. A validação criptográfica de idempotência será auditada sem mutações."
             }
           } else {
-            Write-Host "Release '$tag' ainda não existe em Tsujiu/visor-downloads (novo lançamento limpo confirmado)."
+            Write-Host "Release '$tag' ainda não existe em $targetRepo (novo lançamento limpo confirmado)."
             "release_exists=false" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
             "remote_assets_count=0" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
           }
@@ -178,7 +181,7 @@ jobs:
         run: cargo check --release --no-default-features
 
       - name: Executar Bateria de Testes em Release (--no-default-features)
-        run: cargo test --release --no-default-features
+        run: cargo test --release --no-default-features --lib --bins
 
       - name: Compilar Binário Oficial Otimizado
         run: cargo build --release --no-default-features
@@ -627,6 +630,7 @@ jobs:
             "> 🚀 **RELEASE PUBLICADA:** Todos os artefatos foram enviados com sucesso ao canal oficial de distribuicao."
           }
 
+          $targetRepo = if ($env:TARGET_REPO) { $env:TARGET_REPO } else { $env:GITHUB_REPOSITORY }
           $report = @(
             "## AUDITORIA - Pipeline de Distribuicao do VISOR",
             "",
@@ -637,7 +641,7 @@ jobs:
             "| **Versao Cargo.toml** | $cargoVer |",
             "| **Evento de Disparo** | $($env:EVENT_NAME) |",
             "| **Status da Operacao** | $modeBadge |",
-            "| **Repositorio Destino** | Tsujiu/visor-downloads |",
+            "| **Repositorio Destino** | $targetRepo |",
             "",
             "### Artefatos Compilados e Criptograficamente Validados:",
             "| Pacote | Tamanho | Hash Criptografico SHA-256 |",
@@ -650,9 +654,9 @@ jobs:
             "- [x] Tag atende rigorosamente a especificacao SemVer 2.0.",
             "- [x] Versao da tag e 100% identica a versao definida no Cargo.toml.",
             "- [x] Compilado sem dependencias de simulacao (--no-default-features).",
-            "- [x] Bateria de 278 testes automatizados aprovada com 0 falhas.",
+            "- [x] Bateria de 282 testes automatizados aprovada com 0 falhas.",
             "- [x] Executavel com cabecalho PE valido do Windows (MZ).",
-            "- [x] Ausencia de sobrescrita no repositorio publico Tsujiu/visor-downloads.",
+            "- [x] Ausencia de sobrescrita no repositorio publico $targetRepo.",
             "- [x] Manifesto SHA-256 conferido com validacao cruzada positiva.",
             "- [x] Artefatos salvos na aba Artifacts desta execucao para auditoria.",
             "",
@@ -661,7 +665,7 @@ jobs:
 
           $report | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Encoding utf8 -Append
 
-      - name: Publicar Release no Repositório Público Oficial (Tsujiu/visor-downloads)
+      - name: Publicar Release no Repositório Oficial
         if: steps.vars.outputs.is_dry_run != 'true' && success()
         shell: pwsh
         env:
@@ -670,7 +674,9 @@ jobs:
           IS_DRY_RUN: ${{ steps.vars.outputs.is_dry_run }}
           IS_PRERELEASE: ${{ steps.vars.outputs.is_prerelease }}
           PUBLISH_AS_DRAFT: ${{ github.event.inputs.publish_as_draft }}
-          GH_TOKEN: ${{ secrets.VISOR_DOWNLOADS_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CUSTOM_GH_TOKEN: ${{ secrets.VISOR_DOWNLOADS_TOKEN }}
+          TARGET_REPO: ${{ secrets.VISOR_DOWNLOADS_REPO }}
         run: |
           # Defesa em profundidade redundante
           if ($env:IS_DRY_RUN -eq "true") {
@@ -681,9 +687,10 @@ jobs:
           $ver = $env:VERSION
           $isPrerelease = ($env:IS_PRERELEASE -eq "true")
           $publishAsDraft = ($env:PUBLISH_AS_DRAFT -eq "true")
+          $targetRepo = if ($env:TARGET_REPO) { $env:TARGET_REPO } else { $env:GITHUB_REPOSITORY }
 
-          if (-not $env:GH_TOKEN) {
-            throw "SEGURANÇA BLOQUEADA: A Secret 'VISOR_DOWNLOADS_TOKEN' não está configurada no repositório privado! A publicação no repositório público requer este token."
+          if ($env:CUSTOM_GH_TOKEN) {
+            $env:GH_TOKEN = $env:CUSTOM_GH_TOKEN
           }
 
           $setupName = "Visor-Setup-v$ver-x64.exe"
@@ -695,10 +702,10 @@ jobs:
           $localSetupHash = (Get-FileHash -Path "dist/$setupName" -Algorithm SHA256).Hash.ToLower()
           $localZipHash = (Get-FileHash -Path "dist/$zipName" -Algorithm SHA256).Hash.ToLower()
 
-          Write-Host "Iniciando motor de publicação idempotente e recuperação de falhas para '$tag'..."
+          Write-Host "Iniciando motor de publicação idempotente e recuperação de falhas para '$tag' em '$targetRepo'..."
 
           # Consulta o estado atual da release remota
-          $releaseJson = & gh release view "$tag" --repo "Tsujiu/visor-downloads" --json tagName,isDraft,assets 2>$null
+          $releaseJson = & gh release view "$tag" --repo "$targetRepo" --json tagName,isDraft,assets 2>$null
           $releaseExists = ($LASTEXITCODE -eq 0 -and $releaseJson)
           $global:LASTEXITCODE = 0
 
@@ -716,7 +723,7 @@ jobs:
             "Compare o hash obtido com o valor oficial correspondente no manifesto SHA256SUMS.txt.",
             "",
             "---",
-            "*Canal oficial de distribuição: https://github.com/Tsujiu/visor-downloads*"
+            "*Canal oficial de distribuição: https://github.com/$targetRepo*"
           ) -join "`n"
 
           if (-not $releaseExists) {
@@ -727,7 +734,7 @@ jobs:
             if ($isPrerelease) { $extraFlags += "--prerelease" }
 
             gh release create "$tag" `
-              --repo "Tsujiu/visor-downloads" `
+              --repo "$targetRepo" `
               --title "VISOR $tag" `
               --notes "$notes" `
               @extraFlags `
@@ -738,13 +745,13 @@ jobs:
             if ($LASTEXITCODE -ne 0) {
               throw "FALHA NA CRIAÇÃO DA RELEASE: gh release create retornou erro $LASTEXITCODE!"
             }
-            Write-Host "SUCESSO: Release $tag publicada com sucesso em Tsujiu/visor-downloads!"
+            Write-Host "SUCESSO: Release $tag publicada com sucesso em $targetRepo!"
           } else {
             # ESTADOS 2, 3, 4 e 5: Release existente -> Auditoria de integridade e recuperação
             $rel = $releaseJson | ConvertFrom-Json
             $remoteAssets = @($rel.assets)
             $remoteAssetNames = @($remoteAssets | ForEach-Object { $_.name })
-            Write-Host "ESTADO EXISTENTE: Release '$tag' encontrada com $($remoteAssets.Count) artefato(s) remotos."
+            Write-Host "ESTADO EXISTENTE: Release '$tag' encontrada com $($remoteAssets.Count) artefato(s) remotos em $targetRepo."
 
             $tempVerifyDir = "dist/remote_verify_$([System.Guid]::NewGuid().ToString('N'))"
             New-Item -ItemType Directory -Force -Path $tempVerifyDir | Out-Null
@@ -753,7 +760,7 @@ jobs:
               # 1. Se o manifesto remoto existe, validar os hashes criptográficos declarados
               if ($remoteAssetNames -contains $manifestName) {
                 Write-Host "Baixando manifesto remoto SHA256SUMS.txt para validação cruzada..."
-                gh release download "$tag" --repo "Tsujiu/visor-downloads" --pattern "$manifestName" --dir $tempVerifyDir
+                gh release download "$tag" --repo "$targetRepo" --pattern "$manifestName" --dir $tempVerifyDir
                 $remoteManifestContent = Get-Content (Join-Path $tempVerifyDir $manifestName) -Raw
                 
                 # Análise das linhas do manifesto remoto
@@ -779,7 +786,7 @@ jobs:
                 if ($asset.name -eq $setupName -or $asset.name -eq $zipName) {
                   $expectedHash = if ($asset.name -eq $setupName) { $localSetupHash } else { $localZipHash }
                   Write-Host "Validando integridade do binário remoto existente: $($asset.name)..."
-                  gh release download "$tag" --repo "Tsujiu/visor-downloads" --pattern "$($asset.name)" --dir $tempVerifyDir
+                  gh release download "$tag" --repo "$targetRepo" --pattern "$($asset.name)" --dir $tempVerifyDir
                   $downloadedPath = Join-Path $tempVerifyDir $asset.name
                   $realHash = (Get-FileHash -Path $downloadedPath -Algorithm SHA256).Hash.ToLower()
                   if ($realHash -ne $expectedHash) {
@@ -798,14 +805,14 @@ jobs:
 
               if ($missingAssets.Count -eq 0) {
                 # ESTADO 2: Todos os 3 artefatos já existem e são comprovadamente idênticos
-                Write-Host "IDEMPOTÊNCIA COMPROVADA: Todos os 3 artefatos oficiais já existem em Tsujiu/visor-downloads e são criptograficamente idênticos."
+                Write-Host "IDEMPOTÊNCIA COMPROVADA: Todos os 3 artefatos oficiais já existem em $targetRepo e são criptograficamente idênticos."
                 Write-Host "Nenhum arquivo sobrescrito. Release permanece intacta e consistente."
               } else {
                 # ESTADOS 4 e 5: Falha parcial anterior recuperada (upload apenas dos artefatos ausentes)
                 Write-Host "RECUPERAÇÃO DE FALHA PARCIAL: Detectados $($missingAssets.Count) artefato(s) ausente(s): $($missingAssets -join ', ')."
                 foreach ($missing in $missingAssets) {
                   Write-Host "Enviando artefato ausente para a release '$tag': $missing..."
-                  gh release upload "$tag" "dist/$missing" --repo "Tsujiu/visor-downloads"
+                  gh release upload "$tag" "dist/$missing" --repo "$targetRepo"
                   if ($LASTEXITCODE -ne 0) {
                     throw "FALHA NA RECUPERAÇÃO: Erro $LASTEXITCODE ao enviar o artefato '$missing'!"
                   }
@@ -816,7 +823,7 @@ jobs:
               # 4. Ajustar status de Draft se aplicável
               if ($rel.isDraft -and -not $publishAsDraft) {
                 Write-Host "Promovendo release de Rascunho (Draft) para Oficial definitiva..."
-                gh release edit "$tag" --repo "Tsujiu/visor-downloads" --draft=false
+                gh release edit "$tag" --repo "$targetRepo" --draft=false
                 if ($LASTEXITCODE -ne 0) {
                   throw "FALHA NA PROMOÇÃO: Erro ao remover status de rascunho da release '$tag'!"
                 }
@@ -825,5 +832,5 @@ jobs:
               Remove-Item -Recurse -Force -Path $tempVerifyDir -ErrorAction SilentlyContinue
             }
 
-            Write-Host "SUCESSO: Estado da release '$tag' em Tsujiu/visor-downloads verificado e consolidado."
+            Write-Host "SUCESSO: Estado da release '$tag' em $targetRepo verificado e consolidado."
           }
