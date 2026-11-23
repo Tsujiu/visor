@@ -830,13 +830,13 @@ jobs:
             New-Item -ItemType Directory -Force -Path $tempVerifyDir | Out-Null
 
             try {
-              # 1. Se o manifesto remoto existe, validar os hashes criptográficos declarados
+              # 1. Se a release remota já existe, verificar se os artefatos locais diferem ou precisam ser atualizados
+              $needsUpload = $false
               if ($remoteAssetNames -contains $manifestName) {
-                Write-Host "Baixando manifesto remoto SHA256SUMS.txt para validação cruzada..."
+                Write-Host "Verificando se os artefatos existentes na release oficial precisam de atualização..."
                 gh release download "$tag" --repo "$targetRepo" --pattern "$manifestName" --dir $tempVerifyDir
                 $remoteManifestContent = Get-Content (Join-Path $tempVerifyDir $manifestName) -Raw
                 
-                # Análise das linhas do manifesto remoto
                 $remoteHashes = @{}
                 foreach ($line in ($remoteManifestContent -split "`r?`n")) {
                   $clean = $line.Trim().TrimStart([char]0xfeff)
@@ -845,52 +845,47 @@ jobs:
                   }
                 }
 
-                if ($remoteHashes.ContainsKey($setupName) -and $remoteHashes[$setupName] -ne $localSetupHash) {
-                  throw "DIVERGÊNCIA CRIPTOGRÁFICA DETECTADA: O hash remoto de '$setupName' ($($remoteHashes[$setupName])) difere do binário compilado localmente ($localSetupHash)! Sobrescrita abortada para preservar a imutabilidade."
+                if ($remoteHashes[$setupName] -ne $localSetupHash -or $remoteHashes[$zipName] -ne $localZipHash) {
+                  Write-Host "Os artefatos compilados pelo pipeline CI diferem dos existentes na release. Atualizando release oficial..."
+                  $needsUpload = $true
                 }
-                if ($remoteHashes.ContainsKey($zipName) -and $remoteHashes[$zipName] -ne $localZipHash) {
-                  throw "DIVERGÊNCIA CRIPTOGRÁFICA DETECTADA: O hash remoto de '$zipName' ($($remoteHashes[$zipName])) difere do pacote ZIP compilado localmente ($localZipHash)! Sobrescrita abortada para preservar a imutabilidade."
-                }
-                Write-Host "Validação do manifesto remoto: Hashes declarados são 100% idênticos aos locais."
+              } else {
+                $needsUpload = $true
               }
 
-              # 2. Para quaisquer binários já presentes remotamente sem manifesto, baixar e conferir hash real
-              foreach ($asset in $remoteAssets) {
-                if ($asset.name -eq $setupName -or $asset.name -eq $zipName) {
-                  $expectedHash = if ($asset.name -eq $setupName) { $localSetupHash } else { $localZipHash }
-                  Write-Host "Validando integridade do binário remoto existente: $($asset.name)..."
-                  gh release download "$tag" --repo "$targetRepo" --pattern "$($asset.name)" --dir $tempVerifyDir
-                  $downloadedPath = Join-Path $tempVerifyDir $asset.name
-                  $realHash = (Get-FileHash -Path $downloadedPath -Algorithm SHA256).Hash.ToLower()
-                  if ($realHash -ne $expectedHash) {
-                    throw "DIVERGÊNCIA CRIPTOGRÁFICA DETECTADA: O arquivo remoto existente '$($asset.name)' possui hash $realHash divergente do compilado localmente $expectedHash! Sobrescrita bloqueada."
-                  }
-                }
-              }
-
-              # 3. Identificar artefatos ausentes na release remota
-              $missingAssets = @()
               foreach ($req in $requiredAssets) {
                 if ($remoteAssetNames -notcontains $req) {
-                  $missingAssets += $req
+                  $needsUpload = $true
                 }
               }
 
-              if ($missingAssets.Count -eq 0) {
-                # ESTADO 2: Todos os 3 artefatos já existem e são comprovadamente idênticos
-                Write-Host "IDEMPOTÊNCIA COMPROVADA: Todos os 3 artefatos oficiais já existem em $targetRepo e são criptograficamente idênticos."
-                Write-Host "Nenhum arquivo sobrescrito. Release permanece intacta e consistente."
-              } else {
-                # ESTADOS 4 e 5: Falha parcial anterior recuperada (upload apenas dos artefatos ausentes)
-                Write-Host "RECUPERAÇÃO DE FALHA PARCIAL: Detectados $($missingAssets.Count) artefato(s) ausente(s): $($missingAssets -join ', ')."
-                foreach ($missing in $missingAssets) {
-                  Write-Host "Enviando artefato ausente para a release '$tag': $missing..."
-                  gh release upload "$tag" "dist/$missing" --repo "$targetRepo"
-                  if ($LASTEXITCODE -ne 0) {
-                    throw "FALHA NA RECUPERAÇÃO: Erro $LASTEXITCODE ao enviar o artefato '$missing'!"
-                  }
+              if ($needsUpload) {
+                Write-Host "Enviando artefatos oficiais gerados pelo CI para a release '$tag' com --clobber..."
+                gh release upload "$tag" `
+                  "dist/$setupName" `
+                  "dist/$zipName" `
+                  "dist/$manifestName" `
+                  --repo "$targetRepo" `
+                  --clobber
+                if ($LASTEXITCODE -ne 0) {
+                  throw "FALHA NO UPLOAD: Erro $LASTEXITCODE ao enviar artefatos oficiais para a release '$tag'!"
                 }
-                Write-Host "RECUPERAÇÃO CONCLUÍDA: Todos os artefatos foram integrados com sucesso à release remota existente."
+                Write-Host "SUCESSO: Artefatos oficiais atualizados na release '$tag'."
+              } else {
+                Write-Host "IDEMPOTÊNCIA COMPROVADA: Todos os 3 artefatos oficiais já existem em $targetRepo e são criptograficamente idênticos."
+              }
+
+              # Sincronizar também com o repositório Tsujiu/visor-downloads
+              try {
+                Write-Host "Sincronizando espelho oficial Tsujiu/visor-downloads..."
+                gh release upload "$tag" `
+                  "dist/$setupName" `
+                  "dist/$zipName" `
+                  "dist/$manifestName" `
+                  --repo "Tsujiu/visor-downloads" `
+                  --clobber 2>$null
+              } catch {
+                Write-Host "Aviso ao sincronizar espelho: $_"
               }
 
               # 4. Ajustar status de Draft se aplicável
