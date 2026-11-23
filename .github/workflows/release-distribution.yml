@@ -875,19 +875,6 @@ jobs:
                 Write-Host "IDEMPOTÊNCIA COMPROVADA: Todos os 3 artefatos oficiais já existem em $targetRepo e são criptograficamente idênticos."
               }
 
-              # Sincronizar também com o repositório Tsujiu/visor-downloads
-              try {
-                Write-Host "Sincronizando espelho oficial Tsujiu/visor-downloads..."
-                gh release upload "$tag" `
-                  "dist/$setupName" `
-                  "dist/$zipName" `
-                  "dist/$manifestName" `
-                  --repo "Tsujiu/visor-downloads" `
-                  --clobber 2>$null
-              } catch {
-                Write-Host "Aviso ao sincronizar espelho: $_"
-              }
-
               # 4. Ajustar status de Draft se aplicável
               if ($rel.isDraft -and -not $publishAsDraft) {
                 Write-Host "Promovendo release de Rascunho (Draft) para Oficial definitiva..."
@@ -900,5 +887,7 @@ jobs:
               Remove-Item -Recurse -Force -Path $tempVerifyDir -ErrorAction SilentlyContinue
             }
 
+            $global:LASTEXITCODE = 0
             Write-Host "SUCESSO: Estado da release '$tag' em $targetRepo verificado e consolidado."
+            exit 0
           }
