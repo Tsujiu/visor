@@ -5,7 +5,7 @@ Todas as alterações notáveis neste projeto serão documentadas neste arquivo.
 ## [1.0.1] - 2026-11-19
 
 ### Corrigido
-- **Compatibilidade Nativa Definitiva no Windows (Eliminação de libstdc++-6.dll):**
+- **Compatibilidade Nativa Definitiva no Windows (Eliminação de runtimes MinGW/GCC):**
   - Padronização integral da compilação e empacotamento no target oficial `x86_64-pc-windows-msvc` com runtime C/C++ estático (`+crt-static`).
   - O VISOR agora é 100% autocontido, iniciando perfeitamente em computadores Windows 10 e 11 limpos sem depender de MinGW, GCC, MSYS2 ou pacotes redistribuíveis externos.
 - **Abertura Segura de Navegador via Win32 ShellExecuteW:**

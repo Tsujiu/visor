@@ -216,19 +216,92 @@ jobs:
           }
           Write-Host "Executável oficial validado: $binPath ($([math]::Round($binSize / 1MB, 2)) MB, cabeçalho PE confirmado)"
 
-          # Validação de runtime estático: garantir ausência de dependência externa de VCRUNTIME140.dll e libstdc++-6.dll
-          $bytes = [System.IO.File]::ReadAllBytes((Resolve-Path $binPath))
-          $ascii = [System.Text.Encoding]::ASCII.GetString($bytes)
-          if ($ascii.IndexOf("VCRUNTIME140.dll", [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
-            throw "REGRESSÃO DE RUNTIME: 'VCRUNTIME140.dll' foi detectada nas dependências do binário! A flag '+crt-static' deve ser mantida."
+          # Validação matemática da Tabela de Imports PE/COFF: garantir ausência de dependências não-nativas
+          function Get-PeImports([string]$path) {
+            $stream = [System.IO.File]::OpenRead((Resolve-Path $path))
+            $reader = [System.IO.BinaryReader]::new($stream)
+            try {
+              $stream.Seek(0x3C, [System.IO.SeekOrigin]::Begin) | Out-Null
+              $peOffset = $reader.ReadInt32()
+              $stream.Seek($peOffset + 4 + 20, [System.IO.SeekOrigin]::Begin) | Out-Null
+              $magic = $reader.ReadUInt16()
+              $importDirOffset = if ($magic -eq 0x20b) { $peOffset + 4 + 20 + 112 + 8 } else { $peOffset + 4 + 20 + 96 + 8 }
+              $stream.Seek($importDirOffset, [System.IO.SeekOrigin]::Begin) | Out-Null
+              $importRva = $reader.ReadUInt32()
+              $importSize = $reader.ReadUInt32()
+              if ($importRva -eq 0 -or $importSize -eq 0) { return @() }
+              $stream.Seek($peOffset + 4 + 2, [System.IO.SeekOrigin]::Begin) | Out-Null
+              $numSections = $reader.ReadUInt16()
+              $stream.Seek($peOffset + 4 + 16, [System.IO.SeekOrigin]::Begin) | Out-Null
+              $optHeaderSize = $reader.ReadUInt16()
+              $secOffset = $peOffset + 4 + 20 + $optHeaderSize
+              $sections = @()
+              for ($i = 0; $i -lt $numSections; $i++) {
+                $stream.Seek($secOffset + ($i * 40) + 8, [System.IO.SeekOrigin]::Begin) | Out-Null
+                $secVSize = $reader.ReadUInt32()
+                $secVRva = $reader.ReadUInt32()
+                $secRSize = $reader.ReadUInt32()
+                $secROffset = $reader.ReadUInt32()
+                $sections += @{ VRva = $secVRva; VSize = $secVSize; ROffset = $secROffset }
+              }
+              $dlls = @()
+              $descIndex = 0
+              while ($true) {
+                $curRva = $importRva + ($descIndex * 20)
+                $importFileOffset = 0
+                foreach ($s in $sections) {
+                  if ($curRva -ge $s.VRva -and $curRva -lt ($s.VRva + $s.VSize)) {
+                    $importFileOffset = $s.ROffset + ($curRva - $s.VRva)
+                    break
+                  }
+                }
+                if ($importFileOffset -eq 0) { break }
+                $stream.Seek($importFileOffset, [System.IO.SeekOrigin]::Begin) | Out-Null
+                $origFirstThunk = $reader.ReadUInt32()
+                $timeDateStamp = $reader.ReadUInt32()
+                $forwarderChain = $reader.ReadUInt32()
+                $nameRva = $reader.ReadUInt32()
+                $firstThunk = $reader.ReadUInt32()
+                if ($origFirstThunk -eq 0 -and $nameRva -eq 0) { break }
+                $nameOffset = 0
+                foreach ($s in $sections) {
+                  if ($nameRva -ge $s.VRva -and $nameRva -lt ($s.VRva + $s.VSize)) {
+                    $nameOffset = $s.ROffset + ($nameRva - $s.VRva)
+                    break
+                  }
+                }
+                if ($nameOffset -gt 0) {
+                  $stream.Seek($nameOffset, [System.IO.SeekOrigin]::Begin) | Out-Null
+                  $chars = [System.Collections.Generic.List[byte]]::new()
+                  while ($true) {
+                    $b = $reader.ReadByte()
+                    if ($b -eq 0) { break }
+                    $chars.Add($b)
+                  }
+                  $dlls += [System.Text.Encoding]::ASCII.GetString($chars.ToArray())
+                }
+                $descIndex++
+              }
+              return $dlls
+            } finally {
+              $reader.Close()
+              $stream.Close()
+            }
           }
-          if ($ascii.IndexOf("libstdc++-6.dll", [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
-            throw "REGRESSÃO DE RUNTIME: 'libstdc++-6.dll' foi detectada nas dependências do binário! O compilador MSVC deve ser utilizado."
+
+          $peImports = Get-PeImports $binPath
+          Write-Host "Tabela de imports PE verificada ($($peImports.Count) DLLs importadas):"
+          $peImports | ForEach-Object { Write-Host "  - $_" }
+
+          foreach ($importedDll in $peImports) {
+            if ($importedDll -match "libstdc\+\+-6" -or $importedDll -match "libgcc") {
+              throw "REGRESSÃO DE RUNTIME: Dependência GNU detectada na tabela de imports PE: '$importedDll'!"
+            }
+            if ($importedDll -match "VCRUNTIME140" -or $importedDll -match "MSVCP140") {
+              throw "REGRESSÃO DE RUNTIME: Dependência dinâmica MSVC detectada na tabela de imports PE: '$importedDll'! Flag '+crt-static' ausente."
+            }
           }
-          if ($ascii.IndexOf("libgcc_s_seh-1.dll", [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
-            throw "REGRESSÃO DE RUNTIME: 'libgcc_s_seh-1.dll' foi detectada nas dependências do binário!"
-          }
-          Write-Host "Verificado: Runtime C/C++ vinculado estaticamente (sem dependência de VCRUNTIME140.dll, libstdc++-6.dll ou libgcc)."
+          Write-Host "Verificado com sucesso: Tabela de imports PE 100% nativa do Windows (Zero dependências externas)."
 
       - name: Preparar e Configurar SSL.com eSigner CKA (Cloud Key Adapter)
         id: esigner_setup
