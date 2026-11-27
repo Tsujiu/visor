@@ -27,15 +27,19 @@
 <br>
 
 <p align="center">
-  <a href="https://github.com/Tsujiu/visor/releases/latest"><img src="https://img.shields.io/badge/Release-v1.0.0-0078D4?style=for-the-badge&logo=windows11&logoColor=white" alt="Release v1.0.0"></a>
+  <a href="https://github.com/Tsujiu/visor/releases/latest"><img src="https://img.shields.io/github/v/release/Tsujiu/visor?style=for-the-badge&logo=github&logoColor=white&color=0078D4&label=Release" alt="Última Release Oficial"></a>
+  <a href="https://github.com/Tsujiu/visor/actions/workflows/release-distribution.yml"><img src="https://img.shields.io/github/actions/workflow/status/Tsujiu/visor/release-distribution.yml?style=for-the-badge&logo=githubactions&logoColor=white&label=Build" alt="Status do Build CI"></a>
+  <img src="https://img.shields.io/badge/Windows-10_%7C_11_(x64)-0078D4?style=for-the-badge" alt="Windows 10 e 11 x64">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/Licen%C3%A7a-PolyForm_Noncommercial-F59E0B?style=for-the-badge" alt="PolyForm Noncommercial 1.0.0"></a>
+  <br>
   <a href="https://www.rust-lang.org/"><img src="https://img.shields.io/badge/Rust-Pure_Native-DEA584?style=for-the-badge&logo=rust&logoColor=white" alt="Rust 100%"></a>
-  <img src="https://img.shields.io/badge/Formats-75+-2ea44f?style=for-the-badge" alt="75+ Formats">
-  <img src="https://img.shields.io/badge/Privacy-100%25_Offline-blueviolet?style=for-the-badge" alt="100% Offline">
-  <img src="https://img.shields.io/badge/Telemetry-Zero-success?style=for-the-badge" alt="Zero Telemetry">
+  <img src="https://img.shields.io/badge/Formatos-75+-2ea44f?style=for-the-badge" alt="75+ Formatos">
+  <img src="https://img.shields.io/badge/Privacidade-100%25_Offline-blueviolet?style=for-the-badge" alt="100% Offline">
+  <img src="https://img.shields.io/badge/Telemetria-Zero-success?style=for-the-badge" alt="Zero Telemetria">
 </p>
 
 <p align="center">
-  <a href="#-download--instalação"><strong>Baixar VISOR v1.0.0</strong></a>
+  <a href="#-download--instalação"><strong>Baixar VISOR v1.0.1</strong></a>
   &nbsp;•&nbsp;
   <a href="#-recursos-principais">Recursos</a>
   &nbsp;•&nbsp;

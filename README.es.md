@@ -26,7 +26,11 @@
 <br>
 
 <p align="center">
-  <a href="https://github.com/Tsujiu/visor/releases/latest"><img src="https://img.shields.io/badge/Release-v1.0.0-0078D4?style=for-the-badge&logo=windows11&logoColor=white" alt="Release v1.0.0"></a>
+  <a href="https://github.com/Tsujiu/visor/releases/latest"><img src="https://img.shields.io/github/v/release/Tsujiu/visor?style=for-the-badge&logo=github&logoColor=white&color=0078D4&label=Release" alt="Última Versión"></a>
+  <a href="https://github.com/Tsujiu/visor/actions/workflows/release-distribution.yml"><img src="https://img.shields.io/github/actions/workflow/status/Tsujiu/visor/release-distribution.yml?style=for-the-badge&logo=githubactions&logoColor=white&label=Build" alt="Estado de Build CI"></a>
+  <img src="https://img.shields.io/badge/Windows-10_%7C_11_(x64)-0078D4?style=for-the-badge" alt="Windows 10 y 11 x64">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/Licencia-PolyForm_Noncommercial-F59E0B?style=for-the-badge" alt="PolyForm Noncommercial 1.0.0"></a>
+  <br>
   <a href="https://www.rust-lang.org/"><img src="https://img.shields.io/badge/Rust-Pure_Native-DEA584?style=for-the-badge&logo=rust&logoColor=white" alt="Rust 100%"></a>
   <img src="https://img.shields.io/badge/Formatos-75+-2ea44f?style=for-the-badge" alt="75+ Formatos">
   <img src="https://img.shields.io/badge/Privacidad-100%25_Offline-blueviolet?style=for-the-badge" alt="100% Offline">
@@ -34,7 +38,7 @@
 </p>
 
 <p align="center">
-  <a href="#-descarga--instalaci%C3%B3n"><strong>Descargar VISOR v1.0.0</strong></a>
+  <a href="#-descarga--instalaci%C3%B3n"><strong>Descargar VISOR v1.0.1</strong></a>
   &nbsp;•&nbsp;
   <a href="#-por-qu%C3%A9-visor">Características</a>
   &nbsp;•&nbsp;
