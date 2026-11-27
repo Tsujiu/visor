@@ -80,7 +80,7 @@ fn decode_texels(
                 .get(..need)
                 .ok_or_else(|| "DDS BGRA truncado".to_owned())?;
             let mut rgba = Vec::with_capacity(need);
-            for px in bytes.chunks_exact(4) {
+            for px in bytes.as_chunks::<4>().0 {
                 let alpha = if code == 91 { 255 } else { px[3] };
                 rgba.extend_from_slice(&[px[2], px[1], px[0], alpha]);
             }
@@ -124,8 +124,8 @@ fn decode_blocks(
     name: &str,
     decode: impl FnOnce(&[u8], &mut [u32]) -> Result<(), &'static str>,
 ) -> Result<(Vec<u8>, String, Option<String>), String> {
-    let blocks_x = (width as usize + 3) / 4;
-    let blocks_y = (height as usize + 3) / 4;
+    let blocks_x = (width as usize).div_ceil(4);
+    let blocks_y = (height as usize).div_ceil(4);
     let need = blocks_x * blocks_y * block_bytes;
     let src = data
         .get(..need)

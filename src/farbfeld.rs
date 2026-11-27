@@ -34,7 +34,7 @@ pub fn decode_farbfeld_bytes(bytes: &[u8]) -> Result<Master, String> {
     let mut rgba = vec![0u8; total_pixels * 4];
     let pixel_data = &bytes[16..expected_bytes];
 
-    for (i, chunk) in pixel_data.chunks_exact(8).enumerate() {
+    for (i, chunk) in pixel_data.as_chunks::<8>().0.iter().enumerate() {
         // Cada canal tem 2 bytes (Big Endian u16). Converte para u8 reduzindo os 8 bits menos significativos
         let r = chunk[0]; // mais significativo
         let g = chunk[2];

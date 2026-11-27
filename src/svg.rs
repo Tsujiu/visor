@@ -44,7 +44,7 @@ pub fn decode_svg(data: &[u8]) -> Result<Built, String> {
 
 fn unpremultiply(pixels: &[u8]) -> Vec<u8> {
     let mut out = Vec::with_capacity(pixels.len());
-    for px in pixels.chunks_exact(4) {
+    for px in pixels.as_chunks::<4>().0 {
         let alpha = u32::from(px[3]);
         if alpha == 0 || alpha == 255 {
             out.extend_from_slice(px);

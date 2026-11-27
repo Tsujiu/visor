@@ -38,7 +38,7 @@
 </p>
 
 <p align="center">
-  <a href="#-ダウンロード--インストール"><strong>VISOR v1.0.1 をダウンロード</strong></a>
+  <a href="#-ダウンロード--インストール"><strong>VISOR v1.0.2 をダウンロード</strong></a>
   &nbsp;•&nbsp;
   <a href="#-visor-を選ぶ理由">機能</a>
   &nbsp;•&nbsp;

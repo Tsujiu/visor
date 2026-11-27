@@ -263,11 +263,10 @@ pub fn sniff(head: &[u8], tail: &[u8], ext: Option<&str>) -> Kind {
     if ext == Some("lottie") || (ext == Some("json") && looks_like_lottie(head)) {
         return Kind::Lottie;
     }
-    if let Some(ext) = ext {
-        if let Some(spec) = catalog::find_extension(ext) {
+    if let Some(ext) = ext
+        && let Some(spec) = catalog::find_extension(ext) {
             return kind_from_id(spec.id);
         }
-    }
     Kind::Unknown
 }
 

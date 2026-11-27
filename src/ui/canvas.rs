@@ -143,8 +143,8 @@ pub fn render_canvas(app: &mut VisorApp, ui: &mut egui::Ui) {
 
     // 7. Atualização dinâmica da interpolação na textura (GPU) conforme modo e escala
     let target_options = app.interpolation.resolve_options(effective_scale);
-    if let Some(picture) = app.picture.as_mut() {
-        if picture.texture_options != target_options {
+    if let Some(picture) = app.picture.as_mut()
+        && picture.texture_options != target_options {
             let frame = picture.frame();
             let color = ColorImage::from_rgba_unmultiplied(
                 [frame.width as usize, frame.height as usize],
@@ -153,7 +153,6 @@ pub fn render_canvas(app: &mut VisorApp, ui: &mut egui::Ui) {
             picture.texture.set(color, target_options);
             picture.texture_options = target_options;
         }
-    }
 
     // 8. Cálculo de coordenadas Pixel-Perfect com alinhamento a pixels físicos
     let rect = image_rect(canvas, image_px, scale, app.view.offset).round_to_pixels(ppp);
@@ -373,23 +372,18 @@ pub fn is_canvas_interaction_active(
         return false;
     }
     // Se o cursor estiver sobre uma janela modal aberta (Configurações, Formatos, Conversão, Seletor de Cores)
-    if app.show_settings || app.show_formats || app.show_batch || app.show_color_picker {
-        if let Some(pos) = response.hover_pos() {
-            if let Some(top_layer) = ui.ctx().layer_id_at(pos) {
-                if top_layer != ui.layer_id() {
+    if (app.show_settings || app.show_formats || app.show_batch || app.show_color_picker)
+        && let Some(pos) = response.hover_pos()
+            && let Some(top_layer) = ui.ctx().layer_id_at(pos)
+                && top_layer != ui.layer_id() {
                     return false;
                 }
-            }
-        }
-    }
     // Verifica se a camada ativa no ponto do cursor é a do Canvas (evita Toolbar e menus)
-    if let Some(pos) = response.hover_pos() {
-        if let Some(top_layer) = ui.ctx().layer_id_at(pos) {
-            if top_layer != ui.layer_id() {
+    if let Some(pos) = response.hover_pos()
+        && let Some(top_layer) = ui.ctx().layer_id_at(pos)
+            && top_layer != ui.layer_id() {
                 return false;
             }
-        }
-    }
     true
 }
 

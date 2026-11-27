@@ -314,11 +314,10 @@ unsafe fn delete_via_ifileoperation(
         )));
     }
 
-    if let Some(h) = hwnd {
-        if !h.is_null() && unsafe { IsWindow(h) } != 0 {
+    if let Some(h) = hwnd
+        && !h.is_null() && unsafe { IsWindow(h) } != 0 {
             let _ = (vtbl.SetOwnerWindow)(p_op as *mut c_void, h);
         }
-    }
 
     let mut wide_path: Vec<u16> = clean_path.encode_utf16().collect();
     wide_path.push(0);

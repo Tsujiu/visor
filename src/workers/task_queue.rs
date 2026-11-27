@@ -30,11 +30,10 @@ impl TaskItem {
     /// Executa o trabalho associado se o token não tiver sido cancelado.
     /// Retorna `true` se o trabalho foi executado, ou `false` se foi descartado por cancelamento.
     pub fn execute(self) -> bool {
-        if let Some(token) = &self.token {
-            if token.is_cancelled() {
+        if let Some(token) = &self.token
+            && token.is_cancelled() {
                 return false;
             }
-        }
         (self.work)();
         true
     }
@@ -106,12 +105,11 @@ impl TaskQueue {
         F: FnOnce() + Send + 'static,
     {
         // Se a tarefa já chega cancelada antes de entrar na fila, descartamos de imediato
-        if let Some(t) = &token {
-            if t.is_cancelled() {
+        if let Some(t) = &token
+            && t.is_cancelled() {
                 self.dropped_cancelled.fetch_add(1, Ordering::Relaxed);
                 return false;
             }
-        }
 
         let seq = self.sequence.fetch_add(1, Ordering::Relaxed);
         let item = TaskItem {
@@ -148,12 +146,11 @@ impl TaskQueue {
             // Tenta obter o próximo item elegível
             while let Some(candidate) = self.select_next_item(&mut inner) {
                 // Se o item foi cancelado enquanto aguardava na fila, descartamos sem executar
-                if let Some(token) = &candidate.token {
-                    if token.is_cancelled() {
+                if let Some(token) = &candidate.token
+                    && token.is_cancelled() {
                         self.dropped_cancelled.fetch_add(1, Ordering::Relaxed);
                         continue; // Busca o próximo item válido
                     }
-                }
                 return Some(candidate);
             }
 

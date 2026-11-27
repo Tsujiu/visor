@@ -186,22 +186,15 @@ fn decode_kind(path: &Path, head: &[u8], kind: Kind) -> Result<Master, String> {
         ),
     };
     match decoded {
-        Ok(master) => Ok(wrap_bytes(master)),
+        Ok(master) => Ok(master),
         Err(err) => {
-            if let Some(id) = external_id(kind) {
-                if crate::magick::available() {
-                    return crate::magick::rasterize(path, id).map(wrap_bytes);
-                }
+            if let Some(id) = external_id(kind)
+                && crate::magick::available()
+            {
+                return crate::magick::rasterize(path, id);
             }
             Err(err)
         }
-    }
-}
-
-fn wrap_bytes(master: Master) -> Master {
-    match master {
-        Master::Frames(built) => Master::Frames(built),
-        other => other,
     }
 }
 

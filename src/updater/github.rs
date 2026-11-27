@@ -199,11 +199,10 @@ pub fn query_github_latest(etag: Option<&str>) -> Result<GitHubCheckResult, Upda
         .get(OFFICIAL_API_LATEST_RELEASE)
         .set("Accept", "application/vnd.github.v3+json");
 
-    if let Some(tag) = etag {
-        if !tag.is_empty() {
+    if let Some(tag) = etag
+        && !tag.is_empty() {
             req = req.set("If-None-Match", tag);
         }
-    }
 
     let response = match req.call() {
         Ok(resp) => resp,

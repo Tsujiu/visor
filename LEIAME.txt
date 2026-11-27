@@ -1,5 +1,5 @@
 ==============================================================================
-                                VISOR 1.0.0
+                                VISOR 1.0.2
                 Visualizador de Imagens Moderno para Windows
 ==============================================================================
 
@@ -32,7 +32,7 @@ animacoes, negativos digitais RAW e texturas de jogos.
 ------------------------------------------------------------------------------
 O VISOR e disponibilizado em duas modalidades oficiais:
 
-A) INSTALADOR CONVENCIONAL (Visor-Setup-v1.0.0-x64.exe)
+A) INSTALADOR CONVENCIONAL (Visor-Setup-v1.0.2-x64.exe)
    - Instalacao por usuario em %LOCALAPPDATA%\Programs\Visor.
    - Nao exige privilegios administrativos (sem prompt UAC).
    - Cria atalhos no Menu Iniciar e opcionalmente na Area de Trabalho.
@@ -40,7 +40,7 @@ A) INSTALADOR CONVENCIONAL (Visor-Setup-v1.0.0-x64.exe)
    - Atualizacao in-place automatica sobre versoes anteriores.
    - Desinstalador limpo que preserva suas configuracoes pessoais por padrao.
 
-B) VERSAO PORTATIL (Visor-Portable-v1.0.0-x64.zip)
+B) VERSAO PORTATIL (Visor-Portable-v1.0.2-x64.zip)
    - Zero instalacao: basta extrair o arquivo compactado em qualquer pasta ou
      unidade removivel (pen drive, disco externo).
    - Suporte completo a caminhos com espacos e caracteres acentuados ou Unicode.

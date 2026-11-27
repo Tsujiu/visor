@@ -51,14 +51,14 @@ fn fill_integer(
     };
     match cpp {
         1 => {
-            for (index, pixel) in rgba.chunks_exact_mut(4).enumerate() {
+            for (index, pixel) in rgba.as_chunks_mut::<4>().0.iter_mut().enumerate() {
                 let value = (data[index] >> shift) as u8;
                 pixel.copy_from_slice(&[value, value, value, 255]);
             }
             Ok("prévia em cinza".to_owned())
         }
         3 | 4 => {
-            for (index, pixel) in rgba.chunks_exact_mut(4).enumerate() {
+            for (index, pixel) in rgba.as_chunks_mut::<4>().0.iter_mut().enumerate() {
                 let base = index * cpp;
                 pixel[0] = (data[base] >> shift) as u8;
                 pixel[1] = (data[base + 1] >> shift) as u8;
@@ -83,7 +83,7 @@ fn fill_float(rgba: &mut [u8], data: &[f32], pixels: usize, cpp: usize) -> Resul
     if cpp != 1 || data.len() < pixels {
         return Err("RAW em ponto flutuante não está no formato esperado".to_owned());
     }
-    for (index, pixel) in rgba.chunks_exact_mut(4).enumerate() {
+    for (index, pixel) in rgba.as_chunks_mut::<4>().0.iter_mut().enumerate() {
         let value = (data[index].clamp(0.0, 1.0) * 255.0) as u8;
         pixel.copy_from_slice(&[value, value, value, 255]);
     }

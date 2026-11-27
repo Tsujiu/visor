@@ -71,11 +71,10 @@ pub fn parse_all_versions(markdown: &str) -> Vec<VersionNotes> {
 
         // Detecta cabeçalho de versão (ex: "## [0.3.3] - 2026-11-08" ou "## [v0.4.0]")
         if trimmed.starts_with("## [") {
-            if let Some(notes) = current_notes.take() {
-                if !notes.version.is_empty() {
+            if let Some(notes) = current_notes.take()
+                && !notes.version.is_empty() {
                     versions.push(notes);
                 }
-            }
 
             let mut notes = VersionNotes::default();
             if let Some(close_bracket) = trimmed.find(']') {
@@ -151,11 +150,10 @@ pub fn parse_all_versions(markdown: &str) -> Vec<VersionNotes> {
         }
     }
 
-    if let Some(notes) = current_notes {
-        if !notes.version.is_empty() {
+    if let Some(notes) = current_notes
+        && !notes.version.is_empty() {
             versions.push(notes);
         }
-    }
 
     versions
 }
@@ -321,8 +319,8 @@ pub fn parse_bullet_item(raw: &str) -> (Option<String>, String) {
     }
 
     // Caso 1: Item iniciando com negrito, ex: "**Update Center:**" ou "**Título:** Descrição"
-    if let Some(rest) = trimmed.strip_prefix("**") {
-        if let Some(end_idx) = rest.find("**") {
+    if let Some(rest) = trimmed.strip_prefix("**")
+        && let Some(end_idx) = rest.find("**") {
             let bold_title = rest[..end_idx].trim().trim_end_matches(':').trim();
             let after_bold = rest[end_idx + 2..].trim();
             let desc = after_bold.trim_start_matches(':').trim().replace("**", "");
@@ -332,7 +330,6 @@ pub fn parse_bullet_item(raw: &str) -> (Option<String>, String) {
                 return (Some(bold_title.to_string()), desc);
             }
         }
-    }
 
     // Caso 2: Linha normal de texto com possíveis marcadores internos
     let cleaned = trimmed.replace("**", "");

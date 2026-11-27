@@ -760,7 +760,7 @@ fn newly_added_formats_test() {
     let tex_path = dir.join("test.tex");
     let mut tex_bytes = Vec::new();
     tex_bytes.extend_from_slice(b"KTEX");
-    tex_bytes.extend_from_slice(&(0x00u32 | (1u32 << 9)).to_le_bytes()); // DXT1, 1 mip
+    tex_bytes.extend_from_slice(&(1u32 << 9).to_le_bytes()); // DXT1 (0), 1 mip
     tex_bytes.extend_from_slice(&4u16.to_le_bytes()); // w = 4
     tex_bytes.extend_from_slice(&4u16.to_le_bytes()); // h = 4
     tex_bytes.extend_from_slice(&8u16.to_le_bytes()); // pitch = 8

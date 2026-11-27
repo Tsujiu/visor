@@ -146,13 +146,11 @@ pub mod tests {
 
     #[test]
     pub fn test_cmp_name_path_sorting() {
-        let mut list = vec![
-            PathBuf::from(r"C:\photos\img10.png"),
+        let mut list = [PathBuf::from(r"C:\photos\img10.png"),
             PathBuf::from(r"C:\photos\img1.png"),
             PathBuf::from(r"C:\photos\img2.png"),
             PathBuf::from(r"C:\photos\img20.png"),
-            PathBuf::from(r"C:\photos\img3.png"),
-        ];
+            PathBuf::from(r"C:\photos\img3.png")];
 
         list.sort_by(|a, b| cmp_name(a, b));
 
@@ -165,7 +163,7 @@ pub mod tests {
 
     #[test]
     pub fn test_find_initial_index() {
-        let files = vec![PathBuf::from(r"C:\img1.png"), PathBuf::from(r"C:\img2.png")];
+        let files = [PathBuf::from(r"C:\img1.png"), PathBuf::from(r"C:\img2.png")];
         let target = PathBuf::from(r"C:\img2.png");
         let idx = files.iter().position(|p| p == &target);
         assert_eq!(idx, Some(1));

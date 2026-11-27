@@ -19,7 +19,7 @@ fn main() {
     let obj_path = out_dir.join("visor-icon.o");
     let ico_rc = ico.to_string_lossy().replace('\\', "/");
 
-    let pkg_version = env::var("CARGO_PKG_VERSION").unwrap_or_else(|_| "0.4.4".to_string());
+    let pkg_version = env::var("CARGO_PKG_VERSION").unwrap_or_else(|_| "1.0.2".to_string());
     let mut parts = pkg_version.split('.');
     let major: u32 = parts.next().and_then(|s| s.parse().ok()).unwrap_or(0);
     let minor: u32 = parts.next().and_then(|s| s.parse().ok()).unwrap_or(0);

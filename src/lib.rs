@@ -1,7 +1,6 @@
 //! Visor: leitura, identificação e conversão de imagens.
 
 mod ani;
-mod assoc;
 mod astc;
 mod atf;
 mod avif;
@@ -40,7 +39,6 @@ mod vtf;
 mod xbm;
 mod xcf;
 
-pub use assoc::{AssocReport, current_png_progid, register_as_default};
 pub use catalog::{
     FormatSpec, browsable_extension, external_extensions, formats, libraries, partial_extensions,
     verified_extensions,

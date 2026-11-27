@@ -306,9 +306,9 @@ pub fn render_status(app: &mut VisorApp, ui: &mut egui::Ui) {
             }
 
             // 3.2 Tamanho do arquivo em disco (se couber e houver arquivo)
-            if is_medium {
-                if let Some(path) = app.current_path() {
-                    if let Ok(meta) = fs::metadata(path) {
+            if is_medium
+                && let Some(path) = app.current_path()
+                    && let Ok(meta) = fs::metadata(path) {
                         let size_formatted = format_file_size(meta.len());
                         let label = ui.add(
                             egui::Label::new(
@@ -324,12 +324,10 @@ pub fn render_status(app: &mut VisorApp, ui: &mut egui::Ui) {
                         ));
                         render_divider(ui, palette.border_subtle);
                     }
-                }
-            }
 
             // 3.3 Zoom e Modo de Visualização (ex: "259% [Ajustar]" ou "100%")
-            if !is_ultra_compact {
-                if let Some(percent) = app.shown_percent {
+            if !is_ultra_compact
+                && let Some(percent) = app.shown_percent {
                     let mode_suffix = if app.view.fit {
                         format!(" [{}]", tr.status_mode_fit)
                     } else if app.view.is_actual(ui.pixels_per_point()) {
@@ -375,7 +373,6 @@ pub fn render_status(app: &mut VisorApp, ui: &mut egui::Ui) {
                         }
                     }
                 }
-            }
         });
     });
 }

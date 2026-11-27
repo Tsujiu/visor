@@ -8,8 +8,8 @@ pub fn decode_avif_bytes(data: &[u8]) -> Result<Built, String> {
     }
 
     // Tenta decodificar sequência de quadros (se for animação AVIS ou burst)
-    if let Ok(seq) = oxideav_avif::decode_all(data) {
-        if seq.len() > 1 {
+    if let Ok(seq) = oxideav_avif::decode_all(data)
+        && seq.len() > 1 {
             let mut frames = Vec::with_capacity(seq.len());
             for f in seq {
                 let w = f.image.width;
@@ -44,7 +44,6 @@ pub fn decode_avif_bytes(data: &[u8]) -> Result<Built, String> {
                 });
             }
         }
-    }
 
     // Imagem estática AVIF
     let rgba_img =

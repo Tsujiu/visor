@@ -39,7 +39,7 @@
 </p>
 
 <p align="center">
-  <a href="#-download--instalação"><strong>Baixar VISOR v1.0.1</strong></a>
+  <a href="#-download--instalação"><strong>Baixar VISOR v1.0.2</strong></a>
   &nbsp;•&nbsp;
   <a href="#-recursos-principais">Recursos</a>
   &nbsp;•&nbsp;

@@ -73,7 +73,7 @@ pub fn decode_ktex_bytes(data: &[u8]) -> Result<Built, String> {
                 .get(..need)
                 .ok_or_else(|| "KTEX RGB truncado".to_owned())?;
             let mut out = Vec::with_capacity(w * h * 4);
-            for chunk in slice.chunks_exact(3) {
+            for chunk in slice.as_chunks::<3>().0 {
                 out.push(chunk[0]);
                 out.push(chunk[1]);
                 out.push(chunk[2]);
@@ -96,7 +96,7 @@ pub fn decode_ktex_bytes(data: &[u8]) -> Result<Built, String> {
                 .get(..need)
                 .ok_or_else(|| "KTEX ARGB truncado".to_owned())?;
             let mut out = Vec::with_capacity(w * h * 4);
-            for chunk in slice.chunks_exact(4) {
+            for chunk in slice.as_chunks::<4>().0 {
                 out.push(chunk[1]); // R
                 out.push(chunk[2]); // G
                 out.push(chunk[3]); // B

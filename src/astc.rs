@@ -14,7 +14,7 @@ pub fn decode_astc_bytes(data: &[u8]) -> Result<Built, String> {
     let block_h = data[5] as usize;
     let block_d = data[6] as usize;
 
-    if block_w < 4 || block_w > 12 || block_h < 4 || block_h > 12 || block_d != 1 {
+    if !(4..=12).contains(&block_w) || !(4..=12).contains(&block_h) || block_d != 1 {
         return Err(format!(
             "Dimensões de bloco ASTC não suportadas: {block_w}×{block_h}×{block_d}"
         ));
@@ -30,8 +30,8 @@ pub fn decode_astc_bytes(data: &[u8]) -> Result<Built, String> {
 
     check_dims(width as u32, height as u32)?;
 
-    let blocks_x = (width + block_w - 1) / block_w;
-    let blocks_y = (height + block_h - 1) / block_h;
+    let blocks_x = width.div_ceil(block_w);
+    let blocks_y = height.div_ceil(block_h);
     let expected_bytes = blocks_x * blocks_y * 16;
 
     let payload = data

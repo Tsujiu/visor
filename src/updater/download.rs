@@ -201,13 +201,12 @@ where
         .and_then(|h| h.parse::<u64>().ok())
         .or(Some(package_asset.size));
 
-    if let Some(len) = total_len {
-        if len > MAX_ALLOWED_DOWNLOAD_BYTES {
+    if let Some(len) = total_len
+        && len > MAX_ALLOWED_DOWNLOAD_BYTES {
             return Err(format!(
                 "Tamanho reportado pelo servidor ({len} bytes) excede o limite máximo permitido de 150 MB."
             ));
         }
-    }
 
     progress.total_bytes = total_len;
     progress.status = DownloadStatus::Downloading;
@@ -260,15 +259,14 @@ where
             progress.downloaded_bytes = downloaded;
             progress.speed_bytes_per_sec = speed;
 
-            if let Some(total) = total_len {
-                if total > 0 {
+            if let Some(total) = total_len
+                && total > 0 {
                     progress.percentage = (downloaded as f32 / total as f32).clamp(0.0, 1.0);
                     let remaining_bytes = total.saturating_sub(downloaded);
                     if speed > 0.0 {
                         progress.eta_seconds = Some((remaining_bytes as f64 / speed) as u64);
                     }
                 }
-            }
 
             progress_callback(progress.clone());
             last_progress_emit = Instant::now();

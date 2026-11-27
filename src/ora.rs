@@ -21,11 +21,10 @@ pub fn decode_ora_bytes(bytes: &[u8]) -> Result<Master, String> {
 
     let mut names = Vec::new();
     for i in 0..archive.len() {
-        if let Ok(file) = archive.by_index(i) {
-            if let Ok(name) = file.name() {
+        if let Ok(file) = archive.by_index(i)
+            && let Ok(name) = file.name() {
                 names.push(name.to_string());
             }
-        }
     }
 
     let target_name = if names.iter().any(|n| n == "mergedimage.png") {

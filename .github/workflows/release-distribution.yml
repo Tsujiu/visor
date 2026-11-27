@@ -691,6 +691,7 @@ jobs:
           $setupHash = (Get-FileHash -Path $setupExe -Algorithm SHA256).Hash.ToLower()
           $zipHash = (Get-FileHash -Path $zipName -Algorithm SHA256).Hash.ToLower()
 
+          $targetRepo = if ($env:TARGET_REPO) { $env:TARGET_REPO } else { $env:GITHUB_REPOSITORY }
           $modeBadge = if ($isDryRun) {
             "🟡 **DRY-RUN (Modo Validacao / Nenhum arquivo publicado)**"
           } else {
@@ -698,12 +699,10 @@ jobs:
           }
 
           $statusNote = if ($isDryRun) {
-            "> ℹ️ **AVISO DE VALIDACAO (DRY RUN):** Nenhum arquivo, tag ou release foi publicado no repositorio publico Tsujiu/visor-downloads. Os artefatos foram totalmente validados e estao disponiveis para download de teste na aba de artefatos desta execucao."
+            "> ℹ️ **AVISO DE VALIDACAO (DRY RUN):** Nenhum arquivo, tag ou release foi publicado em $targetRepo. Os artefatos foram totalmente validados e estao disponiveis para download de teste na aba de artefatos desta execucao."
           } else {
             "> 🚀 **RELEASE PUBLICADA:** Todos os artefatos foram enviados com sucesso ao canal oficial de distribuicao."
           }
-
-          $targetRepo = if ($env:TARGET_REPO) { $env:TARGET_REPO } else { $env:GITHUB_REPOSITORY }
           $report = @(
             "## AUDITORIA - Pipeline de Distribuicao do VISOR",
             "",

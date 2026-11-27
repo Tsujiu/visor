@@ -1,4 +1,4 @@
-pub fn take<'a>(data: &'a [u8], at: usize, len: usize) -> Result<&'a [u8], String> {
+pub fn take(data: &[u8], at: usize, len: usize) -> Result<&[u8], String> {
     data.get(at..at + len)
         .ok_or_else(|| "arquivo truncado".to_owned())
 }

@@ -130,6 +130,7 @@ pub enum MouseWheelAction {
 }
 
 impl MouseWheelAction {
+    #[cfg_attr(not(test), allow(dead_code))]
     pub fn label(&self) -> &'static str {
         match self {
             Self::Zoom => "Zoom na imagem (padrão)",
@@ -137,6 +138,7 @@ impl MouseWheelAction {
         }
     }
 
+    #[cfg_attr(not(test), allow(dead_code))]
     pub fn description(&self) -> &'static str {
         match self {
             Self::Zoom => {

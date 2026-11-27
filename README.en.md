@@ -38,7 +38,7 @@
 </p>
 
 <p align="center">
-  <a href="#-download--installation"><strong>Download VISOR v1.0.1</strong></a>
+  <a href="#-download--installation"><strong>Download VISOR v1.0.2</strong></a>
   &nbsp;•&nbsp;
   <a href="#-why-visor">Features</a>
   &nbsp;•&nbsp;

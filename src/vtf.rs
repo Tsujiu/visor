@@ -52,7 +52,7 @@ pub fn decode_vtf_bytes(data: &[u8]) -> Result<Built, String> {
                 .get(..need)
                 .ok_or_else(|| "VTF BGRA truncado".to_owned())?;
             let mut out = Vec::with_capacity(need);
-            for chunk in bytes.chunks_exact(4) {
+            for chunk in bytes.as_chunks::<4>().0 {
                 out.push(chunk[2]); // R
                 out.push(chunk[1]); // G
                 out.push(chunk[0]); // B
@@ -66,7 +66,7 @@ pub fn decode_vtf_bytes(data: &[u8]) -> Result<Built, String> {
                 .get(..need)
                 .ok_or_else(|| "VTF RGB888 truncado".to_owned())?;
             let mut out = Vec::with_capacity(w * h * 4);
-            for chunk in bytes.chunks_exact(3) {
+            for chunk in bytes.as_chunks::<3>().0 {
                 out.push(chunk[0]);
                 out.push(chunk[1]);
                 out.push(chunk[2]);
@@ -80,7 +80,7 @@ pub fn decode_vtf_bytes(data: &[u8]) -> Result<Built, String> {
                 .get(..need)
                 .ok_or_else(|| "VTF BGR888 truncado".to_owned())?;
             let mut out = Vec::with_capacity(w * h * 4);
-            for chunk in bytes.chunks_exact(3) {
+            for chunk in bytes.as_chunks::<3>().0 {
                 out.push(chunk[2]);
                 out.push(chunk[1]);
                 out.push(chunk[0]);

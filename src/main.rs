@@ -54,6 +54,18 @@ fn main() -> eframe::Result {
         return Ok(());
     }
 
+    if std::env::args_os().any(|arg| arg == "--remover-padrao") {
+        match system::assoc::unregister_current_exe() {
+            Ok(count) => {
+                println!("Registro do VISOR removido com sucesso de HKCU ({count} extensões limpas).");
+            }
+            Err(err) => {
+                eprintln!("Erro ao remover registro do VISOR: {err}");
+            }
+        }
+        return Ok(());
+    }
+
     let capture_final = std::env::args_os().any(|arg| arg == "--capture-final-validation");
     let capture_step6 = std::env::args_os().any(|arg| arg == "--capture-step6");
     let capture_step5 = std::env::args_os().any(|arg| arg == "--capture-step5");
@@ -1318,7 +1330,7 @@ foreach ($item in $bin.Items()) {
 
         for y in 0..height {
             for x in 0..width {
-                let is_c1 = ((x / checker_size) + (y / checker_size)) % 2 == 0;
+                let is_c1 = ((x / checker_size) + (y / checker_size)).is_multiple_of(2);
                 let bg_col = if is_c1 { c1 } else { c2 };
                 let idx = (y * width + x) * 4;
                 pixels[idx..idx + 4].copy_from_slice(&bg_col);
@@ -1554,7 +1566,7 @@ foreach ($item in $bin.Items()) {
 
         // 1. Fundo do painel do topo (surface_panel: #1E1E22)
         let bg = [30u8, 30u8, 34u8, 255u8];
-        for chunk in pixels.chunks_exact_mut(4) {
+        for chunk in pixels.as_chunks_mut::<4>().0 {
             chunk.copy_from_slice(&bg);
         }
 

@@ -38,8 +38,8 @@ pub fn render_info_panel(app: &mut VisorApp, ui: &mut egui::Ui) {
             }
 
             // Botão Copiar Resumo
-            if app.picture.is_some() {
-                if ui
+            if app.picture.is_some()
+                && ui
                     .button(
                         RichText::new(tr.info_copy_btn)
                             .size(12.0)
@@ -52,7 +52,6 @@ pub fn render_info_panel(app: &mut VisorApp, ui: &mut egui::Ui) {
                     ui.ctx().copy_text(summary);
                     app.notice = Some(tr.info_copied_notice.to_owned());
                 }
-            }
         });
     });
 
@@ -155,12 +154,11 @@ pub fn render_info_panel(app: &mut VisorApp, ui: &mut egui::Ui) {
                 render_kv_row(ui, &palette, tr.info_aspect_ratio, &ratio);
 
                 // Tamanho em disco
-                if let Some(path) = &file_path {
-                    if let Ok(meta) = fs::metadata(path) {
+                if let Some(path) = &file_path
+                    && let Ok(meta) = fs::metadata(path) {
                         let size_formatted = format_file_size(meta.len());
                         render_kv_row(ui, &palette, tr.file_size, &size_formatted);
                     }
-                }
             });
 
             // =================================================================

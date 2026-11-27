@@ -38,7 +38,7 @@
 </p>
 
 <p align="center">
-  <a href="#-descarga--instalaci%C3%B3n"><strong>Descargar VISOR v1.0.1</strong></a>
+  <a href="#-descarga--instalaci%C3%B3n"><strong>Descargar VISOR v1.0.2</strong></a>
   &nbsp;•&nbsp;
   <a href="#-por-qu%C3%A9-visor">Características</a>
   &nbsp;•&nbsp;

@@ -25,12 +25,11 @@ impl eframe::App for VisorApp {
 
         // Detecta quando o aplicativo retorna ao primeiro plano após abrir as Configurações do Windows
         let is_focused = ui.ctx().input(|i| i.viewport().focused.unwrap_or(true));
-        if is_focused && !self.was_window_focused {
-            if self.was_settings_opened_for_assoc {
+        if is_focused && !self.was_window_focused
+            && self.was_settings_opened_for_assoc {
                 self.was_settings_opened_for_assoc = false;
                 self.trigger_association_check();
             }
-        }
         self.was_window_focused = is_focused;
 
         if self.show_info {

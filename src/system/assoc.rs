@@ -159,14 +159,13 @@ pub fn is_open_with_exe(exec: &Path) -> bool {
     let exec_str = exec.to_string_lossy();
     let clean_str = exec_str.trim().trim_matches('"').trim_matches('\'');
     let path = Path::new(clean_str);
-    if let Some(file_name) = path.file_name() {
-        if file_name
+    if let Some(file_name) = path.file_name()
+        && file_name
             .to_string_lossy()
             .eq_ignore_ascii_case("openwith.exe")
         {
             return true;
         }
-    }
     false
 }
 
@@ -184,11 +183,10 @@ pub fn is_same_or_matching_visor_exe(exec: &Path, current_exe: Option<&Path>) ->
     let clean_path = Path::new(clean_str);
 
     if let Some(curr) = current_exe {
-        if let (Ok(can_exec), Ok(can_curr)) = (clean_path.canonicalize(), curr.canonicalize()) {
-            if can_exec == can_curr {
+        if let (Ok(can_exec), Ok(can_curr)) = (clean_path.canonicalize(), curr.canonicalize())
+            && can_exec == can_curr {
                 return true;
             }
-        }
         let norm_exec = clean_str.replace('/', "\\").to_ascii_lowercase();
         let norm_curr = curr
             .to_string_lossy()
@@ -199,14 +197,13 @@ pub fn is_same_or_matching_visor_exe(exec: &Path, current_exe: Option<&Path>) ->
         }
     }
 
-    if let Some(file_name) = clean_path.file_name() {
-        if file_name
+    if let Some(file_name) = clean_path.file_name()
+        && file_name
             .to_string_lossy()
             .eq_ignore_ascii_case("visor.exe")
         {
             return true;
         }
-    }
 
     false
 }
@@ -235,17 +232,15 @@ impl ExtAssociationInfo {
     /// Verifica se as informações comprovam que o VISOR é o aplicativo padrão desta extensão.
     pub fn matches_visor(&self, current_exe: Option<&Path>) -> bool {
         // 1. ProgID explícito como Visor.Image
-        if let Some(prog_id) = &self.prog_id {
-            if prog_id.eq_ignore_ascii_case(PROG_ID) {
+        if let Some(prog_id) = &self.prog_id
+            && prog_id.eq_ignore_ascii_case(PROG_ID) {
                 return true;
             }
-        }
         // 2. Executável associado é o próprio visor.exe
-        if let Some(exec) = &self.executable {
-            if is_same_or_matching_visor_exe(exec, current_exe) {
+        if let Some(exec) = &self.executable
+            && is_same_or_matching_visor_exe(exec, current_exe) {
                 return true;
             }
-        }
         // 3. Confirmado como aplicativo padrão pelo Windows através de IApplicationAssociationRegistration
         // sem nenhum aplicativo concorrente confirmado
         if self.is_registered_app_default && !self.has_confirmed_competing_app(current_exe) {
@@ -256,16 +251,14 @@ impl ExtAssociationInfo {
 
     /// Verifica se há outro aplicativo comprovadamente associado a esta extensão.
     pub fn has_confirmed_competing_app(&self, current_exe: Option<&Path>) -> bool {
-        if let Some(exec) = &self.executable {
-            if !is_same_or_matching_visor_exe(exec, current_exe) && !is_open_with_exe(exec) {
+        if let Some(exec) = &self.executable
+            && !is_same_or_matching_visor_exe(exec, current_exe) && !is_open_with_exe(exec) {
                 return true;
             }
-        }
-        if let Some(prog_id) = &self.prog_id {
-            if !prog_id.eq_ignore_ascii_case(PROG_ID) && !is_unknown_or_empty_progid(prog_id) {
+        if let Some(prog_id) = &self.prog_id
+            && !prog_id.eq_ignore_ascii_case(PROG_ID) && !is_unknown_or_empty_progid(prog_id) {
                 return true;
             }
-        }
         false
     }
 
@@ -274,18 +267,15 @@ impl ExtAssociationInfo {
         if self.matches_visor(current_exe) {
             return None;
         }
-        if let Some(exec) = &self.executable {
-            if !is_same_or_matching_visor_exe(exec, current_exe) && !is_open_with_exe(exec) {
-                if let Some(name) = exec.file_name() {
+        if let Some(exec) = &self.executable
+            && !is_same_or_matching_visor_exe(exec, current_exe) && !is_open_with_exe(exec)
+                && let Some(name) = exec.file_name() {
                     return Some(name.to_string_lossy().to_string());
                 }
-            }
-        }
-        if let Some(prog_id) = &self.prog_id {
-            if !prog_id.eq_ignore_ascii_case(PROG_ID) && !is_unknown_or_empty_progid(prog_id) {
+        if let Some(prog_id) = &self.prog_id
+            && !prog_id.eq_ignore_ascii_case(PROG_ID) && !is_unknown_or_empty_progid(prog_id) {
                 return Some(prog_id.clone());
             }
-        }
         None
     }
 }
@@ -536,13 +526,13 @@ pub fn query_windows_association(ext: &str) -> Result<Option<ExtAssociationInfo>
         .ok()
         .map(|e| PathBuf::from(e.trim().trim_matches('"')));
 
-    let is_app_default = com_info.as_ref().map_or(false, |c| c.is_app_default);
+    let is_app_default = com_info.as_ref().is_some_and(|c| c.is_app_default);
 
     // Filtrar OpenWith.exe e ProgID "Unknown"
-    let is_open_with = raw_exec.as_ref().map_or(false, |e| is_open_with_exe(e));
+    let is_open_with = raw_exec.as_ref().is_some_and(|e| is_open_with_exe(e));
     let is_unknown_prog = raw_prog_id
         .as_ref()
-        .map_or(false, |p| is_unknown_or_empty_progid(p));
+        .is_some_and(|p| is_unknown_or_empty_progid(p));
 
     let clean_prog_id = if is_unknown_prog { None } else { raw_prog_id };
     let clean_exec = if is_open_with { None } else { raw_exec };
@@ -863,6 +853,48 @@ pub fn register_exe_at_root(
         open_with_extensions_count: extensions.len(),
         exe_path: exe_path.to_path_buf(),
     })
+}
+
+/// Remove todas as chaves e associações criadas pelo VISOR em `HKCU` sem afetar outros aplicativos.
+pub fn unregister_current_exe() -> Result<usize, String> {
+    unregister_exe_at_root(&RegKey::predef(HKEY_CURRENT_USER), "")
+}
+
+/// Função isolável de desregistro das chaves de associação do VISOR sob a raiz informada.
+pub fn unregister_exe_at_root(root: &RegKey, prefix: &str) -> Result<usize, String> {
+    let base_prefix = if prefix.is_empty() {
+        String::new()
+    } else {
+        format!("{prefix}\\")
+    };
+
+    let prog_key_path = format!("{base_prefix}Software\\Classes\\{PROG_ID}");
+    let _ = root.delete_subkey_all(&prog_key_path);
+
+    let visor_caps_root = format!("{base_prefix}Software\\Visor");
+    let _ = root.delete_subkey_all(&visor_caps_root);
+
+    let reg_apps_path = format!("{base_prefix}Software\\RegisteredApplications");
+    if let Ok(reg_apps_key) = root.open_subkey_with_flags(&reg_apps_path, KEY_SET_VALUE) {
+        let _ = reg_apps_key.delete_value(APP_NAME);
+        let _ = reg_apps_key.delete_value("Visor");
+    }
+
+    let mut cleaned = 0usize;
+    let mut exts = target_extensions();
+    if !exts.contains(&"srw") {
+        exts.push("srw");
+    }
+    for ext in exts {
+        let open_with_path = format!("{base_prefix}Software\\Classes\\.{ext}\\OpenWithProgids");
+        if let Ok(open_with_key) = root.open_subkey_with_flags(&open_with_path, KEY_SET_VALUE)
+            && open_with_key.delete_value(PROG_ID).is_ok()
+        {
+            cleaned += 1;
+        }
+    }
+
+    Ok(cleaned)
 }
 
 /// Mantido para compatibilidade temporária com comandos CLI existentes.
@@ -1552,5 +1584,41 @@ pub mod tests {
             info.matches_visor(curr_exe.as_deref()),
             "No ambiente real do operador, .mrw deve comprovar correspondência ao VISOR sem falso positivo"
         );
+    }
+
+    #[test]
+    fn test_18_unregister_exe_at_root_cleans_all_keys_safely() {
+        let guard = RegistryTestGuard::new();
+        let exe_path = PathBuf::from(r"C:\Visor\visor.exe");
+
+        let report = register_exe_at_root(&guard.root, &guard.prefix, &exe_path)
+            .expect("registro de teste deve funcionar");
+        assert!(report.open_with_extensions_count > 50);
+
+        // Adiciona entrada concorrente para garantir preservação de terceiros
+        let other_openwith = format!("{}\\Software\\Classes\\.png\\OpenWithProgids", guard.prefix);
+        let (ow_key, _) = guard.root.create_subkey(&other_openwith).unwrap();
+        ow_key.set_value("OtherViewer.Png", &"").unwrap();
+
+        let cleaned = unregister_exe_at_root(&guard.root, &guard.prefix)
+            .expect("desregistro isolado deve funcionar");
+        assert_eq!(cleaned, report.open_with_extensions_count);
+
+        assert!(
+            guard
+                .root
+                .open_subkey(format!("{}\\Software\\Classes\\{PROG_ID}", guard.prefix))
+                .is_err()
+        );
+        assert!(
+            guard
+                .root
+                .open_subkey(format!("{}\\Software\\Visor", guard.prefix))
+                .is_err()
+        );
+
+        let ow_after = guard.root.open_subkey(&other_openwith).unwrap();
+        assert!(ow_after.get_value::<String, _>(PROG_ID).is_err());
+        assert!(ow_after.get_value::<String, _>("OtherViewer.Png").is_ok());
     }
 }

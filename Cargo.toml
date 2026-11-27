@@ -1,6 +1,6 @@
 [package]
 name = "visor"
-version = "1.0.1"
+version = "1.0.2"
 edition = "2024"
 rust-version = "1.95"
 description = "Visualizador de imagens para Windows"
@@ -65,7 +65,6 @@ basis-universal = "0.3.1"
 flate2 = "1"
 
 [dev-dependencies]
-flate2 = "1"
 png = "0.17"
 
 [features]

@@ -136,10 +136,10 @@ impl VisorApp {
         app.check_post_update_whats_new();
 
         // Se uma versÃ£o desatualizada jÃ¡ foi identificada anteriormente, restaura a notificaÃ§Ã£o imediatamente
-        if let Some(tag) = &app.settings.updates.last_known_release_tag {
-            if crate::updater::version::is_newer_than_current(tag) {
-                if let Some(json_str) = &app.settings.updates.last_known_release_json {
-                    if let Ok(release) =
+        if let Some(tag) = &app.settings.updates.last_known_release_tag
+            && crate::updater::version::is_newer_than_current(tag)
+                && let Some(json_str) = &app.settings.updates.last_known_release_json
+                    && let Ok(release) =
                         serde_json::from_str::<crate::updater::GitHubRelease>(json_str)
                     {
                         let is_ignored = app
@@ -158,9 +158,6 @@ impl VisorApp {
                             app.updater.show_update_window = true;
                         }
                     }
-                }
-            }
-        }
         app.trigger_background_update_check_if_needed();
         if let Some(path) = initial {
             app.open_input(path);
@@ -283,11 +280,10 @@ impl VisorApp {
             }
         }
 
-        if self.job.is_none() {
-            if let Some((token, path)) = self.queued.take() {
+        if self.job.is_none()
+            && let Some((token, path)) = self.queued.take() {
                 self.spawn(ctx, token, path);
             }
-        }
 
         if let Ok(text) = self.notice_rx.try_recv() {
             self.notice = Some(text);
@@ -516,11 +512,10 @@ impl VisorApp {
                 let result = match result {
                     Ok(Ok(decoded)) => {
                         let arc = Arc::new(decoded);
-                        if !task_cancel.is_cancelled() {
-                            if let Ok(key) = CacheKey::from_path(&path_clone) {
+                        if !task_cancel.is_cancelled()
+                            && let Ok(key) = CacheKey::from_path(&path_clone) {
                                 cache.insert_arc(key, Arc::clone(&arc));
                             }
-                        }
                         Ok(arc)
                     }
                     Ok(Err(err)) => Err(err),
@@ -1079,13 +1074,11 @@ impl VisorApp {
             .assessments
             .iter_mut()
             .find(|a| a.extension == clean)
-        {
-            if item.status == crate::system::assoc::ExtensionStatus::Pending {
+            && item.status == crate::system::assoc::ExtensionStatus::Pending {
                 item.status = crate::system::assoc::ExtensionStatus::Ignored;
                 self.associations.pending_count = self.associations.pending_count.saturating_sub(1);
                 self.associations.ignored_count += 1;
             }
-        }
         self.recalculate_association_banner();
     }
 
@@ -1277,16 +1270,14 @@ impl VisorApp {
                         match &outcome {
                             crate::updater::CheckOutcome::NotModified { checked_at } => {
                                 self.settings.updates.last_check = Some(checked_at.clone());
-                                if self.updater.available_release.is_none() {
-                                    if let Some(json_str) =
+                                if self.updater.available_release.is_none()
+                                    && let Some(json_str) =
                                         &self.settings.updates.last_known_release_json
-                                    {
-                                        if let Ok(release) =
+                                        && let Ok(release) =
                                             serde_json::from_str::<crate::updater::GitHubRelease>(
                                                 json_str,
                                             )
-                                        {
-                                            if crate::updater::version::is_newer_than_current(
+                                            && crate::updater::version::is_newer_than_current(
                                                 &release.tag_name,
                                             ) {
                                                 let is_ignored = self.settings.updates.ignored_version.as_deref().map(|ign| {
@@ -1300,9 +1291,6 @@ impl VisorApp {
                                                     self.updater.show_update_window = true;
                                                 }
                                             }
-                                        }
-                                    }
-                                }
                                 self.save_settings();
                             }
                             crate::updater::CheckOutcome::UpToDate { checked_at } => {

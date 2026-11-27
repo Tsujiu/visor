@@ -112,14 +112,12 @@ pub fn handle_keys(app: &mut VisorApp, ui: &mut egui::Ui) {
     if bg_toggle {
         app.background = app.background.cycle();
     }
-    if space {
-        if let Some(picture) = app.picture.as_mut() {
-            if picture.frames.len() > 1 {
+    if space
+        && let Some(picture) = app.picture.as_mut()
+            && picture.frames.len() > 1 {
                 picture.playing = !picture.playing;
                 picture.shown_at = ui.input(|input| input.time);
             }
-        }
-    }
     if fullscreen {
         let on = ui
             .ctx()

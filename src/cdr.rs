@@ -19,18 +19,16 @@ pub fn decode_cdr_bytes(bytes: &[u8]) -> Result<Master, String> {
     }
 
     // 1. CorelDRAW Moderno (X4+) baseado em contêiner ZIP (PK\x03\x04)
-    if bytes.starts_with(b"PK\x03\x04") {
-        if let Ok(master) = decode_modern_cdr_zip(bytes) {
+    if bytes.starts_with(b"PK\x03\x04")
+        && let Ok(master) = decode_modern_cdr_zip(bytes) {
             return Ok(master);
         }
-    }
 
     // 2. CorelDRAW Legado (v3 a X3) baseado em contêiner RIFF
-    if bytes.starts_with(b"RIFF") {
-        if let Ok(master) = decode_legacy_cdr_riff(bytes) {
+    if bytes.starts_with(b"RIFF")
+        && let Ok(master) = decode_legacy_cdr_riff(bytes) {
             return Ok(master);
         }
-    }
 
     // 3. Fallback: tentar ZIP mesmo sem magic inicial estrito (ou ZIP variante)
     if let Ok(master) = decode_modern_cdr_zip(bytes) {
@@ -53,11 +51,10 @@ fn decode_modern_cdr_zip(bytes: &[u8]) -> Result<Master, String> {
 
     let mut entries = Vec::new();
     for i in 0..archive.len() {
-        if let Ok(file) = archive.by_index(i) {
-            if let Ok(name) = file.name() {
+        if let Ok(file) = archive.by_index(i)
+            && let Ok(name) = file.name() {
                 entries.push((i, name.to_string()));
             }
-        }
     }
 
     let preferred_paths = [
@@ -138,11 +135,10 @@ fn decode_legacy_cdr_riff(bytes: &[u8]) -> Result<Master, String> {
     }
 
     // Busca o chunk DISP ou bmp na árvore RIFF
-    if let Some(img_data) = find_riff_preview(bytes) {
-        if let Ok(master) = decode_raw_preview_data(&img_data) {
+    if let Some(img_data) = find_riff_preview(bytes)
+        && let Ok(master) = decode_raw_preview_data(&img_data) {
             return Ok(master);
         }
-    }
 
     // Varredura de fallback
     if let Some(master) = scan_for_embedded_preview(bytes) {
@@ -166,16 +162,14 @@ fn find_in_riff_range(bytes: &[u8], start: usize, end: usize) -> Option<Vec<u8>>
         let data_end = (data_start + chunk_size).min(end);
         let chunk_data = &bytes[data_start..data_end];
 
-        if chunk_id == b"DISP" {
+        if chunk_id == b"DISP" || chunk_id == b"bmp " || chunk_id == b"BMP " || chunk_id == b"bmpt"
+        {
             return Some(chunk_data.to_vec());
-        } else if chunk_id == b"bmp " || chunk_id == b"BMP " || chunk_id == b"bmpt" {
-            return Some(chunk_data.to_vec());
-        } else if chunk_id == b"LIST" || chunk_id == b"RIFF" {
-            if chunk_data.len() > 4 {
-                if let Some(found) = find_in_riff_range(bytes, data_start + 4, data_end) {
-                    return Some(found);
-                }
-            }
+        } else if (chunk_id == b"LIST" || chunk_id == b"RIFF")
+            && chunk_data.len() > 4
+            && let Some(found) = find_in_riff_range(bytes, data_start + 4, data_end)
+        {
+            return Some(found);
         }
 
         let padded_size = (chunk_size + 1) & !1;
@@ -191,8 +185,8 @@ fn decode_raw_preview_data(data: &[u8]) -> Result<Master, String> {
     }
 
     // 1. Arquivo BMP completo
-    if data.starts_with(b"BM") {
-        if let Ok(dyn_img) = image::load_from_memory(data) {
+    if data.starts_with(b"BM")
+        && let Ok(dyn_img) = image::load_from_memory(data) {
             let width = dyn_img.width();
             let height = dyn_img.height();
             check_dims(width, height)?;
@@ -207,11 +201,10 @@ fn decode_raw_preview_data(data: &[u8]) -> Result<Master, String> {
                 id: "cdr",
             });
         }
-    }
 
     // 2. Arquivo PNG completo
-    if data.starts_with(b"\x89PNG\r\n\x1a\n") {
-        if let Ok(dyn_img) = image::load_from_memory(data) {
+    if data.starts_with(b"\x89PNG\r\n\x1a\n")
+        && let Ok(dyn_img) = image::load_from_memory(data) {
             let width = dyn_img.width();
             let height = dyn_img.height();
             check_dims(width, height)?;
@@ -226,14 +219,13 @@ fn decode_raw_preview_data(data: &[u8]) -> Result<Master, String> {
                 id: "cdr",
             });
         }
-    }
 
     // 3. DIB puro iniciando em offset 0 (biSize >= 40)
     if data.len() >= 40 {
         let bi_size = u32::from_le_bytes(data[0..4].try_into().unwrap());
-        if bi_size >= 40 && (bi_size as usize) <= data.len() {
-            if let Some(bmp_bytes) = dib_to_bmp(data) {
-                if let Ok(dyn_img) =
+        if bi_size >= 40 && (bi_size as usize) <= data.len()
+            && let Some(bmp_bytes) = dib_to_bmp(data)
+                && let Ok(dyn_img) =
                     image::load_from_memory_with_format(&bmp_bytes, ImageFormat::Bmp)
                 {
                     let width = dyn_img.width();
@@ -250,16 +242,14 @@ fn decode_raw_preview_data(data: &[u8]) -> Result<Master, String> {
                         id: "cdr",
                     });
                 }
-            }
-        }
     }
 
     // 4. DIB com prefixo de 4 bytes (Clipboard format type DWORD, ex: CF_DIB=8)
     if data.len() >= 44 {
         let bi_size = u32::from_le_bytes(data[4..8].try_into().unwrap());
-        if bi_size >= 40 && (bi_size as usize) <= data.len() - 4 {
-            if let Some(bmp_bytes) = dib_to_bmp(&data[4..]) {
-                if let Ok(dyn_img) =
+        if bi_size >= 40 && (bi_size as usize) <= data.len() - 4
+            && let Some(bmp_bytes) = dib_to_bmp(&data[4..])
+                && let Ok(dyn_img) =
                     image::load_from_memory_with_format(&bmp_bytes, ImageFormat::Bmp)
                 {
                     let width = dyn_img.width();
@@ -276,13 +266,11 @@ fn decode_raw_preview_data(data: &[u8]) -> Result<Master, String> {
                         id: "cdr",
                     });
                 }
-            }
-        }
     }
 
     // 5. BMP completo após 4 bytes de cabeçalho clipboard
-    if data.len() >= 6 && data[4..].starts_with(b"BM") {
-        if let Ok(dyn_img) = image::load_from_memory(&data[4..]) {
+    if data.len() >= 6 && data[4..].starts_with(b"BM")
+        && let Ok(dyn_img) = image::load_from_memory(&data[4..]) {
             let width = dyn_img.width();
             let height = dyn_img.height();
             check_dims(width, height)?;
@@ -297,7 +285,6 @@ fn decode_raw_preview_data(data: &[u8]) -> Result<Master, String> {
                 id: "cdr",
             });
         }
-    }
 
     // 6. WMF (Windows Metafile)
     if data.starts_with(&[0xD7, 0xCD, 0xC6, 0x9A]) || data.starts_with(&[0x01, 0x00, 0x09, 0x00]) {
@@ -307,18 +294,15 @@ fn decode_raw_preview_data(data: &[u8]) -> Result<Master, String> {
     } else if data.len() >= 8
         && (data[4..].starts_with(&[0xD7, 0xCD, 0xC6, 0x9A])
             || data[4..].starts_with(&[0x01, 0x00, 0x09, 0x00]))
-    {
-        if let Ok(built) = crate::emf::decode_wmf(&data[4..]) {
+        && let Ok(built) = crate::emf::decode_wmf(&data[4..]) {
             return Ok(Master::Frames(built));
         }
-    }
 
     // 7. EMF (Enhanced Metafile)
-    if data.len() >= 44 && &data[40..44] == b" EMF" {
-        if let Ok(built) = crate::emf::decode_emf(data) {
+    if data.len() >= 44 && &data[40..44] == b" EMF"
+        && let Ok(built) = crate::emf::decode_emf(data) {
             return Ok(Master::Frames(built));
         }
-    }
 
     Err("formato de preview não reconhecido nos dados".to_owned())
 }
@@ -361,19 +345,18 @@ fn dib_to_bmp(dib: &[u8]) -> Option<Vec<u8>> {
 /// Varredura por assinaturas de pré-visualização embutidas em arquivos malformados ou incomuns.
 fn scan_for_embedded_preview(bytes: &[u8]) -> Option<Master> {
     // 1. Procura chunk DISP
-    if let Some(pos) = bytes.windows(4).position(|w| w == b"DISP") {
-        if pos + 8 <= bytes.len() {
+    if let Some(pos) = bytes.windows(4).position(|w| w == b"DISP")
+        && pos + 8 <= bytes.len() {
             let size = u32::from_le_bytes(bytes[pos + 4..pos + 8].try_into().unwrap()) as usize;
             let end = (pos + 8 + size).min(bytes.len());
             if let Ok(master) = decode_raw_preview_data(&bytes[pos + 8..end]) {
                 return Some(master);
             }
         }
-    }
 
     // 2. Procura imagem PNG embutida
-    if let Some(pos) = bytes.windows(8).position(|w| w == b"\x89PNG\r\n\x1a\n") {
-        if let Ok(dyn_img) = image::load_from_memory(&bytes[pos..]) {
+    if let Some(pos) = bytes.windows(8).position(|w| w == b"\x89PNG\r\n\x1a\n")
+        && let Ok(dyn_img) = image::load_from_memory(&bytes[pos..]) {
             let width = dyn_img.width();
             let height = dyn_img.height();
             if check_dims(width, height).is_ok() {
@@ -389,7 +372,6 @@ fn scan_for_embedded_preview(bytes: &[u8]) -> Option<Master> {
                 });
             }
         }
-    }
 
     // 3. Procura imagem BMP embutida
     let mut search_pos = 0;
@@ -398,8 +380,8 @@ fn scan_for_embedded_preview(bytes: &[u8]) -> Option<Master> {
         if abs_pos + 14 <= bytes.len() {
             let file_size =
                 u32::from_le_bytes(bytes[abs_pos + 2..abs_pos + 6].try_into().unwrap()) as usize;
-            if file_size > 14 && file_size <= bytes.len() - abs_pos {
-                if let Ok(dyn_img) = image::load_from_memory(&bytes[abs_pos..abs_pos + file_size]) {
+            if file_size > 14 && file_size <= bytes.len() - abs_pos
+                && let Ok(dyn_img) = image::load_from_memory(&bytes[abs_pos..abs_pos + file_size]) {
                     let width = dyn_img.width();
                     let height = dyn_img.height();
                     if check_dims(width, height).is_ok() {
@@ -415,7 +397,6 @@ fn scan_for_embedded_preview(bytes: &[u8]) -> Option<Master> {
                         });
                     }
                 }
-            }
         }
         search_pos = abs_pos + 2;
         if search_pos + 14 > bytes.len() {

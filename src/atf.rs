@@ -49,7 +49,7 @@ pub fn decode_atf_bytes(data: &[u8]) -> Result<Built, String> {
                 .get(..need)
                 .ok_or_else(|| "ATF RGB888 truncado".to_owned())?;
             let mut out = Vec::with_capacity(w * h * 4);
-            for chunk in src.chunks_exact(3) {
+            for chunk in src.as_chunks::<3>().0 {
                 out.push(chunk[0]);
                 out.push(chunk[1]);
                 out.push(chunk[2]);
@@ -67,7 +67,7 @@ pub fn decode_atf_bytes(data: &[u8]) -> Result<Built, String> {
         }
         2 => {
             // DXT1
-            let need = ((w + 3) / 4) * ((h + 3) / 4) * 8;
+            let need = w.div_ceil(4) * h.div_ceil(4) * 8;
             let src = payload
                 .get(..need)
                 .ok_or_else(|| "ATF DXT1 truncado".to_owned())?;
@@ -78,7 +78,7 @@ pub fn decode_atf_bytes(data: &[u8]) -> Result<Built, String> {
         }
         4 => {
             // DXT5
-            let need = ((w + 3) / 4) * ((h + 3) / 4) * 16;
+            let need = w.div_ceil(4) * h.div_ceil(4) * 16;
             let src = payload
                 .get(..need)
                 .ok_or_else(|| "ATF DXT5 truncado".to_owned())?;
