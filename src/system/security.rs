@@ -159,6 +159,7 @@ mod tests {
     #[test]
     fn test_security_status_query() {
         let status = get_security_status();
-        assert!(!status.debugger_detected || status.debugger_detected);
+        assert!(status.pe_integrity_valid);
+        assert!(status.binary_sha256.as_ref().is_some_and(|h| h.len() == 64));
     }
 }

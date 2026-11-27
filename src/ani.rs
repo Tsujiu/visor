@@ -33,11 +33,10 @@ pub fn decode_ani_bytes(bytes: &[u8]) -> Result<Master, String> {
 
         if chunk_id == b"anih" && chunk_data.len() >= 36 {
             // cbSize: u32, nFrames: u32, nSteps: u32, cx: u32, cy: u32, cBitCount: u32, cPlanes: u32, jifRate: u32
-            if let Ok(rate) = u32_le(chunk_data, 28) {
-                if rate > 0 {
+            if let Ok(rate) = u32_le(chunk_data, 28)
+                && rate > 0 {
                     default_jif_rate = rate;
                 }
-            }
         } else if chunk_id == b"rate" {
             // Tabela de taxas individuais para cada frame
             let count = chunk_data.len() / 4;

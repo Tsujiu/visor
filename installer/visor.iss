@@ -3,7 +3,7 @@
 ; ==============================================================================
 
 #define MyAppName "VISOR"
-#define MyAppVersion "1.0.1"
+#define MyAppVersion "1.0.2"
 #define MyAppPublisher "Tsujiu"
 #define MyAppURL "https://github.com/Tsujiu/visor"
 #define MyAppExeName "visor.exe"
@@ -140,7 +140,7 @@ Filename: "{app}\{#MyAppExeName}"; Description: "{cm:RunProgram}"; Flags: postin
 // Remocao seletiva de registros exclusivos do VISOR sem afetar outros aplicativos nem configuracoes pessoais
 procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
 var
-  Exts: array[0..48] of String;
+  Exts: array[0..96] of String;
   I: Integer;
 begin
   if CurUninstallStep = usUninstall then
@@ -155,19 +155,29 @@ begin
     RegDeleteValue(HKEY_CURRENT_USER, 'Software\RegisteredApplications', 'VISOR');
     RegDeleteValue(HKEY_CURRENT_USER, 'Software\RegisteredApplications', 'Visor');
 
-    // 4. Remover registro de Visor.Image em OpenWithProgids para as 49 extensoes candidatas
+    // 4. Remover registro de Visor.Image em OpenWithProgids para todas as extensoes candidatas
     Exts[0] := 'png'; Exts[1] := 'apng'; Exts[2] := 'jpg'; Exts[3] := 'jpeg'; Exts[4] := 'jpe';
-    Exts[5] := 'jfif'; Exts[6] := 'webp'; Exts[7] := 'avif'; Exts[8] := 'gif'; Exts[9] := 'bmp';
-    Exts[10] := 'dib'; Exts[11] := 'ico'; Exts[12] := 'tiff'; Exts[13] := 'tif'; Exts[14] := 'tga';
-    Exts[15] := 'icb'; Exts[16] := 'vda'; Exts[17] := 'vst'; Exts[18] := 'dds'; Exts[19] := 'ktx2';
-    Exts[20] := 'exr'; Exts[21] := 'hdr'; Exts[22] := 'jxl'; Exts[23] := 'svg'; Exts[24] := 'svgz';
-    Exts[25] := 'qoi'; Exts[26] := 'pnm'; Exts[27] := 'pbm'; Exts[28] := 'pgm'; Exts[29] := 'ppm';
-    Exts[30] := 'pam'; Exts[31] := 'ff'; Exts[32] := 'farbfeld'; Exts[33] := 'cr2'; Exts[34] := 'nef';
-    Exts[35] := 'arw'; Exts[36] := 'dng'; Exts[37] := 'orf'; Exts[38] := 'rw2'; Exts[39] := 'pef';
-    Exts[40] := 'raf'; Exts[41] := 'srw'; Exts[42] := 'crw'; Exts[43] := 'kdc'; Exts[44] := 'mrw';
-    Exts[45] := 'nrw'; Exts[46] := 'raw'; Exts[47] := 'x3f'; Exts[48] := 'emf';
+    Exts[5] := 'jfif'; Exts[6] := 'gif'; Exts[7] := 'bmp'; Exts[8] := 'dib'; Exts[9] := 'tif';
+    Exts[10] := 'tiff'; Exts[11] := 'webp'; Exts[12] := 'avif'; Exts[13] := 'avis'; Exts[14] := 'jxl';
+    Exts[15] := 'ico'; Exts[16] := 'cur'; Exts[17] := 'ani'; Exts[18] := 'tga'; Exts[19] := 'icb';
+    Exts[20] := 'vda'; Exts[21] := 'vst'; Exts[22] := 'pcx'; Exts[23] := 'dcx'; Exts[24] := 'qoi';
+    Exts[25] := 'hdr'; Exts[26] := 'pic'; Exts[27] := 'exr'; Exts[28] := 'jp2'; Exts[29] := 'j2k';
+    Exts[30] := 'j2c'; Exts[31] := 'jpx'; Exts[32] := 'psd'; Exts[33] := 'psb'; Exts[34] := 'xcf';
+    Exts[35] := 'ora'; Exts[36] := 'ff'; Exts[37] := 'farbfeld'; Exts[38] := 'xbm'; Exts[39] := 'ppm';
+    Exts[40] := 'pgm'; Exts[41] := 'pbm'; Exts[42] := 'pnm'; Exts[43] := 'pam'; Exts[44] := 'sgi';
+    Exts[45] := 'rgb'; Exts[46] := 'rgba'; Exts[47] := 'bw'; Exts[48] := 'ras'; Exts[49] := 'wbmp';
+    Exts[50] := 'dds'; Exts[51] := 'ktx'; Exts[52] := 'ktx2'; Exts[53] := 'astc'; Exts[54] := 'basis';
+    Exts[55] := 'pvr'; Exts[56] := 'atf'; Exts[57] := 'vtf'; Exts[58] := 'blp'; Exts[59] := 'wal';
+    Exts[60] := 'spr'; Exts[61] := 'txd'; Exts[62] := 'tex'; Exts[63] := 'svg'; Exts[64] := 'svgz';
+    Exts[65] := 'emf'; Exts[66] := 'wmf'; Exts[67] := 'dxf'; Exts[68] := 'cdr'; Exts[69] := 'mng';
+    Exts[70] := 'lottie'; Exts[71] := 'tgs'; Exts[72] := 'raw'; Exts[73] := 'dng'; Exts[74] := 'cr2';
+    Exts[75] := 'crw'; Exts[76] := 'nef'; Exts[77] := 'nrw'; Exts[78] := 'arw'; Exts[79] := 'srf';
+    Exts[80] := 'sr2'; Exts[81] := 'raf'; Exts[82] := 'orf'; Exts[83] := 'rw2'; Exts[84] := 'pef';
+    Exts[85] := '3fr'; Exts[86] := 'iiq'; Exts[87] := 'erf'; Exts[88] := 'kdc'; Exts[89] := 'dcr';
+    Exts[90] := 'mos'; Exts[91] := 'mrw'; Exts[92] := 'x3f'; Exts[93] := 'bay'; Exts[94] := 'cap';
+    Exts[95] := 'cr3'; Exts[96] := 'srw';
 
-    for I := 0 to 48 do
+    for I := 0 to 96 do
     begin
       RegDeleteValue(HKEY_CURRENT_USER, 'Software\Classes\.' + Exts[I] + '\OpenWithProgids', 'Visor.Image');
     end;

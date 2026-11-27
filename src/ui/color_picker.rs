@@ -271,7 +271,7 @@ pub fn render_color_picker_window(app: &mut VisorApp, ctx: &Context) {
                     let swatch_btn = render_preset_swatch(
                         ui,
                         *preset_color,
-                        *name,
+                        name,
                         current_color == *preset_color,
                         &palette,
                     );

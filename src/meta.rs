@@ -14,7 +14,7 @@ pub fn jpeg_is_cmyk(head: &[u8]) -> bool {
             continue;
         }
         let marker = head[index + 1];
-        if matches!(marker, 0xC0 | 0xC1 | 0xC2) {
+        if matches!(marker, 0xC0..=0xC2) {
             return head.get(index + 9).copied() == Some(4);
         }
         if marker == 0xD8 || marker == 0x01 || (0xD0..=0xD7).contains(&marker) {

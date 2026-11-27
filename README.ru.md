@@ -38,7 +38,7 @@
 </p>
 
 <p align="center">
-  <a href="#-скачать-и-установка"><strong>Скачать VISOR v1.0.1</strong></a>
+  <a href="#-скачать-и-установка"><strong>Скачать VISOR v1.0.2</strong></a>
   &nbsp;•&nbsp;
   <a href="#-почему-visor">Возможности</a>
   &nbsp;•&nbsp;

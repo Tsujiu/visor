@@ -26,6 +26,7 @@ pub enum InterpolationMode {
 }
 
 impl InterpolationMode {
+    #[cfg_attr(not(test), allow(dead_code))]
     pub fn label(&self) -> &'static str {
         match self {
             Self::Auto => "Automático (Auto)",
@@ -68,8 +69,10 @@ impl InterpolationMode {
 
 /// Modos de fundo para áreas transparentes da imagem (canal alfa).
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
+#[derive(Default)]
 pub enum CanvasBackground {
     /// Xadrez escuro (#303034 / #222226), ideal para imagens e vetores claros.
+    #[default]
     DarkChecker,
     /// Xadrez claro (#F0F0F4 / #DCDCE2), ideal para silhuetas e logos escuros.
     LightChecker,
@@ -81,13 +84,9 @@ pub enum CanvasBackground {
     Custom(Color32),
 }
 
-impl Default for CanvasBackground {
-    fn default() -> Self {
-        Self::DarkChecker
-    }
-}
 
 impl CanvasBackground {
+    #[cfg_attr(not(test), allow(dead_code))]
     pub fn label(&self) -> &'static str {
         match self {
             Self::DarkChecker => "Xadrez Escuro (Padrão)",

@@ -45,15 +45,13 @@ pub fn decode_xcf_bytes(bytes: &[u8]) -> Result<Master, String> {
             .properties
             .iter()
             .find_map(|p| {
-                if let PropertyIdentifier::PropOffsets = p.kind {
-                    if let xcf::PropertyPayload::Unknown(bytes) = &p.payload {
-                        if bytes.len() >= 8 {
+                if let PropertyIdentifier::PropOffsets = p.kind
+                    && let xcf::PropertyPayload::Unknown(bytes) = &p.payload
+                        && bytes.len() >= 8 {
                             let x = i32::from_be_bytes([bytes[0], bytes[1], bytes[2], bytes[3]]);
                             let y = i32::from_be_bytes([bytes[4], bytes[5], bytes[6], bytes[7]]);
                             return Some((x, y));
                         }
-                    }
-                }
                 None
             })
             .unwrap_or((0, 0));

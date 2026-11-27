@@ -230,8 +230,8 @@ pub fn configure_visor_theme(ctx: &egui::Context, palette: &ThemePalette) {
 
     // Injeta fonte fallback para CJK (chinês simplificado, japonês) se disponível no Windows
     let yahei_path = std::path::Path::new(r"C:\Windows\Fonts\msyh.ttc");
-    if yahei_path.is_file() {
-        if let Ok(font_bytes) = std::fs::read(yahei_path) {
+    if yahei_path.is_file()
+        && let Ok(font_bytes) = std::fs::read(yahei_path) {
             let mut fonts = egui::FontDefinitions::default();
             fonts.font_data.insert(
                 "ms_yahei".to_owned(),
@@ -245,7 +245,6 @@ pub fn configure_visor_theme(ctx: &egui::Context, palette: &ThemePalette) {
             }
             ctx.set_fonts(fonts);
         }
-    }
 
     ctx.all_styles_mut(|style| {
         // Paddings e espaçamentos globais

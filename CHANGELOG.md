@@ -2,6 +2,24 @@
 
 Todas as alterações notáveis neste projeto serão documentadas neste arquivo.
 
+## [1.0.2] - 2026-11-27
+
+### Adicionado
+- **Suporte Completo à Flag `--remover-padrao`:**
+  - Implementada a remoção limpa e idempotente dos registros do VISOR no catálogo de aplicativos do usuário (`HKCU`), cumprindo integralmente a documentação do utilitário de linha de comando.
+
+### Modificado
+- **Desinstalador Completo para Todas as 96+ Extensões Suportadas:**
+  - Atualização do script Inno Setup para limpar automaticamente o registro de todas as extensões de imagem, RAW, vetores e texturas registradas pela versão atual.
+- **Central do VISOR e Textos Dinâmicos de Versão:**
+  - Remoção de menções estáticas à versão antiga nos cartões multilíngues da Central do VISOR e atualização completa da documentação (`LEIAME.txt`, `README-PORTABLE.txt` e READMEs).
+- **Refatoração e Limpeza Estrutural do Código:**
+  - Eliminação do módulo legado baseado em PowerShell (`SFTA.ps1`), reduzindo o tamanho do executável, e tratamento explícito de falhas ao iniciar o instalador de atualização.
+
+### Corrigido
+- **Qualidade de Código & Zero Avisos de Compilação:**
+  - Correção de avisos de compilador, modernização de trechos clippy e validação completa da integridade do binário em tempo de execução.
+
 ## [1.0.1] - 2026-11-19
 
 ### Corrigido

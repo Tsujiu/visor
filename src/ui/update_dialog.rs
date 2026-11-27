@@ -462,8 +462,8 @@ fn render_download_content(
                     if matches!(
                         progress.status,
                         DownloadStatus::Downloading | DownloadStatus::Preparing
-                    ) {
-                        if ui
+                    )
+                        && ui
                             .button(
                                 RichText::new(tr.remove)
                                     .size(11.5)
@@ -473,7 +473,6 @@ fn render_download_content(
                         {
                             app.updater.cancel_active_download();
                         }
-                    }
                 });
             });
 
@@ -582,8 +581,15 @@ fn render_download_content(
                         .min_size(Vec2::new(140.0, 32.0));
 
                         if ui.add(install_btn).clicked() {
-                            if let Ok(()) = launch_official_installer(path) {
-                                ui.ctx().send_viewport_cmd(egui::ViewportCommand::Close);
+                            match launch_official_installer(path) {
+                                Ok(()) => {
+                                    ui.ctx().send_viewport_cmd(egui::ViewportCommand::Close);
+                                }
+                                Err(err) => {
+                                    let mut failed = progress.clone();
+                                    failed.status = DownloadStatus::Failed(err);
+                                    app.updater.download_progress = Some(failed);
+                                }
                             }
                         }
                     } else {

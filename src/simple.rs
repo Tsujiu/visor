@@ -96,7 +96,7 @@ fn rle_exact(src: &[u8], expected: usize) -> Result<Vec<u8>, String> {
             }
             let value = src[index];
             index += 1;
-            out.extend(std::iter::repeat(value).take(count));
+            out.extend(std::iter::repeat_n(value, count));
         } else {
             out.push(byte);
         }
@@ -111,7 +111,7 @@ pub fn decode_wbmp(data: &[u8]) -> Result<Built, String> {
     let (width, index) = wbmp_varint(data, 2)?;
     let (height, index) = wbmp_varint(data, index)?;
     check_dims(width, height)?;
-    let row = (width as usize + 7) / 8;
+    let row = (width as usize).div_ceil(8);
     let need = row * height as usize;
     let bits = data
         .get(index..index + need)
@@ -299,7 +299,7 @@ fn sgi_rle(src: &[u8], width: usize) -> Result<Vec<u8>, String> {
                 .get(index)
                 .ok_or_else(|| "SGI RLE truncado".to_owned())?;
             index += 1;
-            out.extend(std::iter::repeat(value).take(count));
+            out.extend(std::iter::repeat_n(value, count));
         }
     }
     if out.len() != width {

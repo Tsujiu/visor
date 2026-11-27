@@ -13,11 +13,10 @@ use crate::updater::download::updates_dir;
 pub fn is_running_installed_version() -> bool {
     if let Ok(current) = std::env::current_exe() {
         let expected_install_dir = local_dir().join("Programs").join("Visor");
-        if let Ok(canon_current) = current.canonicalize() {
-            if let Ok(canon_dir) = expected_install_dir.canonicalize() {
+        if let Ok(canon_current) = current.canonicalize()
+            && let Ok(canon_dir) = expected_install_dir.canonicalize() {
                 return canon_current.starts_with(canon_dir);
             }
-        }
         current.starts_with(&expected_install_dir)
     } else {
         false
@@ -53,11 +52,9 @@ pub fn launch_official_installer(installer_path: &Path) -> Result<(), String> {
     let safe_dir = updates_dir();
     if let (Ok(canon_path), Ok(canon_dir)) =
         (installer_path.canonicalize(), safe_dir.canonicalize())
-    {
-        if !canon_path.starts_with(&canon_dir) {
+        && !canon_path.starts_with(&canon_dir) {
             return Err("Execução bloqueada: tentativa de executar instalador fora do diretório seguro de atualizações.".to_string());
         }
-    }
 
     Command::new(installer_path)
         .spawn()

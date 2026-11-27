@@ -134,7 +134,7 @@ pub fn check_dims(width: u32, height: u32) -> Result<(), String> {
 }
 
 pub fn has_alpha(pixels: &[u8]) -> bool {
-    pixels.chunks_exact(4).any(|px| px[3] != 255)
+    pixels.as_chunks::<4>().0.iter().any(|px| px[3] != 255)
 }
 
 pub fn downscale(frame: Frame, max_side: u32) -> (Frame, bool) {

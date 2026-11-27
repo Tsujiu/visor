@@ -294,12 +294,10 @@ fn render_toolbar_contents(
                 if subtle_button(ui, label, true)
                     .on_hover_text(tr.anim_toggle_tooltip)
                     .clicked()
-                {
-                    if let Some(picture) = app.picture.as_mut() {
+                    && let Some(picture) = app.picture.as_mut() {
                         picture.playing = !picture.playing;
                         picture.shown_at = ui.input(|input| input.time);
                     }
-                }
             }
 
             // Painel de Informações Técnicas
@@ -334,12 +332,10 @@ fn render_toolbar_contents(
                 if subtle_button(ui, label, true)
                     .on_hover_text(tr.anim_toggle_tooltip)
                     .clicked()
-                {
-                    if let Some(picture) = app.picture.as_mut() {
+                    && let Some(picture) = app.picture.as_mut() {
                         picture.playing = !picture.playing;
                         picture.shown_at = ui.input(|input| input.time);
                     }
-                }
             }
         }
         ToolbarTier::Compact | ToolbarTier::Minimal => {
@@ -520,8 +516,8 @@ fn render_more_menu(
             ui.close();
         }
 
-        if let Some(rel) = &app.updater.available_release {
-            if ui
+        if let Some(rel) = &app.updater.available_release
+            && ui
                 .button(
                     RichText::new(format!("{} ({})…", tr.update_available, rel.tag_name))
                         .color(palette.status_warning)
@@ -532,7 +528,6 @@ fn render_more_menu(
                 app.updater.show_update_window = true;
                 ui.close();
             }
-        }
 
         if ui.button(format!("{}…", tr.visor_center)).clicked() {
             app.updater.whats_new_notes =

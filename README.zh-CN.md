@@ -38,7 +38,7 @@
 </p>
 
 <p align="center">
-  <a href="#-下载与安装"><strong>下载 VISOR v1.0.1</strong></a>
+  <a href="#-下载与安装"><strong>下载 VISOR v1.0.2</strong></a>
   &nbsp;•&nbsp;
   <a href="#-为什么选择-visor">核心特性</a>
   &nbsp;•&nbsp;

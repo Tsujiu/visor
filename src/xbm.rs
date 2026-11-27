@@ -22,11 +22,10 @@ pub fn decode_xbm_bytes(bytes: &[u8]) -> Result<Master, String> {
                     if let Ok(w) = parts[2].parse::<u32>() {
                         width = Some(w);
                     }
-                } else if name.ends_with("_height") || name.ends_with("height") {
-                    if let Ok(h) = parts[2].parse::<u32>() {
+                } else if (name.ends_with("_height") || name.ends_with("height"))
+                    && let Ok(h) = parts[2].parse::<u32>() {
                         height = Some(h);
                     }
-                }
             }
         }
     }
@@ -58,7 +57,7 @@ pub fn decode_xbm_bytes(bytes: &[u8]) -> Result<Master, String> {
         }
     }
 
-    let bytes_per_row = (width as usize + 7) / 8;
+    let bytes_per_row = (width as usize).div_ceil(8);
     let expected = bytes_per_row * (height as usize);
     if raw_bytes.len() < expected {
         return Err(format!(

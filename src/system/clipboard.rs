@@ -234,7 +234,7 @@ pub fn prepare_dibv5(rgba: &[u8], width: u32, height: u32) -> Result<Vec<u8>, St
     dib_bytes.extend_from_slice(header_slice);
 
     // Ordem top-down: percorre linhas de y=0 até height-1
-    for chunk in rgba.chunks_exact(4) {
+    for chunk in rgba.as_chunks::<4>().0 {
         let r = chunk[0];
         let g = chunk[1];
         let b = chunk[2];
@@ -354,8 +354,8 @@ pub fn publish_to_clipboard(
     // 1. Publica formato registrado "PNG"
     if let Some(png_bytes) = png {
         let png_fmt = get_png_clipboard_format();
-        if png_fmt != 0 {
-            if let Ok(hmem) = allocate_and_copy_hglobal(png_bytes) {
+        if png_fmt != 0
+            && let Ok(hmem) = allocate_and_copy_hglobal(png_bytes) {
                 let res = unsafe { SetClipboardData(png_fmt, hmem) };
                 if !res.is_null() {
                     png_published = true;
@@ -365,12 +365,11 @@ pub fn publish_to_clipboard(
                     }
                 }
             }
-        }
     }
 
     // 2. Publica formato padrão CF_DIBV5
-    if let Some(dib_bytes) = dibv5 {
-        if let Ok(hmem) = allocate_and_copy_hglobal(dib_bytes) {
+    if let Some(dib_bytes) = dibv5
+        && let Ok(hmem) = allocate_and_copy_hglobal(dib_bytes) {
             let res = unsafe { SetClipboardData(CF_DIBV5, hmem) };
             if !res.is_null() {
                 dib_published = true;
@@ -380,7 +379,6 @@ pub fn publish_to_clipboard(
                 }
             }
         }
-    }
 
     match (png_published, dib_published) {
         (true, true) => ClipboardPublishResult::Success,

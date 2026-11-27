@@ -142,12 +142,11 @@ pub fn render_context_menu(app: &mut VisorApp, ui: &mut egui::Ui, target_path: O
         let path = target_path.unwrap();
         let target_idx = app.files.iter().position(|p| p == path);
 
-        if let Some(idx) = target_idx {
-            if render_menu_item(ui, tr.open_image_btn, None, true, false).clicked() {
+        if let Some(idx) = target_idx
+            && render_menu_item(ui, tr.open_image_btn, None, true, false).clicked() {
                 app.go_to(idx);
                 ui.close();
             }
-        }
 
         if render_menu_item(ui, tr.copy_path, None, true, false).clicked() {
             app.copy_path(ui.ctx(), Some(path));
@@ -262,12 +261,11 @@ pub fn render_context_menu(app: &mut VisorApp, ui: &mut egui::Ui, target_path: O
     if matches!(
         app.background,
         crate::app::state::CanvasBackground::Custom(_)
-    ) {
-        if render_menu_item(ui, tr.customize_bg, None, has_picture, false).clicked() {
+    )
+        && render_menu_item(ui, tr.customize_bg, None, has_picture, false).clicked() {
             app.open_color_picker();
             ui.close();
         }
-    }
 
     render_menu_separator(ui);
 

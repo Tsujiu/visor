@@ -118,11 +118,10 @@ pub fn export_many(
 }
 
 fn save_dynamic(image: &DynamicImage, dst: &Path, kind: ExportKind) -> Result<(), String> {
-    if let Some(parent) = dst.parent() {
-        if !parent.as_os_str().is_empty() {
+    if let Some(parent) = dst.parent()
+        && !parent.as_os_str().is_empty() {
             std::fs::create_dir_all(parent).map_err(|err| format!("não criou a pasta: {err}"))?;
         }
-    }
     let file = File::create(dst).map_err(|err| format!("não criou o arquivo: {err}"))?;
     let mut writer = BufWriter::new(file);
     match kind {

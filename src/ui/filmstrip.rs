@@ -205,20 +205,17 @@ pub fn poll_thumbs(app: &mut VisorApp, ctx: &Context) {
     let mut next_index = None;
 
     for dist in 0..=20 {
-        if let Some(idx) = app.index.checked_add(dist) {
-            if idx < len && !app.thumbs.contains_key(&idx) && !app.failed_thumbs.contains(&idx) {
+        if let Some(idx) = app.index.checked_add(dist)
+            && idx < len && !app.thumbs.contains_key(&idx) && !app.failed_thumbs.contains(&idx) {
                 next_index = Some(idx);
                 break;
             }
-        }
-        if dist > 0 {
-            if let Some(idx) = app.index.checked_sub(dist) {
-                if !app.thumbs.contains_key(&idx) && !app.failed_thumbs.contains(&idx) {
+        if dist > 0
+            && let Some(idx) = app.index.checked_sub(dist)
+                && !app.thumbs.contains_key(&idx) && !app.failed_thumbs.contains(&idx) {
                     next_index = Some(idx);
                     break;
                 }
-            }
-        }
     }
 
     let Some(index) = next_index else {
